@@ -9,7 +9,7 @@ $dbname = "userid_db";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
-if($conn->connect_error){
+if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
@@ -23,10 +23,10 @@ function register($conn, $username, $password) {
     $stmt->bind_param("ss", $username, $hashed_password);
     
     // Execute and handle response
-    if($stmt->execute()) {
+    if ($stmt->execute()) {
         return json_encode(["success" => true, "message" => "Registration successful"]);
     } else {
-        return json_encode(["success" => false, "message" => "Registration not successful"]);
+        return json_encode(["success" => false, "message" => "Registration failed: " . $stmt->error]);
     }
 }
 
@@ -39,27 +39,40 @@ function login($conn, $username, $password) {
     $result = $stmt->get_result();
 
     // Verify password and handle response
-    if($result->num_rows === 1) {
+    if ($result->num_rows === 1) {
         $row = $result->fetch_assoc();
-        if(password_verify($password, $row['password'])) {
-            return json_encode(["success" => true, "message" => "Login successful"]);
+        if (password_verify($password, $row['password'])) {
+            // Redirect to HomePage.html on successful login
+            header("Location: HomePage.html");
+            exit(); // Ensure the script stops after redirection
+        } else {
+            return json_encode(["success" => false, "message" => "Invalid password"]);
         }
+    } else {
+        return json_encode(["success" => false, "message" => "Username not found"]);
     }
-    return json_encode(["success" => false, "message" => "Invalid username or password"]);
 }
 
 // Handle POST requests
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Capture POST data
     $action = $_POST['action'] ?? '';
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
+    // Validate input
+    if (empty($username) || empty($password)) {
+        echo json_encode(["success" => false, "message" => "Username and password are required"]);
+        exit();
+    }
+
     // Respond based on the action
-    if($action === 'register') {
+    if ($action === 'register') {
         echo register($conn, $username, $password);
-    } elseif($action === 'login') {
+    } elseif ($action === 'login') {
         echo login($conn, $username, $password);
+    } else {
+        echo json_encode(["success" => false, "message" => "Invalid action specified"]);
     }
 }
 
