@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Homes</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #fff;
+            font-family: "my-font", serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        header {
+            background-color: white;
+            padding: 10px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center; /* Aligns the logo and text vertically */
+        }
+
+        .logo-container img {
+            margin-right: 15px; /* Adds space between the logo and text */
+            width: 240px;
+            height: auto;
+        }
+
+        .WP {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        ul {
+            display: flex;
+            gap: 30px;
+            list-style: none; /* Removes bullets */
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: black;
+            font-size: 21px;
+            padding: 10px 15px;
+        }
+
+        ul li:hover a {
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adds shadow on hover */
+            color: rgb(0, 114, 114); /* Changes color on hover */
+        }
+        .signlogin {
+            display: flex;
+            gap: 40px;
+            text-decoration: none;
+        }
+         a {
+            text-decoration: none;
+            color: black;
+            font-size: 21px;
+            padding: 10px 15px;
+        }
+
+        .sign, .login {
+            background-color: aqua;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .sign:hover {
+            background-color: rgb(0, 114, 114);
+            color: white;
+        }
+        /* Property Listings */
+        .property-container {
+            width: 90%;
+            margin: 20px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.658);
+            padding: 20px;
+        }
+
+
+        .property-listings {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .property-card {
+            display: flex;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .property-card img {
+            width: 150px;
+            height: auto;
+            margin-right: 15px;
+            border-radius: 8px;
+        }
+
+        .property-card .details {
+            flex: 1;
+        }
+
+        .property-card .price {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .agent-profiles {
+            margin-top: 40px;
+        }
+
+        .agent-profile {
+            display: flex;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .agent-profile img {
+            width: 80px;
+            height: auto;
+            border-radius: 50%; /* Makes the agent's image circular */
+            margin-right: 15px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+        }
+
+        .social_icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+
+        footer p {
+            color: white;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 17.6px;
+        }
+
+ 
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="logo.png" alt="logo">
+                <div class="WP">Real Homes</div> 
+            </div>
+            <div class="navigator">
+                <ul>
+                    <li><a href="./HomePage.html">HOME</a></li>
+                    <li><a href="./BuyPage.html">BUY</a></li>
+                    <li><a href="./RentPage.html">RENT</a></li>        
+                    <li><a href="./calculator.html">Calculate</a></li>
+                </ul>
+            </div>
+            <div class="signlogin">
+                <div class="sign"><a href="./contactUs.html">ContactUs</a></div> 
+            </div>
+        </nav>
+    </header>
+
+    <div class="property-container">
+
+        <div class="agent-profiles">
+            <h3>Meet Our Agents</h3>
+            <div class="agent-profile">
+                <img src="agent 1.jpeg" alt="Agent 1">
+                <div class="details">
+                    <strong>John Doe</strong><br>
+                    <p>Email: johndoe@gmail.com</p>
+                    <p>Phone: (023) 456-7890</p>
+                </div>
+            </div>
+            <div class="agent-profile">
+                <img src="agent 3.jpeg" alt="Agent 2">
+                <div class="details">
+                    <strong>Jane Smith</strong><br>
+                    <p>Email: janesmith@gmail.com</p>
+                    <p>Phone: (098) 765-4321</p>
+                </div>
+            </div>
+            <div class="agent-profile">
+                <img src="agent 2.jpeg" alt="Agent 3">
+                <div class="details">
+                    <strong>Emily Johnson</strong><br>
+                    <p>Email: emilyjohnson@gmail.com</p>
+                    <p>Phone: (067) 890-1234</p>
+                </div>
+            </div>
+            <div class="agent-profile">
+                <img src="agent 4.jpg" alt="Agent 4">
+                <div class="details">
+                    <strong>Kenen Williams</strong><br>
+                    <p>Email: kenanwill@gmail.com</p>
+                    <p>Phone: (089) 223-0123</p>
+                </div>
+            </div>
+            <div class="agent-profile">
+                <img src="agent 5.jpeg" alt="Agent 4">
+                <div class="details">
+                    <strong>Sarah White</strong><br>
+                    <p>Email: sarahwhite@gmail.com</p>
+                    <p>Phone: (011) 890-1234</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <ul class="social_icons">
+            <li><a href="https://instagram.com"><img src="instagram.png" width="30px" height="30px" alt="Instagram"></a></li>
+            <li><a href="https://facebook.com"><img src="facebook.png" width="30px" height="30px" alt="Facebook"></a></li>
+            <li><a href="https://youtube.com"><img src="Youtube.png" width="30px" height="30px" alt="YouTube"></a></li>
+            <li><a href="https://twitter.com"><img src="x.png" width="30px" height="30px" alt="Twitter"></a></li>
+        </ul>
+        <div class="info">
+            <p>Contact Us:</p>
+            <p>Email: info@RealHomesproperties.com</p>
+            <p>Phone: (123) 456-7890</p>
+            <p>Address: 123 Property Lane, Johannesburg, SA</p>            
+        </div>
+        <div class="symbols">&#169; 2024 Real Homes. All rights reserved.</div>
+    </footer>
+
+    <script>
+      
+    </script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Real Homes Properties</title>
+        <style>
+                /* General Styles */
+                header {
+                    background-color: white;
+                    padding: 10px;
+                }
+        
+        
+                nav {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    justify-content: space-between;
+                }
+                .navigator{
+                    display: flex;
+                    align-items: center;
+                    flex-grow: 1;
+                }
+        
+                .logo-container {
+                    display: flex;
+                    align-items: center; /* Aligns the logo and text vertically */
+                }
+        
+                .logo-container img {
+                    margin-right: 10px; /* Adds space between the logo and text */
+                    width: 240px;
+                    height: auto;
+                }
+        
+                .WP {
+                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-right: 10px;
+                }
+        
+                ul {
+                    display: flex;
+                    gap: 20px;
+                    list-style: none; 
+                    margin: 0;
+                    padding: 0;
+                }
+                ul li{
+                    display: flex;
+                    align-items: center;
+                }
+        
+                ul li a {
+                    text-decoration: none;
+                    color: black;
+                    font-size: 21px;
+                    padding: 10px 15px;
+                    display: inline-block;
+                }
+        
+                ul li:hover a {
+                    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adds shadow on hover */
+                    color: rgb(0, 114, 114); /* Changes color on hover */
+                }
+                
+        
+                .signlogin {
+                    display: flex;
+                    gap: 40px;
+                    text-decoration: none;
+                }
+                 a {
+                    text-decoration: none;
+                    color: black;
+                    font-size: 21px;
+                    padding: 10px 15px;
+                }
+        
+                .sign, .login {
+                    background-color: aqua;
+                    padding: 5px 10px;
+                    border-radius: 20px;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+        
+                .sign:hover {
+                    background-color: rgb(0, 114, 114);
+                    color: white;
+                }
+        
+                .login:hover {
+                    background-color: darkcyan;
+                    color: white;
+                }
+        
+                /* Welcome Section */
+                .welcome {
+                    text-align: center;
+                    padding: 40px;
+                    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                }
+                .Slogan{
+                    text-align: center;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-style: italic;
+                    font-size: 30px;
+                    background-color: #f9f9f9;
+                }
+                .welcome .title {
+                    font-size: 36px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+        
+                .welcome p {
+                    font-size: 20px;
+                    color: #333;
+                    line-height: 1.5;
+                    max-width: 800px;
+                    margin: 0 auto;
+                }
+        
+                /* Split Section Styling */
+                .splitting {
+                    height: 50vh;
+                    display: flex;
+                }
+        
+                section {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex: 1; /* Updated to make sections equal initially */
+                    position: relative;
+                    transition: flex 2s ease;
+                }
+        
+                section:hover {
+                    flex: 2; /* Expands hovered section */
+                }
+        
+                /* Background Images */
+                .BUYpic {
+                    background-image: url('BUY.jpeg');
+                    background-position: center;
+                    background-size: cover;
+                    background-blend-mode: multiply;
+                }
+        
+                .SELLpic {
+                    background-image: url('Sell.jpeg');
+                    background-position: center;
+                    background-size: cover;
+                    background-blend-mode: multiply;
+                }
+        
+                .Rentpic {
+                    background-image: url('Rent.jpeg');
+                    background-position: center;
+                    background-size: cover;
+                    background-blend-mode: multiply;
+                }
+        
+                /* Footer Styles */
+                footer {
+                    background-color: #333;
+                    color: white;
+                    text-align: center;
+                    padding: 20px;
+                    font-family: 'Arial', sans-serif;
+                    position: relative;
+                }
+                .social_icons{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 10px 0;
+                    flex-wrap: wrap;
+                }
+                footer p{
+                    color: white;
+                    margin-top: 15px;
+                    margin-bottom: 10px;
+                    font-size: 17.6px;
+                }
+        
+            </style>
+        </head>
+        <header>
+            <nav>
+                <div class="logo-container">
+                    <img src="logo.png" alt="logo">
+                    <div class="WP">Real Homes</div> 
+                </div>
+                <div class="navigator">
+                    <ul>
+                        <li><a href="./BuyPage.html">BUY</a></li>
+                        <li><a href="./RentPage.html">RENT</a></li>         
+                        <li><a href="./calculator.html">Calculate</a></li>
+                        <li><a href="./agent.html">Agents Portal</a></li>
+                    </ul>
+                </div>
+                <div class="signlogin">
+                    <div class="sign"><a href="login.html"> SignIn</a></div> 
+                    <div class="login"><a href="login.html"> Login</a></div>
+                    <div class="sign"><a href="./contactUs.html">ContactUs</a></div> 
+                </div>
+            </nav>
+        </header>
+        <body>
+            <p class="Slogan">Find Your Place</p>
+            <div class="splitting">
+                </a><section class="BUYpic" data-text="Buy Now"> </section>
+                <section class="SELLpic" data-text="Sell Today"></section>
+                <section class="Rentpic" data-text="Rent Today"></section>
+            </div>
+        
+        
+            <div class="welcome">
+                <p class="title">Real Homes Properties</p>
+                <p>Welcome to Real Homes, where we help you find your dream home in the heart of Johannesburg. Our commitment is to offer a wide selection of high-quality homes that meet your needs. Whether you’re looking to buy, sell, or simply explore the market, we are here to guide you through every step of the way with personalized service and expert advice. Let us turn your real estate aspirations into reality!</p>
+            </div>
+        
+        
+            <footer>
+                <ul class="social_icons">
+                    <li><a href="https://instagram.com"><img src="instagram.png" width="30px" height="30px"></a></li>
+                    <li><a href="https://facebook.com"><img src="facebook.png" width="30px" height="30px"></a></li>
+                    <li><a href="https://youtube.com"><img src="Youtube.png" width="30px" height="30px"></a></li>
+                    <li><a href="https://twitter.com"><img src="x.png" width="30px" height="30px"></a></li>
+                </ul>
+                <div class="info">
+                    <p>Contact Us:</p>
+                    <p>Email: info@RealHomesproperties.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <p>Address: 123 Property Lane, Johannesburg, SA</p>            
+                </div>
+                <div class="symbols">&#169;</div>
+            </footer>
+        </body>
+    </html>
+        
