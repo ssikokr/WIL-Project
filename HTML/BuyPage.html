@@ -461,15 +461,15 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Bedrooms</label>
-                            <input type="number" id="propBeds" min="1" max="15" value="3" class="form-control" required>
+                            <input type="number" id="propBeds" name="bedrooms" min="1" max="15" value="3" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Bathrooms</label>
-                            <input type="number" id="propBaths" min="1" max="15" value="2" class="form-control" required>
+                            <input type="number" id="propBaths" name="bathrooms" min="1" max="15" value="2" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Garages</label>
-                            <input type="number" id="propGarages" min="0" max="10" value="2" class="form-control" required>
+                            <input type="number" id="propGarages" name="garages" min="0" max="10" value="2" class="form-control" required>
                         </div>
                     </div>
 
@@ -871,56 +871,71 @@
             document.getElementById('addModal').classList.remove('active');
         }
 
-        function handleAddProperty(e) {
-            // Check if submitted as regular form or client dynamic
+        async function handleAddProperty(e) {
             e.preventDefault();
-            const title = document.getElementById('propTitle').value;
+            const form = e.currentTarget;
+            const submitButton = form.querySelector('button[type="submit"]');
+            const title = document.getElementById('propTitle').value.trim();
             const price = parseInt(document.getElementById('propPrice').value);
             const location = document.getElementById('propLocation').value;
             const beds = parseInt(document.getElementById('propBeds').value);
             const baths = parseInt(document.getElementById('propBaths').value);
             const garages = parseInt(document.getElementById('propGarages').value);
-            const desc = document.getElementById('propDesc').value;
-            const imageInput = document.getElementById('propImage');
+            const desc = document.getElementById('propDesc').value.trim();
 
             if (price < 400000) {
-                alert("Minimum listing price must be at least R400,000.");
+                showToast("Minimum listing price must be at least R400,000.", "error");
                 return;
             }
 
-            let imageSrc = "../IMAGES/buyPage/house1.jpeg";
-            if (imageInput.files && imageInput.files[0]) {
-                imageSrc = URL.createObjectURL(imageInput.files[0]);
-            }
-
-            const newHouse = {
-                id: Date.now(),
-                title: title,
-                price: price,
-                description: desc,
-                location: location,
-                address: `${location}, Johannesburg`,
-                bedrooms: beds,
-                bathrooms: baths,
-                garages: garages,
-                area: beds * 75,
-                tag: "Newly Listed",
-                image: imageSrc,
-                agent: {
-                    name: "Jane Smith",
-                    role: "Senior Luxury Specialist",
-                    phone: "(098) 765-4321",
-                    email: "janesmith@realhomesproperties.com",
-                    image: "../IMAGES/agents Portals/agent 3.jpeg",
-                    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.8612166625694!2d28.071115674716804!3d-26.070791658552544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9572fb05e1969d%3A0x8f70b726e088ac8c!2s1-3%20Aston%20Rd%2C%20Morningside%20Manor%2C%20Sandton%2C%202057!5e0!3m2!1sen!2sza!4v1729759283917!5m2!1sen!2sza"
+            submitButton.disabled = true;
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: { Accept: 'application/json' },
+                    body: new FormData(form)
+                });
+                const result = await response.json();
+                if (!response.ok || !result.success) {
+                    throw new Error(result.message || 'The listing could not be saved.');
                 }
-            };
 
-            allHouses.unshift(newHouse);
-            saveHouses(allHouses);
-            renderHouses(allHouses);
-            closeAddModal();
-            showToast("Property listing successfully submitted and published!");
+                const newHouse = {
+                    id: result.listingId,
+                    title: title,
+                    price: price,
+                    description: desc,
+                    location: location,
+                    address: `${location}, Johannesburg`,
+                    bedrooms: beds,
+                    bathrooms: baths,
+                    garages: garages,
+                    area: beds * 75,
+                    tag: "Newly Listed",
+                    image: result.imageUrl,
+                    agent: {
+                        name: "Jane Smith",
+                        role: "Senior Luxury Specialist",
+                        phone: "(098) 765-4321",
+                        email: "janesmith@realhomesproperties.com",
+                        image: "../IMAGES/agents Portals/agent 3.jpeg",
+                        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.8612166625694!2d28.071115674716804!3d-26.070791658552544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9572fb05e1969d%3A0x8f70b726e088ac8c!2s1-3%20Aston%20Rd%2C%20Morningside%20Manor%2C%20Sandton%2C%202057!5e0!3m2!1sen!2sza!4v1729759283917!5m2!1sen!2sza"
+                    }
+                };
+
+                allHouses.unshift(newHouse);
+                saveHouses(allHouses);
+                renderHouses(allHouses);
+                form.reset();
+                closeAddModal();
+                showToast("Property listing successfully submitted and published!");
+            } catch (error) {
+                const message = error instanceof Error ? error.message : "Please try again.";
+                console.error("Property listing submission failed:", error);
+                showToast(`Unable to submit property listing: ${message}`, "error");
+            } finally {
+                submitButton.disabled = false;
+            }
         }
 
         function handleViewingRequest(e) {

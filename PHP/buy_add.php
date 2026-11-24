@@ -1,59 +1,93 @@
 <?php
-// Database connection
-$host = "localhost";
-$dbname = "realhomes";
-$username = "root";
-$password = "";
+declare(strict_types=1);
 
-$conn = new mysqli($host, $username, $password, $dbname);
+require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/upload_helpers.php';
 
-// Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    respond(false, 'Submit the property form to add a listing.', 405, [], '../HTML/BuyPage.html');
 }
 
-// Check if the form was submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Handle file upload
-    $image = $_FILES['propertyImage'];
-    $uploadDir = "uploads/";
-    $targetFile = $uploadDir . basename($image['name']);
-    $uploadOk = 1;
+$imagePath = null;
 
-    // Basic validation for price and location
-    $location = $_POST['propertyLocation'];
-    $price = $_POST['propertyPrice'];
-
-    if ($price < 400000) {
-        echo "<script>alert('Price must be at least R400,000.'); window.location.href='your_form_page.html';</script>";
-        exit;
+try {
+    $title = requiredPostString('propertyTitle', 'Property title', 180);
+    $description = requiredPostString('propertyDescription', 'Property description', 10000);
+    $location = requiredPostString('propertyLocation', 'Property location', 80);
+    $allowedLocations = ['Sandton', 'Ruimsig', 'Krugersdorp', 'city'];
+    if (!in_array($location, $allowedLocations, true)) {
+        throw new InvalidArgumentException('Choose a valid property location.');
     }
 
-    // Check if file is an image
-    $check = getimagesize($image['tmp_name']);
-    if ($check === false) {
-        echo "<script>alert('File is not an image.'); window.location.href='your_form_page.html';</script>";
-        $uploadOk = 0;
+    $rawPrice = $_POST['propertyPrice'] ?? '';
+    if (!is_string($rawPrice) || !is_numeric($rawPrice) || (float) $rawPrice < 400000) {
+        throw new InvalidArgumentException('The asking price must be at least R400,000.');
+    }
+    $price = (float) $rawPrice;
+    if (!is_finite($price)) {
+        throw new InvalidArgumentException('Enter a valid asking price.');
     }
 
-    // Upload file if valid
-    if ($uploadOk == 1 && move_uploaded_file($image['tmp_name'], $targetFile)) {
-        // Prepare SQL statement to insert data into buy_add table
-        $stmt = $conn->prepare("INSERT INTO buy_add (property_image, location, price) VALUES (?, ?, ?)");
-        $stmt->bind_param("ssd", $targetFile, $location, $price);
+    $rawBedrooms = $_POST['bedrooms'] ?? null;
+    $rawBathrooms = $_POST['bathrooms'] ?? null;
+    $rawGarages = $_POST['garages'] ?? null;
+    $bedrooms = filter_var($rawBedrooms, FILTER_VALIDATE_INT);
+    $bathrooms = filter_var($rawBathrooms, FILTER_VALIDATE_INT);
+    $garages = filter_var($rawGarages, FILTER_VALIDATE_INT);
 
-        // Execute statement and check if insertion was successful
-        if ($stmt->execute()) {
-            echo "<script>alert('Submission successful'); window.location.href='your_form_page.html';</script>";
-        } else {
-            echo "<script>alert('Error: Could not submit property details.'); window.location.href='your_form_page.html';</script>";
-        }
-
-        $stmt->close();
-    } else {
-        echo "<script>alert('Error uploading image.'); window.location.href='your_form_page.html';</script>";
+    if ($bedrooms === false || $bedrooms < 1 || $bedrooms > 15 ||
+        $bathrooms === false || $bathrooms < 1 || $bathrooms > 15 ||
+        $garages === false || $garages < 0 || $garages > 10) {
+        throw new InvalidArgumentException('Enter valid bedroom, bathroom, and garage counts.');
     }
+
+    $imagePath = saveUploadedImage($_FILES['propertyImage'] ?? [], 'sales');
+    $connection = openDatabase(getenv('REALHOMES_DATABASE') ?: 'realhomes');
+    $statement = $connection->prepare(
+        'INSERT INTO sale_listings (title, description, location, price, bedrooms, bathrooms, garages, image_path)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+    );
+    $statement->bind_param(
+        'sssdiiis',
+        $title,
+        $description,
+        $location,
+        $price,
+        $bedrooms,
+        $bathrooms,
+        $garages,
+        $imagePath
+    );
+    $statement->execute();
+    $listingId = $connection->insert_id;
+    $statement->close();
+    $connection->close();
+
+    respond(
+        true,
+        'Your property listing has been submitted.',
+        201,
+        [
+            'listingId' => $listingId,
+            'imageUrl' => '../PHP/' . $imagePath
+        ],
+        '../HTML/BuyPage.html'
+    );
+} catch (InvalidArgumentException $exception) {
+    if ($imagePath !== null) {
+        removeUploadedImages([$imagePath]);
+    }
+    respond(false, $exception->getMessage(), 422, [], '../HTML/BuyPage.html');
+} catch (Throwable $exception) {
+    if ($imagePath !== null) {
+        removeUploadedImages([$imagePath]);
+    }
+    error_log('Sale listing submission failed: ' . $exception->getMessage());
+    respond(
+        false,
+        'We could not save the property listing. Please try again later.',
+        500,
+        [],
+        '../HTML/BuyPage.html'
+    );
 }
-
-$conn->close();
-?>

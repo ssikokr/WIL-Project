@@ -68,24 +68,11 @@
             background: #ffffff;
             border-radius: var(--radius-lg);
             padding: 24px;
-            box-shadow: none;
-            max-width: none;
-            margin: 0 auto;
-            text-align: left;
-            border: 0;
-        }
-
-        .hero-search-dropdown {
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
             max-width: 900px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-            overflow: hidden;
-        }
-
-        .hero-search-dropdown > summary {
-            font-size: 15px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .search-type-tabs {
@@ -477,9 +464,7 @@
             <p class="hero-subtitle">Browse Johannesburg's most exclusive portfolio of luxury residences, architectural family homes, and prime real estate investments.</p>
 
             <!-- Interactive Quick Search Bar -->
-            <details class="site-dropdown hero-search-dropdown" open>
-                <summary>Find a property</summary>
-                <div class="hero-search-card">
+            <div class="hero-search-card">
                     <div class="search-type-tabs">
                         <button class="search-tab active" onclick="setSearchMode('buy', this)">Buy Homes</button>
                         <button class="search-tab" onclick="setSearchMode('rent', this)">Rent Properties</button>
@@ -520,8 +505,7 @@
                         </button>
                         </div>
                     </form>
-                </div>
-            </details>
+            </div>
         </div>
     </section>
 

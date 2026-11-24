@@ -1,64 +1,46 @@
 <?php
-// Database configuration
-$servername = "localhost";
-$username = "root"; // Default XAMPP user
-$password = ""; // Default XAMPP password
-$dbname = "newsletter_db";
+declare(strict_types=1);
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once __DIR__ . '/database.php';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    respond(false, 'Submit the contact form to send a message.', 405, [], '../HTML/contactUs.html');
 }
 
-// Get form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize input to prevent SQL injection and XSS
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-    $message = htmlspecialchars($_POST['message'], ENT_QUOTES, 'UTF-8');
-
-    // Check if the email is valid
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // Prepare and bind the SQL statement
-        $stmt = $conn->prepare("INSERT INTO contact_messages (email, message) VALUES (?, ?)");
-        $stmt->bind_param("ss", $email, $message);
-
-        // Execute the query
-        if ($stmt->execute()) {
-            // Success, redirect or display a success message
-            $success_message = "Your message has been received!";
-        } else {
-            // Handle query failure
-            $error_message = "Error: Could not send your message.";
-        }
-
-        $stmt->close();
-    } else {
-        // If email is invalid
-        $error_message = "Invalid email format.";
+try {
+    $email = requiredPostString('email', 'Email address', 254);
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+        throw new InvalidArgumentException('Enter a valid email address.');
     }
+
+    // The selling form adds the caller and property details to this message field.
+    $message = requiredPostString('message', 'Message', 10000);
+    $databaseName = getenv('CONTACT_DATABASE') ?: 'newsletter_db';
+    $connection = openDatabase($databaseName);
+    $statement = $connection->prepare(
+        'INSERT INTO contact_messages (email, message) VALUES (?, ?)'
+    );
+    $statement->bind_param('ss', $email, $message);
+    $statement->execute();
+    $statement->close();
+    $connection->close();
+
+    respond(
+        true,
+        'Your message has been received. The Real Homes team will be in touch.',
+        200,
+        [],
+        '../HTML/contactUs.html'
+    );
+} catch (InvalidArgumentException $exception) {
+    respond(false, $exception->getMessage(), 422, [], '../HTML/contactUs.html');
+} catch (Throwable $exception) {
+    error_log('Contact message submission failed: ' . $exception->getMessage());
+    respond(
+        false,
+        'We could not save your message. Please try again later.',
+        500,
+        [],
+        '../HTML/contactUs.html'
+    );
 }
-
-$conn->close();
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form Submission</title>
-</head>
-<body>
-    <!-- Display success or error messages -->
-    <?php if (!empty($success_message)): ?>
-        <p style="color: green;"><?php echo $success_message; ?></p>
-    <?php endif; ?>
-    <?php if (!empty($error_message)): ?>
-        <p style="color: red;"><?php echo $error_message; ?></p>
-    <?php endif; ?>
-    <a href="HomePage.html">Back to Home</a>
-</body>
-</html>

@@ -209,10 +209,10 @@
         <div class="container">
             <div id="loginForm">
                 <h2>Login</h2>
-                <form id="login" action = "auth.php">
+                <form id="login" action="auth.php" method="post">
                     <input type="text" id="loginUsername" placeholder="Username" required>
                     <input type="password" id="loginPassword" placeholder="Password" required>
-                    <button type="submit"><a href = "./HomePage.html">Login</a></button>
+                    <button type="submit">Login</button>
                 </form>
                 <div class="toggle">
                     Don't have an account? <a href="#" onclick="toggleForms()">Register</a>
@@ -257,52 +257,63 @@
         const registerForm = document.getElementById('registerForm');
         loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
         registerForm.style.display = registerForm.style.display === 'none' ? 'block' : 'none';
-        document.getElementById('message').innerHTML = '';
+        document.getElementById('message').textContent = '';
     }
 
-    document.getElementById('login').addEventListener('submit', function(e) {
+    document.getElementById('login').addEventListener('submit', async function(e) {
         e.preventDefault();
         const username = document.getElementById('loginUsername').value;
         const password = document.getElementById('loginPassword').value;
-       
-        fetch('auth.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `action=login&username=${username}&password=${password}`
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Redirect to the home page upon successful login
-                window.location.href = "HomePage.html";
-            } else {
-                document.getElementById('message').innerHTML = data.message;
+
+        try {
+            const response = await fetch('auth.php', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({ action: 'login', username, password })
+            });
+            const data = await response.json();
+            if (!response.ok || !data.success) {
+                throw new Error(data.message || 'Login could not be completed.');
             }
-        });
+
+            window.location.href = "HomePage.html";
+        } catch (error) {
+            const message = error instanceof Error ? error.message : 'Please try again.';
+            console.error('Login request failed:', error);
+            document.getElementById('message').textContent = message;
+        }
     });
     
 
-    document.getElementById('register').addEventListener('submit', function(e) {
+    document.getElementById('register').addEventListener('submit', async function(e) {
         e.preventDefault();
         const username = document.getElementById('registerUsername').value;
         const password = document.getElementById('registerPassword').value;
-       
-        fetch('auth.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `action=register&username=${username}&password=${password}`
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('message').innerHTML = data.message;
-            if (data.success) {
-                toggleForms();
+
+        try {
+            const response = await fetch('auth.php', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({ action: 'register', username, password })
+            });
+            const data = await response.json();
+            if (!response.ok || !data.success) {
+                throw new Error(data.message || 'Registration could not be completed.');
             }
-        });
+
+            toggleForms();
+            document.getElementById('message').textContent = data.message;
+        } catch (error) {
+            const message = error instanceof Error ? error.message : 'Please try again.';
+            console.error('Registration request failed:', error);
+            document.getElementById('message').textContent = message;
+        }
     });
 
     function logout() {
@@ -310,7 +321,7 @@
         document.getElementById('loginForm').style.display = 'block';
         document.getElementById('loginUsername').value = '';
         document.getElementById('loginPassword').value = '';
-        document.getElementById('message').innerHTML = '';
+        document.getElementById('message').textContent = '';
     }
 </script>
 </html>

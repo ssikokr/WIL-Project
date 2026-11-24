@@ -108,23 +108,19 @@
 
     <main class="contact-layout">
         <section class="contact-card">
-            <details class="site-dropdown" open>
-                <summary>Send us a message</summary>
-                <div class="site-dropdown-content">
-                    <p style="color: var(--text-secondary); margin-bottom: 18px;">Complete the form and we’ll be in touch.</p>
-                    <form action="../PHP/contactUs.php" method="POST">
-                        <div class="form-group">
-                            <label class="form-label" for="email">Email address</label>
-                            <input class="form-control" type="email" id="email" name="email" autocomplete="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="message">How can we help?</label>
-                            <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
-                        </div>
-                        <button class="btn btn-gold" type="submit">Send Message</button>
-                    </form>
+            <h2>Send us a message</h2>
+            <p style="color: var(--text-secondary); margin: 8px 0 18px;">Complete the form and we’ll be in touch.</p>
+            <form action="../PHP/contactUs.php" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email address</label>
+                    <input class="form-control" type="email" id="email" name="email" autocomplete="email" required>
                 </div>
-            </details>
+                <div class="form-group">
+                    <label class="form-label" for="message">How can we help?</label>
+                    <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
+                </div>
+                <button class="btn btn-gold" type="submit">Send Message</button>
+            </form>
         </section>
 
         <section class="contact-card">

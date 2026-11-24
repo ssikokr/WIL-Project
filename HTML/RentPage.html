@@ -414,7 +414,7 @@
                 <form id="addRentalForm" onsubmit="handleAddRental(event)" action="../PHP/rent_add.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="form-label">Rental Title / Headline</label>
-                        <input type="text" id="rentTitle" name="propertyDescription" class="form-control" placeholder="e.g. Modern 2-Bedroom Apartment in Sandton" required>
+                        <input type="text" id="rentTitle" name="propertyTitle" class="form-control" placeholder="e.g. Modern 2-Bedroom Apartment in Sandton" required>
                     </div>
 
                     <div class="form-row">
@@ -424,7 +424,7 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Property Type</label>
-                            <select id="rentType" class="form-control" required>
+                            <select id="rentType" name="propertyType" class="form-control" required>
                                 <option value="apartment">Apartment</option>
                                 <option value="house">House</option>
                                 <option value="studio">Studio</option>
@@ -436,17 +436,17 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Bedrooms</label>
-                            <input type="number" id="rentBeds" min="1" max="10" value="2" class="form-control" required>
+                            <input type="number" id="rentBeds" name="bedrooms" min="1" max="10" value="2" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Bathrooms</label>
-                            <input type="number" id="rentBaths" min="1" max="10" value="1" class="form-control" required>
+                            <input type="number" id="rentBaths" name="bathrooms" min="1" max="10" value="1" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Full Description</label>
-                        <textarea id="rentDesc" class="form-control" rows="3" placeholder="Describe the inclusions, security, view, parking..." required></textarea>
+                        <textarea id="rentDesc" name="propertyDescription" class="form-control" rows="3" placeholder="Describe the inclusions, security, view, parking..." required></textarea>
                     </div>
 
                     <div class="form-group">
@@ -906,47 +906,64 @@
             document.getElementById('addRentalModal').classList.remove('active');
         }
 
-        function handleAddRental(e) {
+        async function handleAddRental(e) {
             e.preventDefault();
-            const title = document.getElementById('rentTitle').value;
+            const form = e.currentTarget;
+            const submitButton = form.querySelector('button[type="submit"]');
+            const title = document.getElementById('rentTitle').value.trim();
             const rent = parseInt(document.getElementById('rentAmount').value);
             const type = document.getElementById('rentType').value;
             const beds = parseInt(document.getElementById('rentBeds').value);
             const baths = parseInt(document.getElementById('rentBaths').value);
-            const desc = document.getElementById('rentDesc').value;
-            const imgInput = document.getElementById('rentImages');
+            const desc = document.getElementById('rentDesc').value.trim();
 
-            let images = ["../IMAGES/SellPage/apartment1_1.jpeg"];
-            if (imgInput.files && imgInput.files.length > 0) {
-                images = Array.from(imgInput.files).map(file => URL.createObjectURL(file));
-            }
-
-            const newRental = {
-                id: Date.now(),
-                title: title,
-                rent: rent,
-                type: type,
-                bedrooms: beds,
-                bathrooms: baths,
-                parking: 1,
-                area: beds * 45,
-                description: desc,
-                images: images,
-                currentImageIndex: 0,
-                agent: {
-                    name: "Jane Smith",
-                    phone: "(098) 765-4321",
-                    email: "janesmith@realhomesproperties.com",
-                    image: "../IMAGES/agents Portals/agent 3.jpeg",
-                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3584.0230357003106!2d27.82167747471655!3d-26.065503558338207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e959bfbf3f20049!2sSandton!5e0!3m2!1sen!2sza"
+            submitButton.disabled = true;
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: { Accept: 'application/json' },
+                    body: new FormData(form)
+                });
+                const result = await response.json();
+                if (!response.ok || !result.success) {
+                    throw new Error(result.message || 'The rental listing could not be saved.');
                 }
-            };
 
-            allRentals.unshift(newRental);
-            saveRentals(allRentals);
-            renderRentals(allRentals);
-            closeAddRentalModal();
-            showToast("Rental property successfully published!");
+                const images = result.imageUrls;
+                const newRental = {
+                    id: result.listingId,
+                    title: title,
+                    rent: rent,
+                    type: type,
+                    bedrooms: beds,
+                    bathrooms: baths,
+                    parking: 1,
+                    area: beds * 45,
+                    description: desc,
+                    images: images,
+                    currentImageIndex: 0,
+                    agent: {
+                        name: "Jane Smith",
+                        phone: "(098) 765-4321",
+                        email: "janesmith@realhomesproperties.com",
+                        image: "../IMAGES/agents Portals/agent 3.jpeg",
+                        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3584.0230357003106!2d27.82167747471655!3d-26.065503558338207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e959bfbf3f20049!2sSandton!5e0!3m2!1sen!2sza"
+                    }
+                };
+
+                allRentals.unshift(newRental);
+                saveRentals(allRentals);
+                renderRentals(allRentals);
+                form.reset();
+                closeAddRentalModal();
+                showToast("Rental property successfully published!");
+            } catch (error) {
+                const message = error instanceof Error ? error.message : "Please try again.";
+                console.error("Rental listing submission failed:", error);
+                showToast(`Unable to submit rental listing: ${message}`, "error");
+            } finally {
+                submitButton.disabled = false;
+            }
         }
 
         function handleRentalApplication(e) {
