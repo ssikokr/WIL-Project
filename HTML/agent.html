@@ -3,267 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Homes</title>
+    <meta name="description" content="Meet the Real Homes property team serving Johannesburg.">
+    <title>Our Agents | Real Homes</title>
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        /* General Styles */
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #fff;
-            font-family: "my-font", serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-
-        header {
-            background-color: white;
-            padding: 10px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center; /* Aligns the logo and text vertically */
-        }
-
-        .logo-container img {
-            margin-right: 15px; /* Adds space between the logo and text */
-            width: 240px;
-            height: auto;
-        }
-
-        .WP {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        ul {
-            display: flex;
-            gap: 30px;
-            list-style: none; /* Removes bullets */
-        }
-
-        ul li a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
-
-        ul li:hover a {
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adds shadow on hover */
-            color: rgb(0, 114, 114); /* Changes color on hover */
-        }
-        .signlogin {
-            display: flex;
-            gap: 40px;
-            text-decoration: none;
-        }
-         a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
-
-        .sign, .login {
-            background-color: aqua;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .sign:hover {
-            background-color: rgb(0, 114, 114);
-            color: white;
-        }
-        /* Property Listings */
-        .property-container {
-            width: 90%;
-            margin: 20px auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.658);
-            padding: 20px;
-        }
-
-
-        .property-listings {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .property-card {
-            display: flex;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .property-card img {
-            width: 150px;
-            height: auto;
-            margin-right: 15px;
-            border-radius: 8px;
-        }
-
-        .property-card .details {
-            flex: 1;
-        }
-
-        .property-card .price {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .agent-profiles {
-            margin-top: 40px;
-        }
-
-        .agent-profile {
-            display: flex;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .agent-profile img {
-            width: 80px;
-            height: auto;
-            border-radius: 50%; /* Makes the agent's image circular */
-            margin-right: 15px;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
+        .page-banner {
+            padding: 48px 24px;
             text-align: center;
-            padding: 20px;
-            font-family: 'Arial', sans-serif;
-            position: relative;
+            color: #ffffff;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.95)), url('../IMAGES/Headline.jpeg') center/cover no-repeat;
         }
 
-        .social_icons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px 0;
-            flex-wrap: wrap;
-        }
-
-        footer p {
-            color: white;
-            margin-top: 15px;
+        .page-banner h1 {
+            color: #ffffff;
+            font-size: clamp(32px, 4vw, 46px);
             margin-bottom: 10px;
-            font-size: 17.6px;
         }
 
- 
+        .page-banner p {
+            color: #cbd5e1;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .agent-directory {
+            max-width: 1180px;
+            width: calc(100% - 48px);
+            margin: 48px auto 72px;
+        }
+
+        .agent-directory-intro {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .agent-directory-intro p {
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        .agent-directory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: 22px;
+        }
+
+        .agent-directory-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 26px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .agent-directory-card img {
+            width: 104px;
+            height: 104px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--gold-light);
+            margin: 0 auto 14px;
+        }
+
+        .agent-directory-card h2 {
+            font-size: 21px;
+            margin-bottom: 4px;
+        }
+
+        .agent-directory-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .agent-directory-actions {
+            display: grid;
+            gap: 10px;
+        }
+
+        .agent-directory-actions .btn {
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .agent-directory-cta {
+            text-align: center;
+            margin-top: 32px;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo-container">
-                <img src="logo.png" alt="logo">
-                <div class="WP">Real Homes</div> 
-            </div>
-            <div class="navigator">
-                <ul>
-                    <li><a href="./HomePage.html">HOME</a></li>
-                    <li><a href="./BuyPage.html">BUY</a></li>
-                    <li><a href="./RentPage.html">RENT</a></li>        
-                    <li><a href="./calculator.html">Calculate</a></li>
-                </ul>
-            </div>
-            <div class="signlogin">
-                <div class="sign"><a href="./contactUs.html">ContactUs</a></div> 
-            </div>
-        </nav>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="HomePage.html" class="brand-logo-wrap">
+                <img src="../IMAGES/logo.png" alt="Real Homes Logo" class="brand-logo-img">
+                <div class="brand-title-box">
+                    <span class="brand-name">Real Homes</span>
+                    <span class="brand-tagline">Luxury Real Estate</span>
+                </div>
+            </a>
+            <button class="mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <ul class="nav-menu">
+                <li><a href="HomePage.html" class="nav-link">Home</a></li>
+                <li><a href="BuyPage.html" class="nav-link">Buy Homes</a></li>
+                <li><a href="RentPage.html" class="nav-link">Rentals</a></li>
+                <li><a href="sell.html" class="nav-link">Sell Property</a></li>
+                <li><a href="calculator.html" class="nav-link">Bond Calculator</a></li>
+                <li><a href="agent.html" class="nav-link active">Our Agents</a></li>
+                <li><a href="contactUs.html" class="nav-link">Contact Us</a></li>
+            </ul>
+        </div>
     </header>
 
-    <div class="property-container">
+    <section class="page-banner">
+        <span class="badge badge-teal" style="margin-bottom: 10px;">Local expertise</span>
+        <h1>Meet our property team</h1>
+        <p>Connect directly with a Real Homes agent for guidance on buying, selling, and renting in Johannesburg.</p>
+    </section>
 
-        <div class="agent-profiles">
-            <h3>Meet Our Agents</h3>
-            <div class="agent-profile">
-                <img src="agent 1.jpeg" alt="Agent 1">
-                <div class="details">
-                    <strong>John Doe</strong><br>
-                    <p>Email: johndoe@gmail.com</p>
-                    <p>Phone: (023) 456-7890</p>
-                </div>
-            </div>
-            <div class="agent-profile">
-                <img src="agent 3.jpeg" alt="Agent 2">
-                <div class="details">
-                    <strong>Jane Smith</strong><br>
-                    <p>Email: janesmith@gmail.com</p>
-                    <p>Phone: (098) 765-4321</p>
-                </div>
-            </div>
-            <div class="agent-profile">
-                <img src="agent 2.jpeg" alt="Agent 3">
-                <div class="details">
-                    <strong>Emily Johnson</strong><br>
-                    <p>Email: emilyjohnson@gmail.com</p>
-                    <p>Phone: (067) 890-1234</p>
-                </div>
-            </div>
-            <div class="agent-profile">
-                <img src="agent 4.jpg" alt="Agent 4">
-                <div class="details">
-                    <strong>Kenen Williams</strong><br>
-                    <p>Email: kenanwill@gmail.com</p>
-                    <p>Phone: (089) 223-0123</p>
-                </div>
-            </div>
-            <div class="agent-profile">
-                <img src="agent 5.jpeg" alt="Agent 4">
-                <div class="details">
-                    <strong>Sarah White</strong><br>
-                    <p>Email: sarahwhite@gmail.com</p>
-                    <p>Phone: (011) 890-1234</p>
-                </div>
-            </div>
+    <main class="agent-directory">
+        <div class="agent-directory-intro">
+            <h2>Our Johannesburg agents</h2>
+            <p>Choose an agent to start a conversation or browse our current homes.</p>
         </div>
-    </div>
+        <div class="agent-directory-grid">
+            <article class="agent-directory-card">
+                <img src="../IMAGES/agents Portals/agent 1.jpeg" alt="John Doe">
+                <h2>John Doe</h2>
+                <p>Property Consultant</p>
+                <div class="agent-directory-actions">
+                    <a class="btn btn-primary" href="mailto:johndoe@gmail.com">Email John</a>
+                    <a class="btn btn-outline" href="tel:+27234567890">(023) 456-7890</a>
+                </div>
+            </article>
+            <article class="agent-directory-card">
+                <img src="../IMAGES/agents Portals/agent 3.jpeg" alt="Jane Smith">
+                <h2>Jane Smith</h2>
+                <p>Senior Luxury Specialist</p>
+                <div class="agent-directory-actions">
+                    <a class="btn btn-primary" href="mailto:janesmith@gmail.com">Email Jane</a>
+                    <a class="btn btn-outline" href="tel:+27987654321">(098) 765-4321</a>
+                </div>
+            </article>
+            <article class="agent-directory-card">
+                <img src="../IMAGES/agents Portals/agent 2.jpeg" alt="Emily Johnson">
+                <h2>Emily Johnson</h2>
+                <p>Residential Specialist</p>
+                <div class="agent-directory-actions">
+                    <a class="btn btn-primary" href="mailto:emilyjohnson@gmail.com">Email Emily</a>
+                    <a class="btn btn-outline" href="tel:+27678901234">(067) 890-1234</a>
+                </div>
+            </article>
+            <article class="agent-directory-card">
+                <img src="../IMAGES/agents Portals/agent 4.jpg" alt="Kenen Williams">
+                <h2>Kenen Williams</h2>
+                <p>Principal Property Broker</p>
+                <div class="agent-directory-actions">
+                    <a class="btn btn-primary" href="mailto:kenanwill@gmail.com">Email Kenen</a>
+                    <a class="btn btn-outline" href="tel:+27892230123">(089) 223-0123</a>
+                </div>
+            </article>
+            <article class="agent-directory-card">
+                <img src="../IMAGES/agents Portals/agent 5.jpeg" alt="Sarah White">
+                <h2>Sarah White</h2>
+                <p>Rental Portfolio Manager</p>
+                <div class="agent-directory-actions">
+                    <a class="btn btn-primary" href="mailto:sarahwhite@gmail.com">Email Sarah</a>
+                    <a class="btn btn-outline" href="tel:+27118901234">(011) 890-1234</a>
+                </div>
+            </article>
+        </div>
+        <div class="agent-directory-cta">
+            <a class="btn btn-gold" href="BuyPage.html">Browse properties for sale</a>
+        </div>
+    </main>
 
-    <footer>
-        <ul class="social_icons">
-            <li><a href="https://instagram.com"><img src="instagram.png" width="30px" height="30px" alt="Instagram"></a></li>
-            <li><a href="https://facebook.com"><img src="facebook.png" width="30px" height="30px" alt="Facebook"></a></li>
-            <li><a href="https://youtube.com"><img src="Youtube.png" width="30px" height="30px" alt="YouTube"></a></li>
-            <li><a href="https://twitter.com"><img src="x.png" width="30px" height="30px" alt="Twitter"></a></li>
-        </ul>
-        <div class="info">
-            <p>Contact Us:</p>
-            <p>Email: info@RealHomesproperties.com</p>
-            <p>Phone: (123) 456-7890</p>
-            <p>Address: 123 Property Lane, Johannesburg, SA</p>            
+    <footer class="site-footer">
+        <div class="footer-bottom-bar">
+            <div>&copy; 2026 Real Homes Properties. All rights reserved.</div>
+            <a href="contactUs.html">Contact &amp; Office</a>
         </div>
-        <div class="symbols">&#169; 2024 Real Homes. All rights reserved.</div>
     </footer>
-
-    <script>
-      
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>

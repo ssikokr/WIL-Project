@@ -137,6 +137,23 @@
         .fab-add-btn:hover {
             transform: translateY(-3px) scale(1.03);
         }
+
+        .rental-enquiry-card {
+            background: var(--gold-subtle);
+            border: 1px solid rgba(184, 149, 98, 0.35);
+            border-radius: var(--radius-md);
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .rental-enquiry-content {
+            padding: 20px;
+        }
+
+        .rental-enquiry-card textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
     </style>
 </head>
 <body>
@@ -180,7 +197,8 @@
 
     <!-- FILTER PANEL -->
     <div style="padding: 0 24px;">
-        <div class="filter-panel">
+        <details class="filter-panel site-dropdown" open>
+            <summary>Search and filter rentals</summary>
             <div class="filter-grid">
                 <div class="form-group" style="margin:0;">
                     <label class="form-label">Search Keyword</label>
@@ -227,7 +245,7 @@
                     <button class="btn btn-outline" style="width: 100%; padding: 12px 18px;" onclick="resetRentFilters()">Reset</button>
                 </div>
             </div>
-        </div>
+        </details>
     </div>
 
     <!-- META BAR -->
@@ -317,32 +335,68 @@
                             </a>
                         </div>
 
+                        <details class="rental-enquiry-card site-dropdown" open>
+                            <summary>Enquire Now</summary>
+                            <div class="rental-enquiry-content">
+                                <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">
+                                    Ask the agent a question about this rental. Your email app will open with the property details included.
+                                </p>
+                                <form id="rentalEnquiryForm" onsubmit="handleRentalEnquiry(event)">
+                                    <div class="form-group">
+                                        <label class="form-label" for="enquiryName">Your name</label>
+                                        <input type="text" id="enquiryName" name="name" class="form-control" autocomplete="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="enquiryEmail">Email address</label>
+                                        <input type="email" id="enquiryEmail" name="email" class="form-control" autocomplete="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="enquiryPhone">Phone number <span style="font-weight: 400; color: var(--text-muted);">(optional)</span></label>
+                                        <input type="tel" id="enquiryPhone" name="phone" class="form-control" autocomplete="tel">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="enquiryMessage">What would you like to know?</label>
+                                        <textarea id="enquiryMessage" name="message" class="form-control" required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-gold" style="width: 100%; font-size: 14px;">
+                                        Send Enquiry
+                                    </button>
+                                </form>
+                            </div>
+                        </details>
+
                         <!-- Tenant Application Form -->
-                        <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 20px; margin-top: 20px;">
-                            <h5 style="font-size: 16px; margin-bottom: 12px;">Apply For This Rental</h5>
-                            <form onsubmit="handleRentalApplication(event)">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Applicant Full Name" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Email Address" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Phone Number" required>
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control" required>
-                                        <option value="">Desired Lease Term</option>
-                                        <option value="6">6 Months Lease</option>
-                                        <option value="12">12 Months Lease</option>
-                                        <option value="24">24 Months Lease</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-gold" style="width: 100%; font-size: 14px;">
-                                    Submit Rental Application
-                                </button>
-                            </form>
-                        </div>
+                        <details class="site-dropdown" style="margin-top: 20px;" open>
+                            <summary>Apply For This Rental</summary>
+                            <div class="site-dropdown-content">
+                                <form onsubmit="handleRentalApplication(event)">
+                                    <div class="form-group">
+                                        <label class="form-label" for="rentalApplicantName">Your name</label>
+                                        <input type="text" id="rentalApplicantName" class="form-control" autocomplete="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="rentalApplicantEmail">Email address</label>
+                                        <input type="email" id="rentalApplicantEmail" class="form-control" autocomplete="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="rentalApplicantPhone">Phone number</label>
+                                        <input type="tel" id="rentalApplicantPhone" class="form-control" autocomplete="tel" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="rentalLeaseTerm">Desired lease term</label>
+                                        <select id="rentalLeaseTerm" class="form-control" required>
+                                            <option value="">Select a lease term</option>
+                                            <option value="6">6 Months Lease</option>
+                                            <option value="12">12 Months Lease</option>
+                                            <option value="24">24 Months Lease</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-gold" style="width: 100%; font-size: 14px;">
+                                        Submit Rental Application
+                                    </button>
+                                </form>
+                            </div>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -829,6 +883,11 @@
             document.getElementById('rModalAgentPhone').textContent = rental.agent.phone;
             document.getElementById('rModalAgentEmail').textContent = rental.agent.email;
 
+            const enquiryForm = document.getElementById('rentalEnquiryForm');
+            enquiryForm.dataset.agentEmail = rental.agent.email;
+            enquiryForm.dataset.propertyTitle = rental.title;
+            enquiryForm.dataset.propertyRent = `${formatZAR(rental.rent)} / month`;
+
             document.getElementById('rModalCallBtn').href = `tel:${rental.agent.phone.replace(/[^0-9]/g, '')}`;
             document.getElementById('rModalWhatsAppBtn').href = `https://wa.me/27114567890?text=Hi%20${encodeURIComponent(rental.agent.name)},%20I'm%20inquiring%20about%20the%20rental%20${encodeURIComponent(rental.title)}%20(${formatZAR(rental.rent)}/pm)`;
 
@@ -894,6 +953,25 @@
             e.preventDefault();
             closeRentalModal();
             showToast("Rental application submitted! An agent will contact you within 24 hours.");
+        }
+
+        function handleRentalEnquiry(e) {
+            e.preventDefault();
+            const form = e.currentTarget;
+            const formData = new FormData(form);
+            const subject = `Rental enquiry: ${form.dataset.propertyTitle}`;
+            const body = [
+                `Hello, I am interested in ${form.dataset.propertyTitle} (${form.dataset.propertyRent}).`,
+                "",
+                `Name: ${formData.get('name')}`,
+                `Email: ${formData.get('email')}`,
+                `Phone: ${formData.get('phone') || 'Not provided'}`,
+                "",
+                "Question:",
+                formData.get('message')
+            ].join("\n");
+
+            window.location.href = `mailto:${form.dataset.agentEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         }
 
         window.onclick = function(e) {

@@ -136,6 +136,34 @@
             margin: 0 auto 12px;
         }
 
+        .property-enquiry-dropdown {
+            margin-top: 20px;
+            border: 1px solid rgba(184, 149, 98, 0.4);
+            border-radius: var(--radius-md);
+            background: var(--gold-subtle);
+            overflow: hidden;
+        }
+
+        .property-enquiry-dropdown summary {
+            padding: 16px 20px;
+            color: var(--primary-navy);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .property-enquiry-dropdown summary::marker {
+            color: var(--gold-primary);
+        }
+
+        .property-enquiry-form {
+            padding: 0 20px 20px;
+        }
+
+        .property-enquiry-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
         .fab-add-btn {
             position: fixed;
             bottom: 30px;
@@ -196,14 +224,15 @@
 
     <!-- PAGE HERO -->
     <section class="page-banner">
-        <span class="badge badge-gold" style="margin-bottom: 12px;">Premium Inventory</span>
+        <span class="badge badge-teal" style="margin-bottom: 12px;">Premium Inventory</span>
         <h1>Properties For Sale in Johannesburg</h1>
         <p>Explore luxury freestanding residences, contemporary cluster homes, and suburban sanctuaries with verified title deeds.</p>
     </section>
 
     <!-- FILTER PANEL -->
     <div style="padding: 0 24px;">
-        <div class="filter-panel">
+        <details class="filter-panel site-dropdown" open>
+            <summary>Search and filter homes</summary>
             <div class="filter-grid">
                 <div class="form-group" style="margin:0;">
                     <label class="form-label">Search Keyword / Suburb</label>
@@ -250,7 +279,7 @@
                     <button class="btn btn-outline" style="width: 100%; padding: 12px 18px;" onclick="resetFilters()">Reset</button>
                 </div>
             </div>
-        </div>
+        </details>
     </div>
 
     <!-- RESULTS BAR -->
@@ -280,7 +309,7 @@
         <div class="modal-box">
             <div class="modal-header">
                 <div>
-                    <span class="badge badge-gold" id="modalTag">Exclusive Mandate</span>
+                    <span class="badge badge-teal" id="modalTag">Exclusive Mandate</span>
                     <h3 class="modal-title" id="modalTitle" style="margin-top: 6px;">Property Title</h3>
                 </div>
                 <button class="modal-close-btn" onclick="closeDetailsModal()">&times;</button>
@@ -341,23 +370,58 @@
                         </div>
 
                         <!-- Private Viewing Form -->
-                        <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 20px; margin-top: 20px;">
-                            <h5 style="font-size: 16px; margin-bottom: 12px;">Request Private Viewing</h5>
-                            <form onsubmit="handleViewingRequest(event)">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Your Full Name" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Contact Number" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="date" class="form-control" required>
-                                </div>
-                                <button type="submit" class="btn btn-gold" style="width: 100%; font-size: 14px;">
-                                    Book Viewing Appointment
-                                </button>
-                            </form>
-                        </div>
+                        <details class="site-dropdown" style="margin-top: 20px;" open>
+                            <summary>Request Private Viewing</summary>
+                            <div class="site-dropdown-content">
+                                <form onsubmit="handleViewingRequest(event)">
+                                    <div class="form-group">
+                                        <label class="form-label" for="viewingName">Your name</label>
+                                        <input type="text" id="viewingName" class="form-control" autocomplete="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="viewingPhone">Contact number</label>
+                                        <input type="tel" id="viewingPhone" class="form-control" autocomplete="tel" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="viewingDate">Preferred viewing date</label>
+                                        <input type="date" id="viewingDate" class="form-control" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-gold" style="width: 100%; font-size: 14px;">
+                                        Book Viewing Appointment
+                                    </button>
+                                </form>
+                            </div>
+                        </details>
+
+                        <details class="property-enquiry-dropdown site-dropdown" open>
+                            <summary>Enquire about this property</summary>
+                            <div class="property-enquiry-form">
+                                <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">
+                                    Send a question directly to the listing agent. Your email app will open with the property details included.
+                                </p>
+                                <form id="propertyEnquiryForm" onsubmit="handlePropertyEnquiry(event)">
+                                    <div class="form-group">
+                                        <label class="form-label" for="propertyEnquiryName">Your name</label>
+                                        <input type="text" id="propertyEnquiryName" name="name" class="form-control" autocomplete="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="propertyEnquiryEmail">Email address</label>
+                                        <input type="email" id="propertyEnquiryEmail" name="email" class="form-control" autocomplete="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="propertyEnquiryPhone">Phone number <span style="font-weight: 400; color: var(--text-muted);">(optional)</span></label>
+                                        <input type="tel" id="propertyEnquiryPhone" name="phone" class="form-control" autocomplete="tel">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="propertyEnquiryMessage">What would you like to know?</label>
+                                        <textarea id="propertyEnquiryMessage" name="message" class="form-control" required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-gold" style="width: 100%; font-size: 14px;">
+                                        Send Enquiry
+                                    </button>
+                                </form>
+                            </div>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -669,7 +733,7 @@
                 card.innerHTML = `
                     <div class="property-thumb-wrap">
                         <div class="property-tags">
-                            <span class="badge badge-gold">${house.tag || 'For Sale'}</span>
+                            <span class="badge badge-teal">${house.tag || 'For Sale'}</span>
                             <span class="badge badge-navy">${house.location}</span>
                         </div>
                         <button class="property-fav-btn" data-id="${house.id}" onclick="toggleFavorite(${house.id}, this)">&#9825;</button>
@@ -781,6 +845,12 @@
             document.getElementById('modalAgentImg').src = house.agent.image;
             document.getElementById('modalAgentPhone').textContent = house.agent.phone;
             document.getElementById('modalAgentEmail').textContent = house.agent.email;
+
+            const enquiryForm = document.getElementById('propertyEnquiryForm');
+            enquiryForm.dataset.agentEmail = house.agent.email;
+            enquiryForm.dataset.propertyTitle = house.title;
+            enquiryForm.dataset.propertyPrice = formatZAR(house.price);
+            document.querySelector('.property-enquiry-dropdown').open = true;
             
             document.getElementById('modalCallBtn').href = `tel:${house.agent.phone.replace(/[^0-9]/g, '')}`;
             document.getElementById('modalWhatsAppBtn').href = `https://wa.me/27114567890?text=Hi%20${encodeURIComponent(house.agent.name)},%20I'm%20inquiring%20about%20${encodeURIComponent(house.title)}%20(${formatZAR(house.price)})`;
@@ -857,6 +927,25 @@
             e.preventDefault();
             closeDetailsModal();
             showToast("Your private viewing request has been confirmed with the agent!");
+        }
+
+        function handlePropertyEnquiry(e) {
+            e.preventDefault();
+            const form = e.currentTarget;
+            const formData = new FormData(form);
+            const subject = `Property enquiry: ${form.dataset.propertyTitle}`;
+            const body = [
+                `Hello, I am interested in ${form.dataset.propertyTitle} (${form.dataset.propertyPrice}).`,
+                "",
+                `Name: ${formData.get('name')}`,
+                `Email: ${formData.get('email')}`,
+                `Phone: ${formData.get('phone') || 'Not provided'}`,
+                "",
+                "Question:",
+                formData.get('message')
+            ].join("\n");
+
+            window.location.href = `mailto:${form.dataset.agentEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         }
 
         // Close modal when clicking on backdrop

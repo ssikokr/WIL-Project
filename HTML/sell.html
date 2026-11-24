@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Request a property valuation and selling consultation with Real Homes.">
+    <title>Sell Your Property | Real Homes</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-banner {
+            padding: 56px 24px;
+            text-align: center;
+            color: #ffffff;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.95)), url('../IMAGES/Headline.jpeg') center/cover no-repeat;
+        }
+
+        .page-banner h1 {
+            color: #ffffff;
+            font-size: clamp(32px, 4vw, 48px);
+            margin-bottom: 12px;
+        }
+
+        .page-banner p {
+            max-width: 650px;
+            margin: 0 auto;
+            color: #cbd5e1;
+        }
+
+        .sell-page-content {
+            width: min(100% - 32px, 900px);
+            margin: -28px auto 72px;
+            position: relative;
+        }
+
+        .sell-form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: clamp(22px, 5vw, 40px);
+        }
+
+        .sell-form-card h2 {
+            margin-bottom: 8px;
+        }
+
+        .sell-form-card > p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .sell-form-card textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="HomePage.html" class="brand-logo-wrap">
+                <img src="../IMAGES/logo.png" alt="Real Homes Logo" class="brand-logo-img">
+                <div class="brand-title-box">
+                    <span class="brand-name">Real Homes</span>
+                    <span class="brand-tagline">Luxury Real Estate</span>
+                </div>
+            </a>
+            <button class="mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <ul class="nav-menu">
+                <li><a href="HomePage.html" class="nav-link">Home</a></li>
+                <li><a href="BuyPage.html" class="nav-link">Buy Homes</a></li>
+                <li><a href="RentPage.html" class="nav-link">Rentals</a></li>
+                <li><a href="sell.html" class="nav-link active">Sell Property</a></li>
+                <li><a href="calculator.html" class="nav-link">Bond Calculator</a></li>
+                <li><a href="agent.html" class="nav-link">Our Agents</a></li>
+                <li><a href="contactUs.html" class="nav-link">Contact Us</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="page-banner">
+        <span class="badge badge-teal" style="margin-bottom: 12px;">Sell with confidence</span>
+        <h1>Let's find the right buyer for your home</h1>
+        <p>Tell us about your property and our Johannesburg team will get in touch to discuss a valuation and selling plan.</p>
+    </section>
+
+    <main class="sell-page-content">
+        <section class="sell-form-card">
+            <h2>Request a selling consultation</h2>
+            <p>Share a few details so our team can prepare for your conversation.</p>
+            <details class="site-dropdown" open>
+                <summary>Tell us about your property</summary>
+                <div class="site-dropdown-content">
+                    <form action="../PHP/contactUs.php" method="POST" onsubmit="prepareSellEnquiry(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="sellerName">Your name</label>
+                                <input class="form-control" id="sellerName" type="text" autocomplete="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="sellerEmail">Email address</label>
+                                <input class="form-control" id="sellerEmail" type="email" name="email" autocomplete="email" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="sellerPhone">Phone number</label>
+                                <input class="form-control" id="sellerPhone" type="tel" autocomplete="tel" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="propertyAddress">Property suburb or address</label>
+                                <input class="form-control" id="propertyAddress" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="propertyDetails">Property details and preferred selling timeframe</label>
+                            <textarea class="form-control" id="propertyDetails" required></textarea>
+                        </div>
+                        <input type="hidden" name="message" id="sellEnquiryMessage">
+                        <button class="btn btn-gold" type="submit">Request Consultation</button>
+                        <p style="font-size: 13px; color: var(--text-muted); margin: 14px 0 0;">
+                            Your request will be sent to our team through the site contact form.
+                        </p>
+                    </form>
+                </div>
+            </details>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom-bar">
+            <div>&copy; 2026 Real Homes Properties. All rights reserved.</div>
+            <a href="contactUs.html">Contact &amp; Office</a>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script>
+        function prepareSellEnquiry(event) {
+            const message = [
+                `Property seller: ${document.getElementById('sellerName').value}`,
+                `Phone: ${document.getElementById('sellerPhone').value}`,
+                `Property suburb or address: ${document.getElementById('propertyAddress').value}`,
+                "",
+                "Property details and preferred selling timeframe:",
+                document.getElementById('propertyDetails').value
+            ].join("\n");
+            document.getElementById('sellEnquiryMessage').value = message;
+        }
+    </script>
+</body>
+</html>

@@ -68,11 +68,24 @@
             background: #ffffff;
             border-radius: var(--radius-lg);
             padding: 24px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-            max-width: 900px;
+            box-shadow: none;
+            max-width: none;
             margin: 0 auto;
             text-align: left;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 0;
+        }
+
+        .hero-search-dropdown {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .hero-search-dropdown > summary {
+            font-size: 15px;
         }
 
         .search-type-tabs {
@@ -464,13 +477,15 @@
             <p class="hero-subtitle">Browse Johannesburg's most exclusive portfolio of luxury residences, architectural family homes, and prime real estate investments.</p>
 
             <!-- Interactive Quick Search Bar -->
-            <div class="hero-search-card">
-                <div class="search-type-tabs">
-                    <button class="search-tab active" onclick="setSearchMode('buy', this)">Buy Homes</button>
-                    <button class="search-tab" onclick="setSearchMode('rent', this)">Rent Properties</button>
-                </div>
-                <form id="heroSearchForm" onsubmit="handleHeroSearch(event)">
-                    <div class="search-inputs-grid">
+            <details class="site-dropdown hero-search-dropdown" open>
+                <summary>Find a property</summary>
+                <div class="hero-search-card">
+                    <div class="search-type-tabs">
+                        <button class="search-tab active" onclick="setSearchMode('buy', this)">Buy Homes</button>
+                        <button class="search-tab" onclick="setSearchMode('rent', this)">Rent Properties</button>
+                    </div>
+                    <form id="heroSearchForm" onsubmit="handleHeroSearch(event)">
+                        <div class="search-inputs-grid">
                         <div class="form-group" style="margin:0;">
                             <label class="form-label" style="font-size:12px; text-transform:uppercase; color:#64748b;">Location / Suburb</label>
                             <select id="heroLocation" class="form-control" style="font-weight:600;">
@@ -503,9 +518,10 @@
                         <button type="submit" class="btn btn-gold" style="height: 48px; padding: 0 26px; white-space: nowrap;">
                             Search Homes &#8594;
                         </button>
-                    </div>
-                </form>
-            </div>
+                        </div>
+                    </form>
+                </div>
+            </details>
         </div>
     </section>
 
@@ -544,7 +560,7 @@
             <a href="BuyPage.html" class="pillar-card">
                 <img src="../IMAGES/HomePage/BUY.jpeg" alt="Buy Homes" class="pillar-bg" onerror="this.src='images/HomePage/BUY.jpeg'">
                 <div class="pillar-content">
-                    <span class="badge badge-gold" style="margin-bottom: 10px;">For Buyers</span>
+                    <span class="badge badge-teal" style="margin-bottom: 10px;">For Buyers</span>
                     <h3>Buy Your Dream Home</h3>
                     <p>Explore exclusive verified villas, suburban houses, and modern estates across Gauteng.</p>
                     <span class="pillar-link">Browse Available Homes &#8594;</span>
@@ -589,7 +605,7 @@
             <div class="property-card">
                 <div class="property-thumb-wrap">
                     <div class="property-tags">
-                        <span class="badge badge-gold">Exclusive</span>
+                        <span class="badge badge-teal">Exclusive</span>
                         <span class="badge badge-navy">For Sale</span>
                     </div>
                     <button class="property-fav-btn" data-id="5" onclick="toggleFavorite(5, this)">&#9825;</button>
@@ -663,7 +679,7 @@
             <div class="property-card">
                 <div class="property-thumb-wrap">
                     <div class="property-tags">
-                        <span class="badge badge-gold">Prime Estate</span>
+                        <span class="badge badge-teal">Prime Estate</span>
                         <span class="badge badge-navy">For Sale</span>
                     </div>
                     <button class="property-fav-btn" data-id="3" onclick="toggleFavorite(3, this)">&#9825;</button>

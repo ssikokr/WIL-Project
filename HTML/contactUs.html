@@ -3,262 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Homes - Contact Us</title>
+    <meta name="description" content="Contact the Real Homes property team in Johannesburg.">
+    <title>Contact Us | Real Homes</title>
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        header {
-            background-color: white;
-            padding: 10px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center; /* Aligns the logo and text vertically */
-        }
-
-        .logo-container img {
-            margin-right: 15px; /* Adds space between the logo and text */
-            width: 240px;
-            height: auto;
-        }
-
-        .WP {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        ul {
-            display: flex;
-            gap: 30px;
-            list-style: none; /* Removes bullets */
-        }
-
-        ul li a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
-
-        ul li:hover a {
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adds shadow on hover */
-            color: rgb(0, 114, 114); /* Changes color on hover */
-        }
-                
-        .signlogin {
-            display: flex;
-            gap: 50px;
-            text-decoration: none;
-        }
-        
-        a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
-
-        .sign {
-            background-color: aqua;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .sign:hover {
-            background-color: rgb(0, 114, 114);
-            color: white;
-        }
-
-        /* Label Styles */
-        label {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-size: 20px; /* Increased font size */
-            margin-bottom: 20px;
-        }
-
-        .label {
-            font-size: medium;
-            margin-bottom: 20px;
-        }
-
-        /* Button Styles */
-        button {
-            background-color: rgb(0, 114, 114); /* Updated button color */
-            color: white;
-            font-size: 18px; /* Adjusted button font size */
-            padding: 10px 30px; /* Increased button width */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s; /* Smooth transition */
-        }
-
-        button:hover {
-            background-color: rgb(0, 100, 100); /* Darker shade on hover */
-        }
-
-        .container {
-            display: flex;
-            justify-content: space-between; /* Aligns items to opposite ends */
-            align-items: flex-start;
-            margin-top: 20px;
-        }
-
-        .image-container {
-            display: flex;
-            flex-direction: column; /* Stack the image and text */
-            justify-content: flex-start; /* Align the items to the top */
-            align-items: flex-end; /* Align the items to the right */
-        }
-
-        .image-container img {
-            height: auto;
-            width: 300px; /* Set a fixed width for the image */
-            max-width: 100%;
-            border-radius: 10px;
-            border-color: #0056b3;
-            animation: slide 5s infinite alternate; /* Apply sliding animation */
-        }
-
-        /* Animation */
-        @keyframes slide {
-            0% { transform: translateX(1); }
-            100% { transform: translateX(20px); }
-        }
-
-    
-        .quote {
-            font-family: 'Cursive', sans-serif; 
-            font-size: 24px; 
-            margin-top: 10px; /* Space between image and quote */
-            text-align: right; 
-        }
-
-        /* Personal Contact Styles */
-        .personal-contact {
-            text-align: center; 
-            margin-top: 20px;
-        }
-
-        /* Iframe Styles */
-        iframe {
-            width: 100%; 
-            height: 300px; 
-            border: none; 
-            margin-top: 10px; 
-        }
-
-        /* Footer Styles */
-        footer {
-            background-color: #333;
-            color: white;
+        .page-banner {
+            padding: 48px 24px;
             text-align: center;
-            padding: 20px;
-            font-family: 'Arial', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.95)), url('../IMAGES/Headline.jpeg') center/cover no-repeat;
+        }
+
+        .page-banner h1 {
+            color: #ffffff;
+            font-size: clamp(32px, 4vw, 46px);
+            margin-bottom: 10px;
+        }
+
+        .page-banner p {
+            color: #cbd5e1;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .contact-layout {
+            width: min(100% - 32px, 1100px);
+            margin: -24px auto 72px;
             position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+            gap: 24px;
         }
 
-        .social_icons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px 0;
-            flex-wrap: wrap;
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: clamp(22px, 4vw, 34px);
         }
 
-        footer p {
-            color: white;
-            margin: 15px 0 10px;
-            font-size: 17.6px;
+        .contact-card h2 {
+            margin-bottom: 8px;
         }
 
-        /* Textarea Styles */
-        textarea {
-            width: 100%; /* Set width to 100% */
-            height: 150px; /* Increase height */
-            resize: vertical; /* Allow vertical resizing only */
-            padding: 10px; /* Add some padding */
-            font-size: 16px; /* Font size for better readability */
-            border: 1px solid #ccc; /* Add border for better visibility */
-            border-radius: 4px; /* Rounded corners */
+        .contact-card > p {
+            color: var(--text-secondary);
+            margin-bottom: 22px;
+        }
+
+        .contact-details {
+            display: grid;
+            gap: 16px;
+            margin: 20px 0;
+            color: var(--text-secondary);
+        }
+
+        .contact-details strong {
+            color: var(--primary-navy);
+        }
+
+        .contact-map {
+            width: 100%;
+            min-height: 260px;
+            border: 0;
+            border-radius: var(--radius-md);
+        }
+
+        @media (max-width: 760px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo-container">
-                <img src="logo.png" alt="Logo">
-                <div class="WP"><a href="HomePage.html">Real Homes</a></div>
-            </div>
-            <div class="navigator">
-                <ul>
-                    <li><a href="HomePage.html">HOME</a></li>
-                    <li><a href="./BuyPage.html">BUY</a></li>
-                    <li><a href="./RentPage.html">RENT</a></li>         
-                    <li><a href="./calculator.html">Calculate</a></li>
-                    <li><a href="./agent.html">Agents Portal</a></li>
-                </ul>
-            </div>
-            <div class="signlogin">
-                <div class="sign"><a href="./contactUs.html">ContactUs</a></div> 
-            </div>
-        </nav>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="HomePage.html" class="brand-logo-wrap">
+                <img src="../IMAGES/logo.png" alt="Real Homes Logo" class="brand-logo-img">
+                <div class="brand-title-box">
+                    <span class="brand-name">Real Homes</span>
+                    <span class="brand-tagline">Luxury Real Estate</span>
+                </div>
+            </a>
+            <button class="mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <ul class="nav-menu">
+                <li><a href="HomePage.html" class="nav-link">Home</a></li>
+                <li><a href="BuyPage.html" class="nav-link">Buy Homes</a></li>
+                <li><a href="RentPage.html" class="nav-link">Rentals</a></li>
+                <li><a href="sell.html" class="nav-link">Sell Property</a></li>
+                <li><a href="calculator.html" class="nav-link">Bond Calculator</a></li>
+                <li><a href="agent.html" class="nav-link">Our Agents</a></li>
+                <li><a href="contactUs.html" class="nav-link active">Contact Us</a></li>
+            </ul>
+        </div>
     </header>
 
-    <main>
-        <section class="contact-header">
-            <h1>Get in Touch</h1>
+    <section class="page-banner">
+        <span class="badge badge-teal" style="margin-bottom: 10px;">We're here to help</span>
+        <h1>Get in touch</h1>
+        <p>Tell us what you need and the Real Homes team will help you find the right next step.</p>
+    </section>
+
+    <main class="contact-layout">
+        <section class="contact-card">
+            <details class="site-dropdown" open>
+                <summary>Send us a message</summary>
+                <div class="site-dropdown-content">
+                    <p style="color: var(--text-secondary); margin-bottom: 18px;">Complete the form and we’ll be in touch.</p>
+                    <form action="../PHP/contactUs.php" method="POST">
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email address</label>
+                            <input class="form-control" type="email" id="email" name="email" autocomplete="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="message">How can we help?</label>
+                            <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        <button class="btn btn-gold" type="submit">Send Message</button>
+                    </form>
+                </div>
+            </details>
         </section>
-        <div class="container">
-            <div class="form-container">
-                <!-- Form method set to POST to send data to contact_process.php -->
-                <form action="contact_process.php" method="POST">
-                    <label for="email">Enter E-mail</label><br>
-                    <input type="email" id="email" name="email" required><br>
-                    <label for="message">Message</label><br>
-                    <textarea id="message" name="message" required spellcheck="true"></textarea><br>
-                    <button type="submit">Submit</button>
-                </form>
+
+        <section class="contact-card">
+            <h2>Visit our Johannesburg office</h2>
+            <div class="contact-details">
+                <div><strong>Address</strong><br>123 Property Lane, Sandton, Johannesburg, 2196</div>
+                <div><strong>Phone</strong><br><a href="tel:+27114567890">+27 (0)11 456 7890</a></div>
+                <div><strong>Email</strong><br><a href="mailto:info@realhomesproperties.com">info@realhomesproperties.com</a></div>
             </div>
-            <div class="image-container">
-                <img src="logo.png" alt="Logo">
-                <h2 class="quote">Let's Find You a Home</h2>
-            </div>
-        </div>
-        <section class="personal-contact">
-            <h1>Personal Contact of Developer</h1>
-            <div class="personal">
-                Karabo Siko<br>
-                <a href="mailto:Karabosiko1.0@gmail.com">Karabosiko1.0@gmail.com</a>
-            </div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51079.96634613241!2d28.081497700774403!3d-26.083973758386197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6dc6eca93fed55e5%3A0x76fefb9501bdbc14!2sRush%20Home%20Real%20Estate!5e0!3m2!1sen!2sza!4v1729608302889!5m2!1sen!2sza" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe
+                class="contact-map"
+                title="Map to Real Homes Johannesburg office"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51079.96634613241!2d28.081497700774403!3d-26.083973758386197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6dc6eca93fed55e5%3A0x76fefb9501bdbc14!2sRush%20Home%20Real%20Estate!5e0!3m2!1sen!2sza!4v1729608302889!5m2!1sen!2sza"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen>
+            </iframe>
         </section>
     </main>
 
-    <footer>
-        <ul class="social_icons">
-            <li><a href="https://instagram.com"><img src="instagram.png" alt="Instagram" width="30" height="30"></a></li>
-            <li><a href="https://facebook.com"><img src="facebook.png" alt="Facebook" width="30" height="30"></a></li>
-            <li><a href="https://youtube.com"><img src="Youtube.png" alt="YouTube" width="30" height="30"></a></li>
-            <li><a href="https://twitter.com"><img src="x.png" alt="Twitter" width="30" height="30"></a></li>
-        </ul>
-        <div class="info">
-            <p>Contact Us:</p>
-            <p>Email: <a href="mailto:info@RealHomesproperties.com">info@RealHomesproperties.com</a></p>
-            <p>Phone: (123) 456-7890</p>
-            <p>Address: 123 Property Lane, Johannesburg, SA</p>
+    <footer class="site-footer">
+        <div class="footer-bottom-bar">
+            <div>&copy; 2026 Real Homes Properties. All rights reserved.</div>
+            <a href="agent.html">Meet our agents</a>
         </div>
-        <div class="symbols">&#169;</div>
     </footer>
+    <script src="js/main.js"></script>
 </body>
 </html>

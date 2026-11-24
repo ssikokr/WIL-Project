@@ -3,254 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortgage Calculator</title>
+    <meta name="description" content="Estimate monthly home-loan repayments with the Real Homes bond calculator.">
+    <title>Bond Calculator | Real Homes</title>
+    <link rel="stylesheet" href="css/style.css">
     <style>
-      
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #f9f9f9;
-            font-family: "my-font", serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column; 
-        }
-
-
-        header {
-            background-color: white;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-         
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center; /* Aligns the logo and text vertically */
-        }
-
-        .logo-container img {
-            margin-right: 15px; /* Adds space between the logo and text */
-            width: 240px;
-            height: auto;
-        }
-
-        .WP {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        ul {
-            display: flex;
-            gap: 30px;
-            list-style: none; /* Removes bullets */
-        }
-
-        ul li a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
-
-        ul li:hover a {
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adds shadow on hover */
-            color: rgb(0, 114, 114); /* Changes color on hover */
-        }
-        .signlogin {
-            display: flex;
-            gap: 50px;
-            text-decoration: none;
-        }
-         a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
-
-        .sign, .login {
-            background-color: aqua;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .sign:hover {
-            background-color: rgb(0, 114, 114);
-            color: white;
-        }
-        /* Calculator Styles */
-        .calculator {
-            width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #f4f4f4;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .calculator h2 {
+        .page-banner {
+            padding: 48px 24px;
             text-align: center;
-            margin-bottom: 20px;
+            color: #ffffff;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.95)), url('../IMAGES/Headline.jpeg') center/cover no-repeat;
         }
 
-        .calculator input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .calculator button {
-            width: 100%;
-            padding: 10px;
-            background-color: #00796B;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .calculator button:hover {
-            background-color: #004D40;
-        }
-
-        #result {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 18px;
-            color: #333;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-family: 'Arial', sans-serif;
-            position: relative;
-        }
-        .social_icons{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px 0;
-            flex-wrap: wrap;
-            list-style: none; /* Removes bullets */
-        }
-        footer ul {
-            display: flex;
-            gap: 30px;
-            list-style: none; /* Removes bullets */
-        }
-        footer ul li a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
-        footer p{
-            color: white;
-            margin-top: 15px;
+        .page-banner h1 {
+            color: #ffffff;
+            font-size: clamp(32px, 4vw, 46px);
             margin-bottom: 10px;
-            font-size: 17.6px;
+        }
+
+        .page-banner p {
+            color: #cbd5e1;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .calculator-card {
+            width: min(100% - 32px, 760px);
+            margin: -24px auto 72px;
+            padding: clamp(22px, 5vw, 36px);
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .calculator-card h2 {
+            margin-bottom: 8px;
+        }
+
+        .calculator-card > p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .calculator-result {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            background: var(--teal-light);
+            color: var(--teal-dark);
+            font-weight: 700;
+        }
+
+        .calculator-result:empty {
+            display: none;
+        }
+
+        .calculator-result.error {
+            background: #fef2f2;
+            color: #b91c1c;
         }
     </style>
 </head>
 <body>
-
-<header>
-    <nav>
-        <div class="logo-container">
-            <img src="logo.png" alt="West Properties Logo">
-            <div class="WP">Real Homes</div>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="HomePage.html" class="brand-logo-wrap">
+                <img src="../IMAGES/logo.png" alt="Real Homes Logo" class="brand-logo-img">
+                <div class="brand-title-box">
+                    <span class="brand-name">Real Homes</span>
+                    <span class="brand-tagline">Luxury Real Estate</span>
+                </div>
+            </a>
+            <button class="mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <ul class="nav-menu">
+                <li><a href="HomePage.html" class="nav-link">Home</a></li>
+                <li><a href="BuyPage.html" class="nav-link">Buy Homes</a></li>
+                <li><a href="RentPage.html" class="nav-link">Rentals</a></li>
+                <li><a href="sell.html" class="nav-link">Sell Property</a></li>
+                <li><a href="calculator.html" class="nav-link active">Bond Calculator</a></li>
+                <li><a href="agent.html" class="nav-link">Our Agents</a></li>
+                <li><a href="contactUs.html" class="nav-link">Contact Us</a></li>
+            </ul>
         </div>
-        <ul>
-            <li><a href="HomePage.html">HOME</a></li>
-            <li><a href="BuyPage.html">BUY</a></li>
-            <li><a href="./RentPage.html">RENT</a></li>
-            <li><a href="./agent.html">Agents Portal</a></li>
-        
-        </ul>
-        <div class="signlogin">
-            <div class="sign"><a href="./contactUs.html">ContactUs</a></div> 
+    </header>
+
+    <section class="page-banner">
+        <span class="badge badge-teal" style="margin-bottom: 10px;">Plan your purchase</span>
+        <h1>Bond Repayment Calculator</h1>
+        <p>Get an estimate of your monthly home-loan repayment. This estimate excludes fees, insurance, and other lending costs.</p>
+    </section>
+
+    <main>
+        <section class="calculator-card">
+            <h2>Estimate your repayments</h2>
+            <p>Enter the purchase price, interest rate, and loan term to see an estimated monthly repayment.</p>
+            <form id="mortgageForm">
+                <div class="form-group">
+                    <label class="form-label" for="amount">Property price (R)</label>
+                    <input class="form-control" type="number" id="amount" min="1" step="any" inputmode="decimal" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="interest">Annual interest rate (%)</label>
+                        <input class="form-control" type="number" id="interest" min="0" max="100" step="0.01" inputmode="decimal" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="years">Loan term (years)</label>
+                        <input class="form-control" type="number" id="years" min="1" max="40" step="1" inputmode="numeric" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="downpayment">Deposit (R, optional)</label>
+                    <input class="form-control" type="number" id="downpayment" min="0" step="1000" inputmode="decimal" value="0">
+                </div>
+                <button class="btn btn-gold" type="submit">Calculate Repayment</button>
+            </form>
+            <p id="result" class="calculator-result" role="status" aria-live="polite"></p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom-bar">
+            <div>&copy; 2026 Real Homes Properties. All rights reserved.</div>
+            <a href="contactUs.html">Contact &amp; Office</a>
         </div>
-    </nav>
-</header>
+    </footer>
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('mortgageForm').addEventListener('submit', function (event) {
+            event.preventDefault();
 
-<!-- Mortgage Calculator Section -->
-<div class="calculator">
-    <h2>Mortgage Calculator</h2>
-    <form id="mortgageForm">
-        <label for="amount">Loan Amount:</label>
-        <input type="number" id="amount" placeholder="Loan Amount" required>
+            const price = Number(document.getElementById('amount').value);
+            const annualRate = Number(document.getElementById('interest').value);
+            const years = Number(document.getElementById('years').value);
+            const deposit = Number(document.getElementById('downpayment').value || 0);
+            const result = document.getElementById('result');
+            result.classList.remove('error');
 
-        <label for="interest">Interest Rate (%):</label>
-        <input type="number" step="0.01" id="interest" placeholder="Interest Rate" required>
+            if (!Number.isFinite(price) || price <= 0 ||
+                !Number.isFinite(annualRate) || annualRate < 0 ||
+                !Number.isInteger(years) || years < 1 || years > 40 ||
+                !Number.isFinite(deposit) || deposit < 0 || deposit >= price) {
+                result.textContent = 'Enter a valid property price, interest rate, loan term, and deposit below the property price.';
+                result.classList.add('error');
+                return;
+            }
 
-        <label for="years">Loan Term (years):</label>
-        <input type="number" id="years" placeholder="Years" required>
+            const principal = price - deposit;
+            const monthlyRate = annualRate / 100 / 12;
+            const numberOfPayments = years * 12;
+            const monthlyPayment = monthlyRate === 0
+                ? principal / numberOfPayments
+                : principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -numberOfPayments));
 
-        <label for="downpayment">Down Payment (optional):</label>
-        <input type="number" id="downpayment" placeholder="Down Payment">
+            if (!Number.isFinite(monthlyPayment)) {
+                result.textContent = 'The repayment could not be calculated. Check the values and try again.';
+                result.classList.add('error');
+                return;
+            }
 
-        <button type="submit">Calculate</button>
-    </form>
-
-    <p id="result"></p>
-</div>
-
-<script>
-    document.getElementById("mortgageForm").addEventListener("submit", function(event) 
-    {
-        event.preventDefault();
-        
-        let loanAmount = parseFloat(document.getElementById("amount").value);
-        let interestRate = parseFloat(document.getElementById("interest").value) / 100 / 12;
-        let years = parseInt(document.getElementById("years").value) * 12;
-        let downPayment = parseFloat(document.getElementById("downpayment").value) || 0;
-        
-        let principal = loanAmount - downPayment;
-        
-        let monthlyPayment = (principal * interestRate * Math.pow(1 + interestRate, years)) / (Math.pow(1 + interestRate, years) - 1);
-        
-        if (!isNaN(monthlyPayment) && monthlyPayment !== Infinity) {
-            document.getElementById("result").innerHTML = `Your monthly payment is: R${monthlyPayment.toFixed(2)}`;
-        } else {
-            document.getElementById("result").innerHTML = "Please enter valid input.";
-        }
-    });
-</script>
-        
-<footer>
-    <ul class="social_icons">
-        <li><a href="https://instagram.com"><img src="instagram.png" width="30px" height="30px"></a></li>
-        <li><a href="https://facebook.com"><img src="facebook.png" width="30px" height="30px"></a></li>
-        <li><a href="https://youtube.com"><img src="Youtube.png" width="30px" height="30px"></a></li>
-        <li><a href="https://twitter.com"><img src="x.png" width="30px" height="30px"></a></li>
-    </ul>
-    <div class="info">
-        <p>Contact Us:</p>
-        <p>Email: info@RealHomesproperties.com</p>
-        <p>Phone: (123) 456-7890</p>
-        <p>Address: 123 Property Lane, Johannesburg, SA</p>            
-    </div>
-    <div class="symbols">&#169;</div>
-</footer>
+            const formattedPayment = new Intl.NumberFormat('en-ZA', {
+                style: 'currency',
+                currency: 'ZAR',
+                maximumFractionDigits: 2
+            }).format(monthlyPayment);
+            result.textContent = `Estimated monthly repayment: ${formattedPayment}`;
+        });
+    </script>
 </body>
 </html>
