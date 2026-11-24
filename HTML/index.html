@@ -61,7 +61,7 @@
             <form class="auth-form" id="register" action="auth.php" method="post" hidden>
                 <div class="form-group">
                     <label class="form-label" for="registerUsername">Choose a username</label>
-                    <input class="form-control" type="text" id="registerUsername" name="username" autocomplete="username" minlength="3" maxlength="50" pattern="[A-Za-z0-9._-]{3,50}" title="Use 3 to 50 letters, numbers, periods, underscores, or hyphens." required>
+                    <input class="form-control" type="text" id="registerUsername" name="username" autocomplete="username" minlength="3" maxlength="50" pattern="(?:[A-Za-z0-9._]|-){3,50}" title="Use 3 to 50 letters, numbers, periods, underscores, or hyphens." required>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="registerPassword">Create a password</label>

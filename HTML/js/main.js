@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const href = link.getAttribute('href');
         if (href && (href === currentPath || href.endsWith(currentPath))) {
             link.classList.add('active');
-        } else if ((currentPath === '' || currentPath === 'index.html' || currentPath === 'HomePage.html') && href && href.includes('HomePage.html')) {
+        } else if ((currentPath === '' || currentPath === 'HomePage.html') && href && href.includes('HomePage.html')) {
             link.classList.add('active');
         }
     });
