@@ -194,6 +194,13 @@
             align-items: flex-end;
             padding: 30px;
             transition: var(--transition);
+            width: 100%;
+            border: 0;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
         }
 
         .pillar-card::before {
@@ -443,14 +450,14 @@
                 <li><a href="HomePage.html" class="nav-link active">Home</a></li>
                 <li><a href="BuyPage.html" class="nav-link">Buy Homes</a></li>
                 <li><a href="RentPage.html" class="nav-link">Rentals</a></li>
-                <li><a href="sell.html" class="nav-link">Sell Property</a></li>
+                <li><button type="button" class="nav-link" data-open-sell-modal>Sell Property</button></li>
                 <li><a href="calculator.html" class="nav-link">Bond Calculator</a></li>
                 <li><a href="agent.html" class="nav-link">Our Agents</a></li>
                 <li><a href="contactUs.html" class="nav-link">Contact Us</a></li>
             </ul>
 
             <div class="nav-actions">
-                <a href="sell.html" class="btn-header-cta">+ List Property</a>
+                <button type="button" class="btn-header-cta" data-open-sell-modal>+ List Property</button>
                 <a href="index.html" class="btn-header-outline">Client Login</a>
             </div>
         </div>
@@ -563,7 +570,7 @@
             </a>
 
             <!-- SELL PILLAR -->
-            <a href="sell.html" class="pillar-card">
+            <button type="button" class="pillar-card" data-open-sell-modal>
                 <img src="../IMAGES/HomePage/Sell.jpeg" alt="Sell Property" class="pillar-bg" onerror="this.src='images/HomePage/Sell.jpeg'">
                 <div class="pillar-content">
                     <span class="badge badge-navy" style="margin-bottom: 10px; background: rgba(255,255,255,0.2); color:#fff;">For Sellers</span>
@@ -571,7 +578,7 @@
                     <p>Targeted marketing, professional staging, and aggressive negotiation to achieve top market price.</p>
                     <span class="pillar-link">Request Free Valuation &#8594;</span>
                 </div>
-            </a>
+            </button>
         </div>
     </section>
 
@@ -834,9 +841,9 @@
                 <h2>Ready To Sell Your Property For Top Market Value?</h2>
                 <p>Get a complimentary, data-backed comparative market analysis (CMA) from our certified Johannesburg property specialists.</p>
             </div>
-            <a href="sell.html" class="btn btn-primary" style="background: var(--primary-navy); color: #fff; padding: 14px 30px; font-size: 16px;">
+            <button type="button" class="btn btn-primary" data-open-sell-modal style="background: var(--primary-navy); color: #fff; padding: 14px 30px; font-size: 16px;">
                 Request Free Property Valuation
-            </a>
+            </button>
         </div>
     </div>
 
@@ -860,7 +867,7 @@
                     <li><a href="HomePage.html">Home</a></li>
                     <li><a href="BuyPage.html">Properties For Sale</a></li>
                     <li><a href="RentPage.html">Rental Properties</a></li>
-                    <li><a href="sell.html">Sell Your Home</a></li>
+                    <li><button type="button" data-open-sell-modal>Sell Your Home</button></li>
                     <li><a href="calculator.html">Bond Calculator</a></li>
                     <li><a href="agent.html">Our Certified Agents</a></li>
                     <li><a href="contactUs.html">Contact & Office</a></li>

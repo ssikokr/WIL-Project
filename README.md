@@ -11,13 +11,12 @@ Open the site from `HTML/HomePage.html`. The main pages are:
 | `HTML/HomePage.html` | Landing page, featured properties, and a property search form |
 | `HTML/BuyPage.html` | Browse and filter sale listings, view property details, and enquire about a home |
 | `HTML/RentPage.html` | Browse and filter rentals, view details, and submit rental enquiries or applications |
-| `HTML/sell.html` | Send a property-selling consultation request |
 | `HTML/calculator.html` | Estimate bond repayments in the browser |
 | `HTML/agent.html` | Browse agent profiles and contact them by email or phone |
 | `HTML/contactUs.html` | Send a general message to the Real Homes team |
 | `HTML/index.html` | Register or sign in to a client account |
 
-The site uses shared styles in `HTML/css/style.css` and shared browser helpers in `HTML/js/main.js`. Search, filters, calculators, modals, and most page interactions run in the browser. Buy and rental listings added through the forms are saved to MySQL and cached in that browser's `localStorage`; the current site does not load listing cards from MySQL, so that local cache is not shared across browsers. Contact and selling requests are saved as messages. Rental applications and viewing requests currently show an on-page confirmation; property enquiries prepare an email in the visitor's email application.
+The sticky header on each main page includes a **Sell Property** button. It opens a consultation form as an overlay without leaving the current page. The site uses shared styles in `HTML/css/style.css` and shared browser helpers in `HTML/js/main.js`. Search, filters, calculators, modals, and most page interactions run in the browser. Buy and rental listings added through the forms are saved to MySQL and cached in that browser's `localStorage`; the current site does not load listing cards from MySQL, so that local cache is not shared across browsers. Contact and selling requests are saved as messages. Rental applications and viewing requests currently show an on-page confirmation; property enquiries prepare an email in the visitor's email application.
 
 ## Requirements
 
@@ -74,6 +73,7 @@ Use a PHP-capable web server for backend forms; opening the HTML files directly 
 - Sale and rental listing forms post to `PHP/buy_add.php` and `PHP/rent_add.php`. Listing records and image paths are saved in MySQL. Rental listings accept up to 10 images; each image must be JPEG, PNG, or WebP and no larger than 5 MB.
 - Uploaded images are placed in `PHP/uploads/sales/` or `PHP/uploads/rentals/`. PHP creates these directories when needed, but the web-server user must be allowed to write there.
 - Contact and selling forms post to `PHP/contactUs.php` and save messages in `newsletter_db.contact_messages`.
+- The selling consultation overlay is available from the header and the selling calls to action on the home page.
 - Registration and sign-in use `HTML/auth.php`; passwords are stored as hashes in `userid_db.users`.
 - The buy and rental pages keep newly submitted listing cards in browser `localStorage`, using the `realhomes_buylistings` and `realhomes_rentlistings` keys. Clearing browser storage removes those cached cards but does not delete database records.
 

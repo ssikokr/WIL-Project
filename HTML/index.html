@@ -3,325 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Homes Login</title>
-    <!-- Styles are the same as provided in your original HTML -->
-    <style>
-        header {
-            background-color: white;
-            padding: 10px;
-            width: 100%;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #f9f9f9;
-            font-family: "my-font", serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-         
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-container img {
-            margin-right: 15px;
-            width: 240px;
-            height: auto;
-        }
-
-        .WP {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        ul {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        ul li a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
-
-        ul li:hover a {
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            color: rgb(0, 114, 114);
-        }
-        .signlogin {
-            display: flex;
-            gap: 50px;
-            text-decoration: none;
-        }
-         a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
-
-        .sign, .login {
-            background-color: aqua;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .sign:hover {
-            background-color: rgb(0, 114, 114);
-            color: white;
-        }
-        /* Wrapper for flex centering */
-        .main-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        input {
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        button {
-            background-color: rgb(0, 183, 255);
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: rgb(103, 217, 255);
-        }
-
-        .toggle {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .toggle a {
-            color: rgb(0, 114, 114);
-            text-decoration: none;
-        }
-
-        #message {
-            text-align: center;
-            margin-top: 10px;
-            color: #f44336;
-        }
-
-        #dashboard {
-            display: none;
-        }
-
-        /* Footer Styles */
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-family: 'Arial', sans-serif;
-            margin-top: 10px;
-        }
-        
-        .social_icons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px 0;
-            flex-wrap: wrap;
-        }
-        
-        footer p {
-            color: white;
-            margin-top: 15px;
-            margin-bottom: 10px;
-            font-size: 17.6px;
-        }
-    </style>
+    <meta name="description" content="Sign in or create a Real Homes client account.">
+    <title>Client Login | Real Homes</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo-container">
-                <img src="logo.png" alt="logo">
-                <div class="WP">West Properties</div> 
-            </div>
-            <div class="navigator">
-                <ul>
-                    <li><a href="BuyPage.html">BUY</a></li>
-                    <li><a href="rent.html">RENT</a></li>
-                    <li><a href="sell.html">SELL</a></li>          
-                    <li><a href="claculator.html">Calculate</a></li>
-                    <li><a href="./agent.html">Agents Portal</a></li>
-                </ul>
-            </div>
-            <div class="signlogin">
-                <div class="sign"><a href="./contactUs.html">ContactUs</a></div> 
-            </div>
-        </nav>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="HomePage.html" class="brand-logo-wrap">
+                <img src="../IMAGES/logo.png" alt="Real Homes Logo" class="brand-logo-img">
+                <div class="brand-title-box">
+                    <span class="brand-name">Real Homes</span>
+                    <span class="brand-tagline">Luxury Real Estate</span>
+                </div>
+            </a>
+            <button class="mobile-toggle" type="button" aria-label="Toggle navigation">&#9776;</button>
+            <ul class="nav-menu">
+                <li><a href="HomePage.html" class="nav-link">Home</a></li>
+                <li><a href="BuyPage.html" class="nav-link">Buy Homes</a></li>
+                <li><a href="RentPage.html" class="nav-link">Rentals</a></li>
+                <li><button type="button" class="nav-link" data-open-sell-modal>Sell Property</button></li>
+                <li><a href="calculator.html" class="nav-link">Bond Calculator</a></li>
+                <li><a href="agent.html" class="nav-link">Our Agents</a></li>
+                <li><a href="contactUs.html" class="nav-link">Contact Us</a></li>
+            </ul>
+        </div>
     </header>
 
-    <div class="main-content">
-        <div class="container">
-            <div id="loginForm">
-                <h2>Login</h2>
-                <form id="login" action="auth.php" method="post">
-                    <input type="text" id="loginUsername" placeholder="Username" required>
-                    <input type="password" id="loginPassword" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-                <div class="toggle">
-                    Don't have an account? <a href="#" onclick="toggleForms()">Register</a>
-                </div>
+    <main class="auth-main">
+        <section class="auth-intro">
+            <span class="badge badge-teal">Your Real Homes account</span>
+            <h1>Welcome to a more personal property journey.</h1>
+            <p>Sign in or create an account to stay connected with the Real Homes team while you explore properties across Johannesburg.</p>
+        </section>
+
+        <section class="auth-card" aria-labelledby="authHeading">
+            <div class="auth-mode-switch" aria-label="Choose an account action">
+                <button class="auth-mode-button active" id="loginMode" type="button" aria-pressed="true">Sign in</button>
+                <button class="auth-mode-button" id="registerMode" type="button" aria-pressed="false">Create account</button>
             </div>
-            
-            <div id="registerForm" style="display:none;">
-                <h2>Register</h2>
-                <form id="register">
-                    <input type="text" id="registerUsername" placeholder="Username" required>
-                    <input type="password" id="registerPassword" placeholder="Password" required>
-                    <button type="submit">Register</button>
-                </form>
-                <div class="toggle">
-                    Already have an account? <a href="#" onclick="toggleForms()">Login</a>
+
+            <h2 id="authHeading">Sign in</h2>
+            <p class="auth-card-intro" id="authDescription">Enter your account details to continue.</p>
+
+            <form class="auth-form" id="login" action="auth.php" method="post">
+                <div class="form-group">
+                    <label class="form-label" for="loginUsername">Username</label>
+                    <input class="form-control" type="text" id="loginUsername" name="username" autocomplete="username" maxlength="50" required>
                 </div>
-            </div>
- 
-            <div id="message"></div>
+                <div class="form-group">
+                    <label class="form-label" for="loginPassword">Password</label>
+                    <input class="form-control" type="password" id="loginPassword" name="password" autocomplete="current-password" required>
+                </div>
+                <button class="btn btn-primary" type="submit" style="width: 100%;">Sign in</button>
+            </form>
+
+            <form class="auth-form" id="register" action="auth.php" method="post" hidden>
+                <div class="form-group">
+                    <label class="form-label" for="registerUsername">Choose a username</label>
+                    <input class="form-control" type="text" id="registerUsername" name="username" autocomplete="username" minlength="3" maxlength="50" pattern="[A-Za-z0-9._-]{3,50}" title="Use 3 to 50 letters, numbers, periods, underscores, or hyphens." required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="registerPassword">Create a password</label>
+                    <input class="form-control" type="password" id="registerPassword" name="password" autocomplete="new-password" minlength="8" required>
+                </div>
+                <button class="btn btn-primary" type="submit" style="width: 100%;">Create account</button>
+            </form>
+
+            <p class="auth-status" id="authStatus" role="status" aria-live="polite" hidden></p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom-bar">
+            <div>&copy; 2026 Real Homes Properties. All rights reserved.</div>
+            <a href="contactUs.html">Contact &amp; Office</a>
         </div>
-    </div>
- 
-    <footer>
-        <ul class="social_icons">
-            <li><a href="https://instagram.com"><img src="instagram.png" width="30px" height="30px"></a></li>
-            <li><a href="https://facebook.com"><img src="facebook.png" width="30px" height="30px"></a></li>
-            <li><a href="https://youtube.com"><img src="Youtube.png" width="30px" height="30px"></a></li>
-            <li><a href="https://twitter.com"><img src="x.png" width="30px" height="30px"></a></li>
-        </ul>
-        <div class="info">
-            <p>Contact Us:</p>
-            <p>Email: info@westproperties.com</p>
-            <p>Phone: (123) 456-7890</p>
-            <p>Address: 123 Property Lane, Johannesburg, SA</p>            
-        </div>
-        <div class="symbols">&#169;</div>
     </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        const loginForm = document.getElementById('login');
+        const registerForm = document.getElementById('register');
+        const loginMode = document.getElementById('loginMode');
+        const registerMode = document.getElementById('registerMode');
+        const authHeading = document.getElementById('authHeading');
+        const authDescription = document.getElementById('authDescription');
+        const authStatus = document.getElementById('authStatus');
+
+        function setAuthMode(mode) {
+            const isLogin = mode === 'login';
+            loginForm.hidden = !isLogin;
+            registerForm.hidden = isLogin;
+            loginMode.classList.toggle('active', isLogin);
+            registerMode.classList.toggle('active', !isLogin);
+            loginMode.setAttribute('aria-pressed', String(isLogin));
+            registerMode.setAttribute('aria-pressed', String(!isLogin));
+            authHeading.textContent = isLogin ? 'Sign in' : 'Create your account';
+            authDescription.textContent = isLogin
+                ? 'Enter your account details to continue.'
+                : 'Choose a username and password to get started.';
+            authStatus.hidden = true;
+            authStatus.textContent = '';
+        }
+
+        loginMode.addEventListener('click', () => setAuthMode('login'));
+        registerMode.addEventListener('click', () => setAuthMode('register'));
+
+        async function submitAccountForm(event, action) {
+            event.preventDefault();
+            const form = event.currentTarget;
+            const submitButton = form.querySelector('button[type="submit"]');
+            authStatus.hidden = true;
+            authStatus.textContent = '';
+            submitButton.disabled = true;
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        action: action,
+                        username: form.elements.username.value.trim(),
+                        password: form.elements.password.value
+                    })
+                });
+                const result = await response.json();
+                if (!response.ok || !result.success) {
+                    throw new Error(result.message || 'The account request could not be completed.');
+                }
+
+                if (action === 'login') {
+                    window.location.href = 'HomePage.html';
+                    return;
+                }
+
+                form.reset();
+                setAuthMode('login');
+                authStatus.dataset.state = 'success';
+                authStatus.textContent = result.message;
+                authStatus.hidden = false;
+            } catch (error) {
+                const message = error instanceof Error ? error.message : 'Please try again.';
+                console.error('Account request failed:', error);
+                authStatus.dataset.state = 'error';
+                authStatus.textContent = message;
+                authStatus.hidden = false;
+            } finally {
+                submitButton.disabled = false;
+            }
+        }
+
+        loginForm.addEventListener('submit', event => submitAccountForm(event, 'login'));
+        registerForm.addEventListener('submit', event => submitAccountForm(event, 'register'));
+    </script>
 </body>
-<script>
-    function toggleForms() {
-        const loginForm = document.getElementById('loginForm');
-        const registerForm = document.getElementById('registerForm');
-        loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
-        registerForm.style.display = registerForm.style.display === 'none' ? 'block' : 'none';
-        document.getElementById('message').textContent = '';
-    }
-
-    document.getElementById('login').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const username = document.getElementById('loginUsername').value;
-        const password = document.getElementById('loginPassword').value;
-
-        try {
-            const response = await fetch('auth.php', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({ action: 'login', username, password })
-            });
-            const data = await response.json();
-            if (!response.ok || !data.success) {
-                throw new Error(data.message || 'Login could not be completed.');
-            }
-
-            window.location.href = "HomePage.html";
-        } catch (error) {
-            const message = error instanceof Error ? error.message : 'Please try again.';
-            console.error('Login request failed:', error);
-            document.getElementById('message').textContent = message;
-        }
-    });
-    
-
-    document.getElementById('register').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const username = document.getElementById('registerUsername').value;
-        const password = document.getElementById('registerPassword').value;
-
-        try {
-            const response = await fetch('auth.php', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({ action: 'register', username, password })
-            });
-            const data = await response.json();
-            if (!response.ok || !data.success) {
-                throw new Error(data.message || 'Registration could not be completed.');
-            }
-
-            toggleForms();
-            document.getElementById('message').textContent = data.message;
-        } catch (error) {
-            const message = error instanceof Error ? error.message : 'Please try again.';
-            console.error('Registration request failed:', error);
-            document.getElementById('message').textContent = message;
-        }
-    });
-
-    function logout() {
-        document.getElementById('dashboard').style.display = 'none';
-        document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('loginUsername').value = '';
-        document.getElementById('loginPassword').value = '';
-        document.getElementById('message').textContent = '';
-    }
-</script>
 </html>
