@@ -1,250 +1,967 @@
-
-
 <!DOCTYPE html>
-    <html lang="en">
-        <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Real Homes Properties</title>
-        <style>
-                /* General Styles */
-                header {
-                    background-color: white;
-                    padding: 10px;
-                }
-        
-        
-                nav {
-                    display: flex;
-                    align-items: center;
-                    width: 100%;
-                    justify-content: space-between;
-                }
-                .navigator{
-                    display: flex;
-                    align-items: center;
-                    flex-grow: 1;
-                }
-        
-                .logo-container {
-                    display: flex;
-                    align-items: center; /* Aligns the logo and text vertically */
-                }
-        
-                .logo-container img {
-                    margin-right: 10px; /* Adds space between the logo and text */
-                    width: 240px;
-                    height: auto;
-                }
-        
-                .WP {
-                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-                    font-size: 24px;
-                    font-weight: bold;
-                    margin-right: 10px;
-                }
-        
-                ul {
-                    display: flex;
-                    gap: 20px;
-                    list-style: none; 
-                    margin: 0;
-                    padding: 0;
-                }
-                ul li{
-                    display: flex;
-                    align-items: center;
-                }
-        
-                ul li a {
-                    text-decoration: none;
-                    color: black;
-                    font-size: 21px;
-                    padding: 10px 15px;
-                    display: inline-block;
-                }
-        
-                ul li:hover a {
-                    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adds shadow on hover */
-                    color: rgb(0, 114, 114); /* Changes color on hover */
-                }
-                
-        
-                .signlogin {
-                    display: flex;
-                    gap: 40px;
-                    text-decoration: none;
-                }
-                 a {
-                    text-decoration: none;
-                    color: black;
-                    font-size: 21px;
-                    padding: 10px 15px;
-                }
-        
-                .sign, .login {
-                    background-color: aqua;
-                    padding: 5px 10px;
-                    border-radius: 20px;
-                    font-size: 20px;
-                    cursor: pointer;
-                }
-        
-                .sign:hover {
-                    background-color: rgb(0, 114, 114);
-                    color: white;
-                }
-        
-                .login:hover {
-                    background-color: darkcyan;
-                    color: white;
-                }
-        
-                /* Welcome Section */
-                .welcome {
-                    text-align: center;
-                    padding: 40px;
-                    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-                }
-                .Slogan{
-                    text-align: center;
-                    font-family: Arial, Helvetica, sans-serif;
-                    font-style: italic;
-                    font-size: 30px;
-                    background-color: #f9f9f9;
-                }
-                .welcome .title {
-                    font-size: 36px;
-                    font-weight: bold;
-                    margin-bottom: 10px;
-                }
-        
-                .welcome p {
-                    font-size: 20px;
-                    color: #333;
-                    line-height: 1.5;
-                    max-width: 800px;
-                    margin: 0 auto;
-                }
-        
-                /* Split Section Styling */
-                .splitting {
-                    height: 50vh;
-                    display: flex;
-                }
-        
-                section {
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex: 1; /* Updated to make sections equal initially */
-                    position: relative;
-                    transition: flex 2s ease;
-                }
-        
-                section:hover {
-                    flex: 2; /* Expands hovered section */
-                }
-        
-                /* Background Images */
-                .BUYpic {
-                    background-image: url('BUY.jpeg');
-                    background-position: center;
-                    background-size: cover;
-                    background-blend-mode: multiply;
-                }
-        
-                .SELLpic {
-                    background-image: url('Sell.jpeg');
-                    background-position: center;
-                    background-size: cover;
-                    background-blend-mode: multiply;
-                }
-        
-                .Rentpic {
-                    background-image: url('Rent.jpeg');
-                    background-position: center;
-                    background-size: cover;
-                    background-blend-mode: multiply;
-                }
-        
-                /* Footer Styles */
-                footer {
-                    background-color: #333;
-                    color: white;
-                    text-align: center;
-                    padding: 20px;
-                    font-family: 'Arial', sans-serif;
-                    position: relative;
-                }
-                .social_icons{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin: 10px 0;
-                    flex-wrap: wrap;
-                }
-                footer p{
-                    color: white;
-                    margin-top: 15px;
-                    margin-bottom: 10px;
-                    font-size: 17.6px;
-                }
-        
-            </style>
-        </head>
-        <header>
-            <nav>
-                <div class="logo-container">
-                    <img src="logo.png" alt="logo">
-                    <div class="WP">Real Homes</div> 
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Homes | Luxury Real Estate & Prime Properties in Johannesburg</title>
+    <meta name="description" content="Discover Johannesburg's premier collection of luxury estates, modern family homes, and executive rentals with Real Homes Properties.">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Homepage Specific Enhancements */
+        .hero-banner {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.72) 0%, rgba(15, 23, 42, 0.88) 100%), 
+                        url('../IMAGES/Headline.jpeg') center/cover no-repeat;
+            padding: 80px 24px 100px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 960px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(184, 149, 98, 0.25);
+            border: 1px solid rgba(212, 181, 132, 0.6);
+            padding: 8px 18px;
+            border-radius: var(--radius-full);
+            color: var(--gold-light);
+            font-size: 13.5px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+            backdrop-filter: blur(8px);
+        }
+
+        .hero-title {
+            font-size: clamp(38px, 5.5vw, 64px);
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(16px, 2vw, 20px);
+            color: #cbd5e1;
+            max-width: 750px;
+            margin: 0 auto 36px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Search Filter Box */
+        .hero-search-card {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .search-type-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 12px;
+        }
+
+        .search-tab {
+            padding: 8px 20px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .search-tab.active {
+            background: var(--primary-navy);
+            color: #ffffff;
+        }
+
+        .search-inputs-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1.2fr 1.2fr auto;
+            gap: 16px;
+            align-items: flex-end;
+        }
+
+        @media (max-width: 820px) {
+            .search-inputs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Stats Bar */
+        .stats-strip {
+            background: var(--primary-navy);
+            color: #ffffff;
+            padding: 40px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stats-grid {
+            max-width: 1380px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--gold-light);
+            line-height: 1.1;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Pillars & Categories */
+        .section-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 50px;
+        }
+
+        .section-tag {
+            color: var(--gold-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 3.5vw, 40px);
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 17px;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .pillar-card {
+            position: relative;
+            height: 380px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            text-decoration: none;
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.9) 85%);
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .pillar-card:hover::before {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.95) 85%);
+        }
+
+        .pillar-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .pillar-card:hover .pillar-bg {
+            transform: scale(1.08);
+        }
+
+        .pillar-content {
+            position: relative;
+            z-index: 2;
+            color: #ffffff;
+        }
+
+        .pillar-content h3 {
+            color: #ffffff;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .pillar-content p {
+            color: #cbd5e1;
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+
+        .pillar-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold-light);
+            font-weight: 700;
+            font-size: 14.5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Why Choose Us Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .feature-box {
+            background: #ffffff;
+            padding: 34px 28px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(184, 149, 98, 0.4);
+        }
+
+        .feature-icon-box {
+            width: 58px;
+            height: 58px;
+            border-radius: 14px;
+            background: var(--gold-subtle);
+            border: 1px solid rgba(184, 149, 98, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: var(--gold-primary);
+            margin-bottom: 22px;
+        }
+
+        .feature-box h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .feature-box p {
+            color: var(--text-secondary);
+            font-size: 14.5px;
+            line-height: 1.6;
+        }
+
+        /* Quick Calculator Section */
+        .home-calc-section {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #ffffff;
+            padding: 80px 24px;
+            margin: 80px 0;
+            border-radius: var(--radius-lg);
+            max-width: 1380px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .home-calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .home-calc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .home-calc-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 34px;
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(10px);
+        }
+
+        .calc-output-card {
+            background: #ffffff;
+            color: var(--primary-navy);
+            padding: 30px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Testimonials */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .review-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .review-stars {
+            color: #f59e0b;
+            font-size: 18px;
+            margin-bottom: 14px;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: var(--navy-lighter);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .review-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gold-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--gold-dark);
+        }
+
+        /* Banner CTA */
+        .sell-cta-banner {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #ffffff;
+            padding: 60px 30px;
+            border-radius: var(--radius-lg);
+            max-width: 1380px;
+            margin: 80px auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .sell-cta-banner h2 {
+            color: #ffffff;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .sell-cta-banner p {
+            color: #fdf6ec;
+            font-size: 16px;
+            max-width: 650px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SITE HEADER -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="HomePage.html" class="brand-logo-wrap">
+                <img src="../IMAGES/logo.png" alt="Real Homes Logo" class="brand-logo-img" onerror="this.src='images/logo.png'">
+                <div class="brand-title-box">
+                    <span class="brand-name">Real Homes</span>
+                    <span class="brand-tagline">Luxury Real Estate</span>
                 </div>
-                <div class="navigator">
-                    <ul>
-                        <li><a href="./BuyPage.html">BUY</a></li>
-                        <li><a href="./RentPage.html">RENT</a></li>         
-                        <li><a href="./calculator.html">Calculate</a></li>
-                        <li><a href="./agent.html">Agents Portal</a></li>
-                    </ul>
-                </div>
-                <div class="signlogin">
-                    <div class="sign"><a href="index.html"> SignIn</a></div> 
-                    <div class="login"><a href="index.html"> Login</a></div>
-                    <div class="sign"><a href="./contactUs.html">ContactUs</a></div> 
-                </div>
-            </nav>
-        </header>
-        <body>
-            <p class="Slogan">Find Your Place</p>
-            <div class="splitting">
-                </a><section class="BUYpic" data-text="Buy Now"> </section>
-                <section class="SELLpic" data-text="Sell Today"></section>
-                <section class="Rentpic" data-text="Rent Today"></section>
+            </a>
+
+            <button class="mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+            <ul class="nav-menu">
+                <li><a href="HomePage.html" class="nav-link active">Home</a></li>
+                <li><a href="BuyPage.html" class="nav-link">Buy Homes</a></li>
+                <li><a href="RentPage.html" class="nav-link">Rentals</a></li>
+                <li><a href="sell.html" class="nav-link">Sell Property</a></li>
+                <li><a href="calculator.html" class="nav-link">Bond Calculator</a></li>
+                <li><a href="agent.html" class="nav-link">Our Agents</a></li>
+                <li><a href="contactUs.html" class="nav-link">Contact Us</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="sell.html" class="btn-header-cta">+ List Property</a>
+                <a href="index.html" class="btn-header-outline">Client Login</a>
             </div>
-        
-        
-            <div class="welcome">
-                <p class="title">Real Homes Properties</p>
-                <p>Welcome to Real Homes, where we help you find your dream home in the heart of Johannesburg. Our commitment is to offer a wide selection of high-quality homes that meet your needs. Whether you’re looking to buy, sell, or simply explore the market, we are here to guide you through every step of the way with personalized service and expert advice. Let us turn your real estate aspirations into reality!</p>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <div class="hero-badge">&#9733; Johannesburg's Premier Home Selling Agency</div>
+            <h1 class="hero-title">Discover Exceptional Homes Where Life Unfolds</h1>
+            <p class="hero-subtitle">Browse Johannesburg's most exclusive portfolio of luxury residences, architectural family homes, and prime real estate investments.</p>
+
+            <!-- Interactive Quick Search Bar -->
+            <div class="hero-search-card">
+                <div class="search-type-tabs">
+                    <button class="search-tab active" onclick="setSearchMode('buy', this)">Buy Homes</button>
+                    <button class="search-tab" onclick="setSearchMode('rent', this)">Rent Properties</button>
+                </div>
+                <form id="heroSearchForm" onsubmit="handleHeroSearch(event)">
+                    <div class="search-inputs-grid">
+                        <div class="form-group" style="margin:0;">
+                            <label class="form-label" style="font-size:12px; text-transform:uppercase; color:#64748b;">Location / Suburb</label>
+                            <select id="heroLocation" class="form-control" style="font-weight:600;">
+                                <option value="all">All Prime Areas (Johannesburg)</option>
+                                <option value="Sandton">Sandton & Morningside</option>
+                                <option value="Ruimsig">Ruimsig Country Estate</option>
+                                <option value="Krugersdorp">Krugersdorp & West Rand</option>
+                                <option value="City">Johannesburg City Centre</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin:0;">
+                            <label class="form-label" style="font-size:12px; text-transform:uppercase; color:#64748b;">Property Type</label>
+                            <select id="heroType" class="form-control" style="font-weight:600;">
+                                <option value="all">All Types</option>
+                                <option value="house">Freestanding Houses</option>
+                                <option value="townhouse">Townhouses & Clusters</option>
+                                <option value="apartment">Apartments & Flats</option>
+                                <option value="luxury">Luxury Mansions</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin:0;">
+                            <label class="form-label" style="font-size:12px; text-transform:uppercase; color:#64748b;">Price Range</label>
+                            <select id="heroPrice" class="form-control" style="font-weight:600;">
+                                <option value="all">Any Price</option>
+                                <option value="under1m">Under R 1,000,000</option>
+                                <option value="1m-2m">R 1,000,000 - R 2,000,000</option>
+                                <option value="above2m">Above R 2,000,000</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-gold" style="height: 48px; padding: 0 26px; white-space: nowrap;">
+                            Search Homes &#8594;
+                        </button>
+                    </div>
+                </form>
             </div>
-        
-        
-            <footer>
-                <ul class="social_icons">
-                    <li><a href="https://instagram.com"><img src="instagram.png" width="30px" height="30px"></a></li>
-                    <li><a href="https://facebook.com"><img src="facebook.png" width="30px" height="30px"></a></li>
-                    <li><a href="https://youtube.com"><img src="Youtube.png" width="30px" height="30px"></a></li>
-                    <li><a href="https://twitter.com"><img src="x.png" width="30px" height="30px"></a></li>
+        </div>
+    </section>
+
+    <!-- TRUST STATS STRIP -->
+    <div class="stats-strip">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">R 4.8B+</div>
+                <div class="stat-label">Properties Sold</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1,250+</div>
+                <div class="stat-label">Happy Homeowners</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15+ Years</div>
+                <div class="stat-label">Real Estate Authority</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">99.2%</div>
+                <div class="stat-label">Client Recommendation</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN PORTALS (BUY / RENT / SELL) -->
+    <section style="padding: 90px 0 60px;">
+        <div class="section-header">
+            <span class="section-tag">Explore Real Homes</span>
+            <h2 class="section-title">Everything You Need To Move Forward</h2>
+            <p class="section-desc">Whether you are buying your family's future, renting a modern sanctuary, or maximizing the selling value of your current property.</p>
+        </div>
+
+        <div class="pillars-grid">
+            <!-- BUY PILLAR -->
+            <a href="BuyPage.html" class="pillar-card">
+                <img src="../IMAGES/HomePage/BUY.jpeg" alt="Buy Homes" class="pillar-bg" onerror="this.src='images/HomePage/BUY.jpeg'">
+                <div class="pillar-content">
+                    <span class="badge badge-gold" style="margin-bottom: 10px;">For Buyers</span>
+                    <h3>Buy Your Dream Home</h3>
+                    <p>Explore exclusive verified villas, suburban houses, and modern estates across Gauteng.</p>
+                    <span class="pillar-link">Browse Available Homes &#8594;</span>
+                </div>
+            </a>
+
+            <!-- RENT PILLAR -->
+            <a href="RentPage.html" class="pillar-card">
+                <img src="../IMAGES/HomePage/Rent.jpeg" alt="Rent Properties" class="pillar-bg" onerror="this.src='images/HomePage/Rent.jpeg'">
+                <div class="pillar-content">
+                    <span class="badge badge-teal" style="margin-bottom: 10px;">For Tenants</span>
+                    <h3>Prime Rental Properties</h3>
+                    <p>Curated luxury apartments and family townhomes with flexible lease options.</p>
+                    <span class="pillar-link">Explore Rental Listings &#8594;</span>
+                </div>
+            </a>
+
+            <!-- SELL PILLAR -->
+            <a href="sell.html" class="pillar-card">
+                <img src="../IMAGES/HomePage/Sell.jpeg" alt="Sell Property" class="pillar-bg" onerror="this.src='images/HomePage/Sell.jpeg'">
+                <div class="pillar-content">
+                    <span class="badge badge-navy" style="margin-bottom: 10px; background: rgba(255,255,255,0.2); color:#fff;">For Sellers</span>
+                    <h3>Sell With Top Specialists</h3>
+                    <p>Targeted marketing, professional staging, and aggressive negotiation to achieve top market price.</p>
+                    <span class="pillar-link">Request Free Valuation &#8594;</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- CURATED FEATURED PROPERTIES FOR SALE -->
+    <section style="padding: 60px 0 90px; background: #ffffff;">
+        <div class="section-header">
+            <span class="section-tag">Exclusive Mandates</span>
+            <h2 class="section-title">Featured Homes For Sale</h2>
+            <p class="section-desc">Hand-picked properties offering world-class finishes, security, and unmatched lifestyle value.</p>
+        </div>
+
+        <div class="properties-grid" style="max-width: 1380px; margin: 0 auto; padding: 0 24px;">
+            
+            <!-- House 1 -->
+            <div class="property-card">
+                <div class="property-thumb-wrap">
+                    <div class="property-tags">
+                        <span class="badge badge-gold">Exclusive</span>
+                        <span class="badge badge-navy">For Sale</span>
+                    </div>
+                    <button class="property-fav-btn" data-id="5" onclick="toggleFavorite(5, this)">&#9825;</button>
+                    <img src="../IMAGES/buyPage/house3.jpeg" alt="Luxury Estate" class="property-thumb" onerror="this.src='images/buyPage/house3.jpeg'">
+                </div>
+                <div class="property-content">
+                    <div class="property-price-row">
+                        <div class="property-price">R 2,375,000</div>
+                    </div>
+                    <h3 class="property-title">Luxurious 5-Bedroom Estate with Private Pool</h3>
+                    <div class="property-location">&#128205; Aston Rd, Morningside Manor, Sandton</div>
+                    <div class="property-specs">
+                        <div class="spec-item">&#128716; 5 Beds</div>
+                        <div class="spec-item">&#128705; 4 Baths</div>
+                        <div class="spec-item">&#128663; 3 Garages</div>
+                        <div class="spec-item">&#128208; 520 m²</div>
+                    </div>
+                    <div class="property-footer">
+                        <div class="agent-mini">
+                            <img src="../IMAGES/agents Portals/agent 3.jpeg" alt="Jane Smith" class="agent-mini-avatar" onerror="this.src='images/agents Portals/agent 3.jpeg'">
+                            <div class="agent-mini-info">
+                                <span class="agent-mini-name">Jane Smith</span>
+                                <span class="agent-mini-role">Senior Luxury Specialist</span>
+                            </div>
+                        </div>
+                        <div class="property-card-actions">
+                            <a href="BuyPage.html" class="btn-card-details">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- House 2 -->
+            <div class="property-card">
+                <div class="property-thumb-wrap">
+                    <div class="property-tags">
+                        <span class="badge badge-teal">New Listing</span>
+                        <span class="badge badge-navy">For Sale</span>
+                    </div>
+                    <button class="property-fav-btn" data-id="4" onclick="toggleFavorite(4, this)">&#9825;</button>
+                    <img src="../IMAGES/buyPage/house1.jpeg" alt="Modern Home" class="property-thumb" onerror="this.src='images/buyPage/house1.jpeg'">
+                </div>
+                <div class="property-content">
+                    <div class="property-price-row">
+                        <div class="property-price">R 2,000,000</div>
+                    </div>
+                    <h3 class="property-title">Modern 4-Bedroom Architectural Home</h3>
+                    <div class="property-location">&#128205; Stuart Ave, Morningside Manor, Sandton</div>
+                    <div class="property-specs">
+                        <div class="spec-item">&#128716; 4 Beds</div>
+                        <div class="spec-item">&#128705; 3.5 Baths</div>
+                        <div class="spec-item">&#128663; 2 Garages</div>
+                        <div class="spec-item">&#128208; 380 m²</div>
+                    </div>
+                    <div class="property-footer">
+                        <div class="agent-mini">
+                            <img src="../IMAGES/agents Portals/agent 4.jpg" alt="Kenen Williams" class="agent-mini-avatar" onerror="this.src='images/agents Portals/agent 4.jpg'">
+                            <div class="agent-mini-info">
+                                <span class="agent-mini-name">Kenen Williams</span>
+                                <span class="agent-mini-role">Principal Property Broker</span>
+                            </div>
+                        </div>
+                        <div class="property-card-actions">
+                            <a href="BuyPage.html" class="btn-card-details">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- House 3 -->
+            <div class="property-card">
+                <div class="property-thumb-wrap">
+                    <div class="property-tags">
+                        <span class="badge badge-gold">Prime Estate</span>
+                        <span class="badge badge-navy">For Sale</span>
+                    </div>
+                    <button class="property-fav-btn" data-id="3" onclick="toggleFavorite(3, this)">&#9825;</button>
+                    <img src="../IMAGES/buyPage/house2.jpeg" alt="Ruimsig Country Estate" class="property-thumb" onerror="this.src='images/buyPage/house2.jpeg'">
+                </div>
+                <div class="property-content">
+                    <div class="property-price-row">
+                        <div class="property-price">R 1,800,000</div>
+                    </div>
+                    <h3 class="property-title">Contemporary 3-Bedroom Villa with Garden</h3>
+                    <div class="property-location">&#128205; Yvette St, Ruimsig Country Estate</div>
+                    <div class="property-specs">
+                        <div class="spec-item">&#128716; 3 Beds</div>
+                        <div class="spec-item">&#128705; 2 Baths</div>
+                        <div class="spec-item">&#128663; 2 Garages</div>
+                        <div class="spec-item">&#128208; 310 m²</div>
+                    </div>
+                    <div class="property-footer">
+                        <div class="agent-mini">
+                            <img src="../IMAGES/agents Portals/agent 2.jpeg" alt="Emily Johnson" class="agent-mini-avatar" onerror="this.src='images/agents Portals/agent 2.jpeg'">
+                            <div class="agent-mini-info">
+                                <span class="agent-mini-name">Emily Johnson</span>
+                                <span class="agent-mini-role">Residential Specialist</span>
+                            </div>
+                        </div>
+                        <div class="property-card-actions">
+                            <a href="BuyPage.html" class="btn-card-details">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="BuyPage.html" class="btn btn-primary" style="padding: 14px 34px; font-size: 16px;">
+                View All Properties For Sale &#8594;
+            </a>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE REAL HOMES -->
+    <section style="padding: 90px 24px; background: var(--bg-main);">
+        <div class="section-header">
+            <span class="section-tag">The Real Homes Advantage</span>
+            <h2 class="section-title">Why Johannesburg Trusts Us To Sell & Buy</h2>
+            <p class="section-desc">We combine elite local expertise, certified conveyancing partners, and cutting-edge digital exposure to make property transactions effortless.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-box">
+                <div class="feature-icon-box">&#128220;</div>
+                <h4>Verified Title Deeds & Legal Audit</h4>
+                <p>Every single property on our platform undergoes stringent verification against the Deeds Registry to ensure clear titles and peace of mind.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon-box">&#127916;</div>
+                <h4>3D Virtual Tours & Cinema Media</h4>
+                <p>We present every home with architectural HDR photography, drone aerial coverage, and immersive walkthroughs that attract qualified buyers.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon-box">&#128179;</div>
+                <h4>End-to-End Bond Originators</h4>
+                <p>Our in-house bond specialists submit pre-approval applications to all major South African banks simultaneously to secure the lowest prime interest rate.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon-box">&#129309;</div>
+                <h4>Master Certified Negotiators</h4>
+                <p>With an average of 15 years in Johannesburg's northern and western suburbs, our agents achieve 97.4% of initial asking price.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MORTGAGE ESTIMATOR TEASER -->
+    <section style="padding: 0 24px;">
+        <div class="home-calc-section">
+            <div class="home-calc-grid">
+                <div>
+                    <span class="section-tag" style="color: var(--gold-light);">Financial Planning</span>
+                    <h2 style="color: #ffffff; font-size: 36px; margin-bottom: 16px;">Quick Bond & Monthly Repayment Estimator</h2>
+                    <p style="color: #cbd5e1; font-size: 16px; margin-bottom: 26px;">
+                        Plan your home purchase with confidence. Calculate estimated monthly bond repayments based on South Africa's prevailing prime interest rate.
+                    </p>
+                    <div class="home-calc-box">
+                        <div class="form-group">
+                            <label class="form-label" style="color: #ffffff;">Home Purchase Price (ZAR)</label>
+                            <input type="range" id="quickPriceRange" min="500000" max="5000000" step="50000" value="2000000" style="width: 100%; accent-color: var(--gold-primary);" oninput="updateQuickCalc()">
+                            <div style="display: flex; justify-content: space-between; font-weight: 700; color: var(--gold-light); margin-top: 6px;">
+                                <span>R 500k</span>
+                                <span id="quickPriceDisplay">R 2,000,000</span>
+                                <span>R 5M+</span>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label" style="color: #ffffff;">Deposit Amount</label>
+                            <input type="number" id="quickDeposit" class="form-control" value="200000" step="10000" oninput="updateQuickCalc()" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2);">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-output-card">
+                    <span style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b;">Estimated Monthly Bond Repayment</span>
+                    <div id="quickMonthlyPayment" style="font-size: 44px; font-weight: 800; color: var(--primary-navy); margin: 12px 0; font-family: var(--font-body);">
+                        R 19,450
+                    </div>
+                    <p style="font-size: 13.5px; color: #64748b; margin-bottom: 24px;">
+                        Based on 20-year bond term at 11.75% prime lending rate.
+                    </p>
+                    <a href="calculator.html" class="btn btn-gold" style="width: 100%; padding: 14px;">
+                        Open Comprehensive Mortgage & Transfer Duty Calculator &#8594;
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section style="padding: 80px 0;">
+        <div class="section-header">
+            <span class="section-tag">Client Reviews</span>
+            <h2 class="section-title">What Homeowners Say About Real Homes</h2>
+            <p class="section-desc">Transparent, authentic feedback from families and investors who achieved their real estate goals with us.</p>
+        </div>
+
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="review-text">"Jane Smith and the Real Homes team sold our Morningside home within 18 days of listing. The video production and marketing attracted high-caliber buyers immediately."</p>
+                <div class="review-author">
+                    <div class="review-avatar">DM</div>
+                    <div>
+                        <strong style="color: var(--primary-navy); font-size: 14px;">David & Michelle Meyer</strong>
+                        <div style="font-size: 12px; color: #64748b;">Sold in Morningside, Sandton</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="review-text">"As first-time home buyers in Ruimsig, we were overwhelmed by the paperwork and bond applications. Real Homes guided us through conveyancing and bond pre-approval with total transparency."</p>
+                <div class="review-author">
+                    <div class="review-avatar">TN</div>
+                    <div>
+                        <strong style="color: var(--primary-navy); font-size: 14px;">Thabo Ndebele</strong>
+                        <div style="font-size: 12px; color: #64748b;">Bought in Ruimsig Country Estate</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="review-text">"Kenen Williams is simply the best broker in Johannesburg. He managed our rental portfolio and helped us acquire our newest estate at fair market value. Highly recommend!"</p>
+                <div class="review-author">
+                    <div class="review-avatar">SK</div>
+                    <div>
+                        <strong style="color: var(--primary-navy); font-size: 14px;">Sarah Khoza</strong>
+                        <div style="font-size: 12px; color: #64748b;">Property Investor, Sandton</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SELL CTA BANNER -->
+    <div style="padding: 0 24px;">
+        <div class="sell-cta-banner">
+            <div>
+                <h2>Ready To Sell Your Property For Top Market Value?</h2>
+                <p>Get a complimentary, data-backed comparative market analysis (CMA) from our certified Johannesburg property specialists.</p>
+            </div>
+            <a href="sell.html" class="btn btn-primary" style="background: var(--primary-navy); color: #fff; padding: 14px 30px; font-size: 16px;">
+                Request Free Property Valuation
+            </a>
+        </div>
+    </div>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-top-container">
+            <div class="footer-brand-col">
+                <div class="brand-logo-wrap" style="filter: brightness(0) invert(1);">
+                    <img src="../IMAGES/logo.png" alt="Real Homes" class="brand-logo-img" onerror="this.src='images/logo.png'">
+                    <span class="brand-name" style="color: #ffffff;">Real Homes</span>
+                </div>
+                <p>Johannesburg's premier residential real estate practice, specializing in the acquisition, valuation, and marketing of prime luxury estates and family homes.</p>
+                <div class="footer-compliance-tag">
+                    &#10003; Registered with the Property Practitioners Regulatory Authority (PPRA)
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-col-title">Navigation</h4>
+                <ul class="footer-links-list">
+                    <li><a href="HomePage.html">Home</a></li>
+                    <li><a href="BuyPage.html">Properties For Sale</a></li>
+                    <li><a href="RentPage.html">Rental Properties</a></li>
+                    <li><a href="sell.html">Sell Your Home</a></li>
+                    <li><a href="calculator.html">Bond Calculator</a></li>
+                    <li><a href="agent.html">Our Certified Agents</a></li>
+                    <li><a href="contactUs.html">Contact & Office</a></li>
                 </ul>
-                <div class="info">
-                    <p>Contact Us:</p>
-                    <p>Email: info@RealHomesproperties.com</p>
-                    <p>Phone: (123) 456-7890</p>
-                    <p>Address: 123 Property Lane, Johannesburg, SA</p>            
+            </div>
+
+            <div>
+                <h4 class="footer-col-title">Prime Locations</h4>
+                <ul class="footer-links-list">
+                    <li><a href="BuyPage.html">Sandton & Morningside</a></li>
+                    <li><a href="BuyPage.html">Ruimsig Country Estate</a></li>
+                    <li><a href="BuyPage.html">Krugersdorp & West Rand</a></li>
+                    <li><a href="BuyPage.html">Rosebank & Hyde Park</a></li>
+                    <li><a href="RentPage.html">Johannesburg City Center</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-col-title">Johannesburg Office</h4>
+                <div class="footer-contact-info">
+                    <div class="contact-line">
+                        <span class="contact-icon">&#128205;</span>
+                        <span>123 Property Lane, Sandton, Johannesburg, 2196, South Africa</span>
+                    </div>
+                    <div class="contact-line">
+                        <span class="contact-icon">&#128222;</span>
+                        <span>+27 (0)11 456 7890 / (123) 456-7890</span>
+                    </div>
+                    <div class="contact-line">
+                        <span class="contact-icon">&#9993;</span>
+                        <span>info@realhomesproperties.com</span>
+                    </div>
+                    <div class="contact-line">
+                        <span class="contact-icon">&#128337;</span>
+                        <span>Monday - Saturday: 08:00 - 18:00</span>
+                    </div>
                 </div>
-                <div class="symbols">&#169;</div>
-            </footer>
-        </body>
-    </html>
-        
+
+                <div class="footer-social-wrap">
+                    <a href="https://instagram.com" class="social-circle-btn" aria-label="Instagram">
+                        <img src="../IMAGES/instagram.png" alt="Instagram" onerror="this.src='images/instagram.png'">
+                    </a>
+                    <a href="https://facebook.com" class="social-circle-btn" aria-label="Facebook">
+                        <img src="../IMAGES/facebook.png" alt="Facebook" onerror="this.src='images/facebook.png'">
+                    </a>
+                    <a href="https://youtube.com" class="social-circle-btn" aria-label="YouTube">
+                        <img src="../IMAGES/Youtube.png" alt="YouTube" onerror="this.src='images/Youtube.png'">
+                    </a>
+                    <a href="https://twitter.com" class="social-circle-btn" aria-label="X Twitter">
+                        <img src="../IMAGES/x.png" alt="X" onerror="this.src='images/x.png'">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+            <div>&copy; 2026 Real Homes Properties (Pty) Ltd. All Rights Reserved. Equal Housing Opportunity.</div>
+            <div style="display:flex; gap: 20px;">
+                <a href="#" style="color:#94a3b8;">Privacy Policy</a>
+                <a href="#" style="color:#94a3b8;">Terms of Service</a>
+                <a href="#" style="color:#94a3b8;">PAIA Manual</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/main.js"></script>
+    <script>
+        let searchMode = 'buy';
+
+        function setSearchMode(mode, btn) {
+            searchMode = mode;
+            document.querySelectorAll('.search-tab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function handleHeroSearch(e) {
+            e.preventDefault();
+            const loc = document.getElementById('heroLocation').value;
+            const targetPage = searchMode === 'buy' ? 'BuyPage.html' : 'RentPage.html';
+            window.location.href = `${targetPage}?location=${encodeURIComponent(loc)}`;
+        }
+
+        function updateQuickCalc() {
+            const price = parseFloat(document.getElementById('quickPriceRange').value);
+            const deposit = parseFloat(document.getElementById('quickDeposit').value) || 0;
+            document.getElementById('quickPriceDisplay').textContent = formatZAR(price);
+
+            const loan = Math.max(0, price - deposit);
+            const monthlyRate = 0.1175 / 12; // 11.75% prime
+            const months = 20 * 12; // 20 years
+
+            let monthlyPayment = 0;
+            if (loan > 0) {
+                monthlyPayment = (loan * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+            }
+
+            document.getElementById('quickMonthlyPayment').textContent = formatZAR(Math.round(monthlyPayment));
+        }
+
+        updateQuickCalc();
+    </script>
+</body>
+</html>

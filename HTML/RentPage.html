@@ -3,552 +3,905 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Homes Rent Page</title>
+    <title>Luxury Rental Properties & Apartments | Real Homes</title>
+    <meta name="description" content="Discover premium rental apartments, townhouses, and villas across Johannesburg with flexible lease terms.">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #1eb7f3;
-            font-family: "my-font", serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            background-color: white;
-            padding: 10px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-container img {
-            margin-right: 15px;
-            width: 240px;
-            height: auto;
-        }
-
-        .WP {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        ul {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        ul li a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
-
-        ul li:hover a {
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            color: rgb(0, 114, 114);
-        }
-        
-        .signlogin {
-            display: flex;
-            gap: 50px;
-            text-decoration: none;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
-
-        .sign, .login {
-            background-color: aqua;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .sign:hover {
-            background-color: rgb(0, 114, 114);
-            color: white;
-        }
-
-        .container {
-            align-self: center;
-            width: 90%;
-            margin: 20px;
-            max-width: 1200px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
+        .page-banner {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), 
+                        url('../IMAGES/Headline.jpeg') center/cover no-repeat;
+            padding: 60px 24px;
+            color: #ffffff;
             text-align: center;
-            color: #333;
         }
 
-        .filter {
-            align-content: center;
-            margin-bottom: 20px;
-            cursor: pointer;
-            padding: 10px;
-            background-color: #1eb7f3;
-            color: white;
-            border: none;
-            width: 100%;
-            border-radius: 10px;
-            margin-top: 30px;
+        .page-banner h1 {
+            color: #ffffff;
+            font-size: clamp(32px, 4vw, 48px);
+            margin-bottom: 12px;
         }
 
-        .filter label {
-            font-size: 1.2em;
-            margin-right: 10px;
-            
-
+        .page-banner p {
+            color: #cbd5e1;
+            font-size: 17px;
+            max-width: 650px;
+            margin: 0 auto;
         }
 
-        .rental-listings {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: space-around;
+        /* Filter Bar */
+        .filter-panel {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 24px 28px;
+            box-shadow: var(--shadow-md);
+            margin: -35px auto 40px;
+            max-width: 1380px;
+            position: relative;
+            z-index: 10;
+            border: 1px solid var(--border-light);
         }
 
-        .rental-card {
-            width: 300px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            background-color: #fff;
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 1.8fr 1.2fr 1.2fr 1.2fr 1fr auto;
+            gap: 16px;
+            align-items: flex-end;
         }
 
-        .slideshow-container {
+        @media (max-width: 1100px) {
+            .filter-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 640px) {
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Carousel Inside Card */
+        .card-slider {
             position: relative;
             width: 100%;
-            height: 200px;
+            height: 250px;
+            background: #090d16;
+            overflow: hidden;
         }
 
-        .slideshow-container img {
+        .card-slider-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: opacity 0.3s ease;
         }
 
-        .slideshow-container button {
+        .slider-ctrl-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .slideshow-container button:first-of-type {
-            left: 0;
-        }
-
-        .slideshow-container button:last-of-type {
-            right: 0;
-        }
-
-        .slideshow-container button:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .rental-card .details {
-            padding: 15px;
-        }
-
-        .rental-card .rent {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .rental-card .description {
-            color: #666;
-        }
-
-        .agent-details {
-            display: none; /* Initially hidden */
-            padding: 15px;
-            background-color: #f9f9f9;
-            border-top: 1px solid #ddd;
-        }
-
-        .agent-details img {
-            width: 50px;
-            height: auto;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-        }
-
-        .toggle-agent-btn {
-            cursor: pointer;
-            padding: 10px;
-            background-color: #1eb7f3;
-            color: white;
+            background: rgba(15, 23, 42, 0.7);
+            color: #ffffff;
             border: none;
-            width: 100%;
-            text-align: left;
-            border-radius: 10px;
-            margin-top: 30px;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-family: 'Arial', sans-serif;
-            position: relative;
-            width: 100%;
-        }
-
-        .social_icons {
+            cursor: pointer;
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin: 10px 0;
-            flex-wrap: wrap;
+            justify-content: center;
+            font-size: 14px;
+            z-index: 3;
+            transition: var(--transition);
         }
 
-        footer p {
-            color: white;
-            margin-top: 15px;
-            margin-bottom: 10px;
-            font-size: 17.6px;
+        .slider-ctrl-btn:hover {
+            background: var(--gold-primary);
         }
 
-        .sell-form {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 20px;
+        .slider-prev { left: 10px; }
+        .slider-next { right: 10px; }
+
+        .slider-counter {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(15, 23, 42, 0.75);
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+            z-index: 3;
+        }
+
+        .fab-add-btn {
             position: fixed;
-            bottom: 20px; 
-            right: 20px; 
-            background-color: white; /* To make it stand out */
-            padding: 15px; 
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); 
-        }
-
-        .sell-form input[type="file"] {
-            margin-bottom: 10px;
-        }
-
-        .sell-form input[type="text"] {
-            margin-bottom: 10px;
-            padding: 8px;
-            font-size: 1em;
-        }
-
-        .sell-form button {
-            padding: 10px;
-            background-color: #1eb7f3;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #ffffff;
+            padding: 14px 24px;
+            border-radius: var(--radius-full);
+            box-shadow: 0 10px 25px rgba(184, 149, 98, 0.45);
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             border: none;
-            color: white;
-            font-size: 1em;
             cursor: pointer;
+            z-index: 99;
+            transition: var(--transition);
+        }
+
+        .fab-add-btn:hover {
+            transform: translateY(-3px) scale(1.03);
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo-container">
-                <img src="logo.png" alt="logo">
-                <div class="WP">Real Homes</div> 
+
+    <!-- SITE HEADER -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="HomePage.html" class="brand-logo-wrap">
+                <img src="../IMAGES/logo.png" alt="Real Homes Logo" class="brand-logo-img" onerror="this.src='images/logo.png'">
+                <div class="brand-title-box">
+                    <span class="brand-name">Real Homes</span>
+                    <span class="brand-tagline">Luxury Real Estate</span>
+                </div>
+            </a>
+
+            <button class="mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+            <ul class="nav-menu">
+                <li><a href="HomePage.html" class="nav-link">Home</a></li>
+                <li><a href="BuyPage.html" class="nav-link">Buy Homes</a></li>
+                <li><a href="RentPage.html" class="nav-link active">Rentals</a></li>
+                <li><a href="sell.html" class="nav-link">Sell Property</a></li>
+                <li><a href="calculator.html" class="nav-link">Bond Calculator</a></li>
+                <li><a href="agent.html" class="nav-link">Our Agents</a></li>
+                <li><a href="contactUs.html" class="nav-link">Contact Us</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn-header-cta" onclick="openAddRentalModal()">+ List Rental</button>
+                <a href="index.html" class="btn-header-outline">Client Login</a>
             </div>
-            <div class="navigator">
-                <ul>
-                    <li><a href="HomePage.html">HOME</a></li>
-                    <li><a href="BuyPage.html">BUY</a></li>
-                    <li><a href="./agent.html">Agents Portal</a></li>        
-                    <li><a href="./calculator.html">Calculate</a></li>
-                </ul>
-            </div>
-            <div class="signlogin">
-                <div class="sign"><a href="./contactUs.html">ContactUs</a></div> 
-            </div>
-        </nav>
+        </div>
     </header>
 
-    <div class="container">
-        <h1>Rental Listings</h1>
+    <!-- PAGE HERO -->
+    <section class="page-banner">
+        <span class="badge badge-teal" style="margin-bottom: 12px;">Verified Rentals</span>
+        <h1>Executive Rentals & Luxury Apartments</h1>
+        <p>Curated residential leases across Sandton, Rosebank, and Johannesburg with flexible contracts and vetted landlords.</p>
+    </section>
 
-        <!-- Filter by rent range -->
-        <div class="filter">
-            <label for="rentRange">Filter by monthly rent:</label>
-            <select id="rentRange" onchange="filterRentals()">
-                <option value="all">All</option>
-                <option value="low">Below R4,000</option>
-                <option value="mid">Between R4,000 and R6,000</option>
-                <option value="high">Above R7,000</option>
-            </select>
-        </div>
-
-        <!-- Rental Listings -->
-        <div class="rental-listings" id="rentalListings">
-            <!-- Rentals will be dynamically inserted here -->
+    <!-- FILTER PANEL -->
+    <div style="padding: 0 24px;">
+        <div class="filter-panel">
+            <div class="filter-grid">
+                <div class="form-group" style="margin:0;">
+                    <label class="form-label">Search Keyword</label>
+                    <input type="text" id="filterRentKeyword" class="form-control" placeholder="e.g. apartment, balcony, views..." oninput="applyRentFilters()">
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label class="form-label">Monthly Rent</label>
+                    <select id="filterRentPrice" class="form-control" onchange="applyRentFilters()">
+                        <option value="all">All Rental Rates</option>
+                        <option value="low">Below R 4,500 / month</option>
+                        <option value="mid">R 4,500 - R 6,500 / month</option>
+                        <option value="high">Above R 6,500 / month</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label class="form-label">Property Type</label>
+                    <select id="filterRentType" class="form-control" onchange="applyRentFilters()">
+                        <option value="all">All Types</option>
+                        <option value="apartment">Apartments</option>
+                        <option value="house">Freestanding Houses</option>
+                        <option value="studio">Modern Studios</option>
+                        <option value="townhouse">Townhomes</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label class="form-label">Bedrooms</label>
+                    <select id="filterRentBeds" class="form-control" onchange="applyRentFilters()">
+                        <option value="all">Any Bedrooms</option>
+                        <option value="1">1+ Bedrooms</option>
+                        <option value="2">2+ Bedrooms</option>
+                        <option value="3">3+ Bedrooms</option>
+                        <option value="4">4+ Bedrooms</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label class="form-label">Sort By</label>
+                    <select id="filterRentSort" class="form-control" onchange="applyRentFilters()">
+                        <option value="featured">Featured First</option>
+                        <option value="price-asc">Rent: Low to High</option>
+                        <option value="price-desc">Rent: High to Low</option>
+                    </select>
+                </div>
+                <div>
+                    <button class="btn btn-outline" style="width: 100%; padding: 12px 18px;" onclick="resetRentFilters()">Reset</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <ul class="social_icons">
-            <li><a href="https://instagram.com"><img src="instagram.png" width="30px" height="30px"></a></li>
-            <li><a href="https://facebook.com"><img src="facebook.png" width="30px" height="30px"></a></li>
-            <li><a href="https://youtube.com"><img src="Youtube.png" width="30px" height="30px"></a></li>
-            <li><a href="https://twitter.com"><img src="x.png" width="30px" height="30px"></a></li>
-        </ul>
-        <div class="info">
-            <p>Contact Us:</p>
-            <p>Email: info@RealHomesproperties.com</p>
-            <p>Phone: (123) 456-7890</p>
-            <p>Address: 123 Property Lane, Johannesburg, SA</p>            
+    <!-- META BAR -->
+    <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1380px; margin: 0 auto 24px; padding: 0 24px; flex-wrap: wrap; gap: 14px;">
+        <div class="results-count" id="rentCount" style="font-size: 16px; font-weight: 700; color: var(--primary-navy);">
+            Loading verified rentals...
         </div>
-        <div class="symbols">&#169;</div>
+        <button class="btn btn-primary" onclick="openAddRentalModal()" style="padding: 9px 18px; font-size: 14px;">
+            + List A Rental Property
+        </button>
+    </div>
+
+    <!-- RENTALS GRID -->
+    <main style="max-width: 1380px; margin: 0 auto; padding: 0 24px 80px; width: 100%;">
+        <div class="properties-grid" id="rentalContainer">
+            <!-- Dynamically populated -->
+        </div>
+    </main>
+
+    <!-- FLOATING ACTION BUTTON -->
+    <button class="fab-add-btn" onclick="openAddRentalModal()">
+        <span>+</span> List Rental Property
+    </button>
+
+    <!-- RENTAL DETAILS MODAL -->
+    <div class="modal-backdrop" id="rentalModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div>
+                    <span class="badge badge-teal">Verified Rental</span>
+                    <h3 class="modal-title" id="rModalTitle" style="margin-top: 6px;">Rental Listing</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeRentalModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img id="rModalImg" src="" alt="Property" class="modal-gallery-img">
+                
+                <div class="details-grid">
+                    <div>
+                        <div style="font-size: 30px; font-weight: 800; color: var(--primary-navy); margin-bottom: 6px;" id="rModalPrice">
+                            R 0 / month
+                        </div>
+                        <div style="color: var(--text-secondary); margin-bottom: 20px; font-size: 15px;" id="rModalLocation">
+                            Johannesburg
+                        </div>
+
+                        <div class="property-specs" id="rModalSpecs">
+                            <!-- Specs injected here -->
+                        </div>
+
+                        <h4 style="margin: 20px 0 10px; font-size: 18px;">Rental Overview & Inclusions</h4>
+                        <p id="rModalDesc" style="color: var(--text-secondary); line-height: 1.7; font-size: 15px;">
+                            Description
+                        </p>
+
+                        <h4 style="margin: 24px 0 10px; font-size: 18px;">Lease Highlights</h4>
+                        <ul class="amenities-list">
+                            <li><span>&#10003;</span> 1 Month Security Deposit Required</li>
+                            <li><span>&#10003;</span> Prepaid Electricity Meter Installed</li>
+                            <li><span>&#10003;</span> Water & Refuse Included in Rent</li>
+                            <li><span>&#10003;</span> High-Speed Fiber Optic Connection</li>
+                            <li><span>&#10003;</span> 24/7 Access Control & Guard House</li>
+                            <li><span>&#10003;</span> Covered Allocated Carport Parking</li>
+                        </ul>
+
+                        <h4 style="margin: 24px 0 10px; font-size: 18px;">Area Map</h4>
+                        <iframe id="rModalMap" src="" width="100%" height="220" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+
+                    <!-- Right Column: Agent & Application -->
+                    <div>
+                        <div class="agent-contact-card">
+                            <img id="rModalAgentImg" src="" alt="Agent" class="agent-lg-avatar">
+                            <h4 id="rModalAgentName" style="font-size: 18px; margin-bottom: 4px;">Agent Name</h4>
+                            <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">Rental Portfolio Manager</p>
+                            
+                            <div style="text-align: left; font-size: 14px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;">
+                                <div><strong>Phone:</strong> <span id="rModalAgentPhone"></span></div>
+                                <div><strong>Email:</strong> <span id="rModalAgentEmail"></span></div>
+                            </div>
+
+                            <a id="rModalWhatsAppBtn" href="#" target="_blank" class="btn btn-teal" style="width: 100%; margin-bottom: 10px; font-size: 14px;">
+                                &#128172; WhatsApp Agent
+                            </a>
+                            <a id="rModalCallBtn" href="#" class="btn btn-primary" style="width: 100%; font-size: 14px;">
+                                &#128222; Call Agent Now
+                            </a>
+                        </div>
+
+                        <!-- Tenant Application Form -->
+                        <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 20px; margin-top: 20px;">
+                            <h5 style="font-size: 16px; margin-bottom: 12px;">Apply For This Rental</h5>
+                            <form onsubmit="handleRentalApplication(event)">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Applicant Full Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Email Address" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" class="form-control" placeholder="Phone Number" required>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" required>
+                                        <option value="">Desired Lease Term</option>
+                                        <option value="6">6 Months Lease</option>
+                                        <option value="12">12 Months Lease</option>
+                                        <option value="24">24 Months Lease</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-gold" style="width: 100%; font-size: 14px;">
+                                    Submit Rental Application
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD RENTAL MODAL -->
+    <div class="modal-backdrop" id="addRentalModal">
+        <div class="modal-box" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 class="modal-title">List A Rental Property</h3>
+                <button class="modal-close-btn" onclick="closeAddRentalModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addRentalForm" onsubmit="handleAddRental(event)" action="../PHP/rent_add.php" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="form-label">Rental Title / Headline</label>
+                        <input type="text" id="rentTitle" name="propertyDescription" class="form-control" placeholder="e.g. Modern 2-Bedroom Apartment in Sandton" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Monthly Rent (ZAR)</label>
+                            <input type="number" id="rentAmount" name="propertyPrice" min="2000" step="100" class="form-control" placeholder="e.g. 6500" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Property Type</label>
+                            <select id="rentType" class="form-control" required>
+                                <option value="apartment">Apartment</option>
+                                <option value="house">House</option>
+                                <option value="studio">Studio</option>
+                                <option value="townhouse">Townhome</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Bedrooms</label>
+                            <input type="number" id="rentBeds" min="1" max="10" value="2" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Bathrooms</label>
+                            <input type="number" id="rentBaths" min="1" max="10" value="1" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Full Description</label>
+                        <textarea id="rentDesc" class="form-control" rows="3" placeholder="Describe the inclusions, security, view, parking..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Property Photos (Upload at least 1)</label>
+                        <input type="file" id="rentImages" name="propertyImages[]" accept="image/*" multiple class="form-control" required>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; margin-top: 24px;">
+                        <button type="button" class="btn btn-outline" style="flex:1;" onclick="closeAddRentalModal()">Cancel</button>
+                        <button type="submit" class="btn btn-gold" style="flex:2;">Publish Rental Listing</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-top-container">
+            <div class="footer-brand-col">
+                <div class="brand-logo-wrap" style="filter: brightness(0) invert(1);">
+                    <img src="../IMAGES/logo.png" alt="Real Homes" class="brand-logo-img" onerror="this.src='images/logo.png'">
+                    <span class="brand-name" style="color: #ffffff;">Real Homes</span>
+                </div>
+                <p>Johannesburg's premier residential real estate practice, specializing in the acquisition, valuation, and marketing of prime luxury estates and family homes.</p>
+                <div class="footer-compliance-tag">
+                    &#10003; Registered with the Property Practitioners Regulatory Authority (PPRA)
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-col-title">Navigation</h4>
+                <ul class="footer-links-list">
+                    <li><a href="HomePage.html">Home</a></li>
+                    <li><a href="BuyPage.html">Properties For Sale</a></li>
+                    <li><a href="RentPage.html">Rental Properties</a></li>
+                    <li><a href="sell.html">Sell Your Home</a></li>
+                    <li><a href="calculator.html">Bond Calculator</a></li>
+                    <li><a href="agent.html">Our Certified Agents</a></li>
+                    <li><a href="contactUs.html">Contact & Office</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-col-title">Prime Locations</h4>
+                <ul class="footer-links-list">
+                    <li><a href="BuyPage.html">Sandton & Morningside</a></li>
+                    <li><a href="BuyPage.html">Ruimsig Country Estate</a></li>
+                    <li><a href="BuyPage.html">Krugersdorp & West Rand</a></li>
+                    <li><a href="RentPage.html">Johannesburg City Center</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-col-title">Johannesburg Office</h4>
+                <div class="footer-contact-info">
+                    <div class="contact-line">
+                        <span class="contact-icon">&#128205;</span>
+                        <span>123 Property Lane, Sandton, Johannesburg, 2196</span>
+                    </div>
+                    <div class="contact-line">
+                        <span class="contact-icon">&#128222;</span>
+                        <span>+27 (0)11 456 7890 / (123) 456-7890</span>
+                    </div>
+                    <div class="contact-line">
+                        <span class="contact-icon">&#9993;</span>
+                        <span>info@realhomesproperties.com</span>
+                    </div>
+                </div>
+
+                <div class="footer-social-wrap">
+                    <a href="https://instagram.com" class="social-circle-btn" aria-label="Instagram">
+                        <img src="../IMAGES/instagram.png" alt="Instagram" onerror="this.src='images/instagram.png'">
+                    </a>
+                    <a href="https://facebook.com" class="social-circle-btn" aria-label="Facebook">
+                        <img src="../IMAGES/facebook.png" alt="Facebook" onerror="this.src='images/facebook.png'">
+                    </a>
+                    <a href="https://youtube.com" class="social-circle-btn" aria-label="YouTube">
+                        <img src="../IMAGES/Youtube.png" alt="YouTube" onerror="this.src='images/Youtube.png'">
+                    </a>
+                    <a href="https://twitter.com" class="social-circle-btn" aria-label="X Twitter">
+                        <img src="../IMAGES/x.png" alt="X" onerror="this.src='images/x.png'">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+            <div>&copy; 2026 Real Homes Properties (Pty) Ltd. All Rights Reserved. Equal Housing Opportunity.</div>
+            <div style="display:flex; gap: 20px;">
+                <a href="#" style="color:#94a3b8;">Privacy Policy</a>
+                <a href="#" style="color:#94a3b8;">Terms of Service</a>
+            </div>
+        </div>
     </footer>
-    
-<div class="sell-form"><!-- Form to add new rental property -->
-        <form action="rent_add.php" method="POST" enctype="multipart/form-data">
-            <input type="text" name="propertyDescription" placeholder="Enter property description" required>
-            <input type="number" name="propertyPrice" placeholder="Enter property price" required>
-            <input type="file" name="propertyImages[]" multiple accept="image/*" required>
-            <button type="submit">Add Property</button>
-        </form>
-    </div>
-    
-</div>
 
-    </div>
-
+    <!-- SCRIPTS -->
+    <script src="js/main.js"></script>
     <script>
-        const rentals = [
+        const defaultRentals = [
             {
-                id: 1,
-                rent: 3900,
-                description: "Charming 1-bedroom apartment in the city center.",
-                images: ["apartment1_1.jpeg", "apartment1_2.jpeg", "apartment1_3.jpeg"],
+                id: 7,
+                title: "Stunning City View Apartment with Dining Room",
+                rent: 7890,
+                type: "apartment",
+                bedrooms: 1,
+                bathrooms: 1,
+                parking: 1,
+                area: 75,
+                description: "Stunning executive apartment featuring an open-plan lounge, dining room, designer fitted kitchen, and sleek bathroom. Located in prime urban central with high-speed internet and panoramic balcony views.",
+                images: [
+                    "../IMAGES/SellPage/studio3_3.jpeg",
+                    "../IMAGES/SellPage/studio3_2.jpeg",
+                    "../IMAGES/SellPage/studio3_4.jpeg",
+                    "../IMAGES/SellPage/studio3_5.jpeg"
+                ],
+                currentImageIndex: 0,
                 agent: {
-                    name: "John Doe",
-                    contact: "(023) 456-7890",
-                    email: "johndoe@gmail.com",
-                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345096465!2d144.953735315683!3d-37.81720997975111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11c341%3A0x5045675218ceed30!2sJohn%20Doe%20Real%20Estate!5e0!3m2!1sen!2sau!4v1634541129312!5m2!1sen!2sau",
-                    image: "agent 1.jpeg"
-                },
-                currentImageIndex: 0
+                    name: "Kenen Williams",
+                    phone: "(089) 223-0123",
+                    email: "kenanwill@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 4.jpg",
+                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.919015522223!2d28.070246674716675!3d-26.068902958476098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9572fbc1f4e30f%3A0x594c2c88c393c1b4!2sSandton!5e0!3m2!1sen!2sza"
+                }
             },
             {
-                id: 2,
-                rent: 4500,
-                description: "Spacious 2-bedroom house with a garden.",
-                images: ["house1_1.jpg", "house1_2.jpg", "house1_3.jpg"],
+                id: 6,
+                title: "Beautiful 2-Bedroom Apartment with City Skyline",
+                rent: 7100,
+                type: "apartment",
+                bedrooms: 2,
+                bathrooms: 1,
+                parking: 1,
+                area: 88,
+                description: "Spacious 2-bedroom home in a quiet secure complex. Enjoy breathtaking sunset views from your private balcony, modern Caesarstone kitchen countertops, and 24/7 security patrol.",
+                images: [
+                    "../IMAGES/SellPage/apartment2_1.jpeg",
+                    "../IMAGES/SellPage/apartment2_2.jpeg",
+                    "../IMAGES/SellPage/apartment2_3.jpeg"
+                ],
+                currentImageIndex: 0,
                 agent: {
-                    name: "Jane Smith",
-                    contact: "(098) 765-4321",
-                    email: "janesmith@gmail.com",
-                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345096465!2d144.953735315683!3d-37.81720997975111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11c341%3A0x5045675218ceed30!2sJane%20Smith%20Real%20Estate!5e0!3m2!1sen!2sau!4v1634541129312!5m2!1sen!2sau",
-                    image: "agent 3.jpeg"
-                },
-                currentImageIndex: 0
-            },
-            {
-                id: 3,
-                rent: 4900,
-                description: "Modern studio apartment with great views.",
-                images: ["studio1_1.jpeg", "studio1_2.png", "studio1_3.png"],
-                agent: {
-                    name: "Emily Johnson",
-                    contact: "(056) 789-0123",
-                    email: "emilyjohnson@gmail.com",
-                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345096465!2d144.953735315683!3d-37.81720997975111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11c341%3A0x5045675218ceed30!2sAlice%20Johnson%20Real%20Estate!5e0!3m2!1sen!2sau!4v1634541129312!5m2!1sen!2sau",
-                    image: "agent 2.jpeg"
-                },
-                currentImageIndex: 0
+                    name: "Sarah White",
+                    phone: "(067) 890-1234",
+                    email: "sarahwhite@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 5.jpeg",
+                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.8612166625694!2d28.071115674716804!3d-26.070791658552544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9572fb05e1969d%3A0x8f70b726e088ac8c!2sMorningside!5e0!3m2!1sen!2sza"
+                }
             },
             {
                 id: 4,
+                title: "Cozy 3-Bedroom Townhouse in Gated Enclave",
                 rent: 6000,
-                description: "Cozy 3-bedroom townhouse in a quiet neighborhood.",
-                images: ["townhome1_1.jpg","townhome1_2.jpg"],
+                type: "townhouse",
+                bedrooms: 3,
+                bathrooms: 2,
+                parking: 2,
+                area: 140,
+                description: "Exceptional duplex townhouse situated in a tranquil neighborhood. Offers an open-plan lounge, private manicured courtyard, lock-up garage, and communal swimming pool.",
+                images: [
+                    "../IMAGES/SellPage/townhome1_1.jpg",
+                    "../IMAGES/SellPage/townhome1_2.jpg"
+                ],
+                currentImageIndex: 0,
                 agent: {
                     name: "Kenen Williams",
-                    contact: "(089) 223-0123",
-                    email: "kenanwill@gmail.com",
-                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345096465!2d144.953735315683!3d-37.81720997975111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11c341%3A0x5045675218ceed30!2sMark%20Brown%20Real%20Estate!5e0!3m2!1sen!2sau!4v1634541129312!5m2!1sen!2sau",
-                    image: "agent 4.jpg"
-                },
-                currentImageIndex: 0
+                    phone: "(089) 223-0123",
+                    email: "kenanwill@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 4.jpg",
+                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.919015522223!2d28.070246674716675!3d-26.068902958476098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9572fbc1f4e30f%3A0x594c2c88c393c1b4!2sSandton!5e0!3m2!1sen!2sza"
+                }
             },
             {
                 id: 5,
+                title: "Contemporary Villa Style Studio with Private Garden",
                 rent: 5500,
-                description: "Elegant 4-bedroom villa in a gated community.",
-                images: ["studio2_1.jpg","studio2_2.png","studio3_1.jpeg"],
+                type: "studio",
+                bedrooms: 1,
+                bathrooms: 1,
+                parking: 1,
+                area: 60,
+                description: "Contemporary lock-up-and-go studio residence with private entryway, polished concrete flooring, kitchenette with gas stove, and fast fiber broadband connection.",
+                images: [
+                    "../IMAGES/SellPage/studio2_1.jpg",
+                    "../IMAGES/SellPage/studio2_2.png",
+                    "../IMAGES/SellPage/studio2_3.png"
+                ],
+                currentImageIndex: 0,
                 agent: {
                     name: "Sarah White",
-                    contact: "(067) 890-1234",
-                    email: "sarahwhite@gmail.com",
-                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345096465!2d144.953735315683!3d-37.81720997975111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11c341%3A0x5045675218ceed30!2sSarah%20White%20Real%20Estate!5e0!3m2!1sen!2sau!4v1634541129312!5m2!1sen!2sau",
-                    image: "agent 5.jpeg"
-                },
-                currentImageIndex: 0
+                    phone: "(067) 890-1234",
+                    email: "sarahwhite@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 5.jpeg",
+                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.8612166625694!2d28.071115674716804!3d-26.070791658552544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9572fb05e1969d%3A0x8f70b726e088ac8c!2sMorningside!5e0!3m2!1sen!2sza"
+                }
             },
-        {
-            id: 6,
-            rent: 7100,
-            description: "butiful 2-bedroom apartment with a wonderful city view.",
-            images: ["apartment2_1.jpeg", "apartment2_2.jpeg", "apartment2_3.jpeg"],
-            agent: {
-                name: "Sarah White",
-                contact: "(067) 890-1234",
-                email: "sarahwhite@gmail.com",
-                location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345096465!2d144.953735315683!3d-37.81720997975111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11c341%3A0x5045675218ceed30!2sSarah%20White%20Real%20Estate!5e0!3m2!1sen!2sau!4v1634541129312!5m2!1sen!2sau",
-                image: "agent 5.jpeg"
+            {
+                id: 3,
+                title: "Modern Executive Studio Apartment",
+                rent: 4900,
+                type: "studio",
+                bedrooms: 1,
+                bathrooms: 1,
+                parking: 1,
+                area: 55,
+                description: "Chic open-concept studio apartment featuring great natural daylight, energy-efficient fixtures, built-in wardrobes, and biometric security entrance.",
+                images: [
+                    "../IMAGES/SellPage/studio1_1.jpeg",
+                    "../IMAGES/SellPage/studio1_2.png",
+                    "../IMAGES/SellPage/studio1_3.png"
+                ],
+                currentImageIndex: 0,
+                agent: {
+                    name: "Emily Johnson",
+                    phone: "(056) 789-0123",
+                    email: "emilyjohnson@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 2.jpeg",
+                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.923029835512!2d27.84464053817812!3d-26.06877177756638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e959ea71f2eec15!2sRuimsig!5e0!3m2!1sen!2sza"
+                }
             },
-            currentImageIndex: 0
-        },
-        {
-            id: 7,
-            rent: 7890,
-            description: "Stunning apartment with 1-bedroom ,bathroom,kitchen and dinning room within the city.",
-            images: ["studio3_3.jpeg","studio3_2.jpeg","studio3_4.jpeg","studio3_5.jpeg"],
-            agent: {
-                name: "Kenen Williams",
-                contact: "(089) 223-0123",
-                email: "kenanwill@gmail.com",
-                location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345096465!2d144.953735315683!3d-37.81720997975111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11c341%3A0x5045675218ceed30!2sMark%20Brown%20Real%20Estate!5e0!3m2!1sen!2sau!4v1634541129312!5m2!1sen!2sau",
-                image: "agent 4.jpg"
+            {
+                id: 2,
+                title: "Spacious 2-Bedroom Suburban Garden House",
+                rent: 4500,
+                type: "house",
+                bedrooms: 2,
+                bathrooms: 1,
+                parking: 2,
+                area: 95,
+                description: "Well-appointed 2-bedroom home surrounded by mature trees and garden lawn. Pet friendly by approval, close to top schools and shopping centers.",
+                images: [
+                    "../IMAGES/SellPage/house1_1.jpg",
+                    "../IMAGES/SellPage/house1_2.jpg",
+                    "../IMAGES/SellPage/house1_3.jpg"
+                ],
+                currentImageIndex: 0,
+                agent: {
+                    name: "Jane Smith",
+                    phone: "(098) 765-4321",
+                    email: "janesmith@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 3.jpeg",
+                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3584.0230357003106!2d27.82167747471655!3d-26.065503558338207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e959bfbf3f20049!2sKrugersdorp!5e0!3m2!1sen!2sza"
+                }
             },
-            currentImageIndex: 0
-        },
+            {
+                id: 1,
+                title: "Charming 1-Bedroom Central City Flat",
+                rent: 3900,
+                type: "apartment",
+                bedrooms: 1,
+                bathrooms: 1,
+                parking: 1,
+                area: 50,
+                description: "Centrally located apartment offering convenient access to public transport, shopping hubs, and universities. Low maintenance and great community vibe.",
+                images: [
+                    "../IMAGES/SellPage/apartment1_1.jpeg",
+                    "../IMAGES/SellPage/apartment1_2.jpeg",
+                    "../IMAGES/SellPage/apartment1_3.jpeg"
+                ],
+                currentImageIndex: 0,
+                agent: {
+                    name: "John Doe",
+                    phone: "(023) 456-7890",
+                    email: "johndoe@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 1.jpeg",
+                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.19658525562!2d27.789131174717742!3d-26.092500759432724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e95997114318fa3!2sNoordheuwel!5e0!3m2!1sen!2sza"
+                }
+            }
         ];
-// Function to display rentals
-function displayRentals(rentalsToDisplay) {
-    const listingsContainer = document.getElementById('rentalListings');
-    listingsContainer.innerHTML = '';
 
-    rentalsToDisplay.forEach(rental => {
-        const rentalCard = document.createElement('div');
-        rentalCard.classList.add('rental-card');
-        rentalCard.innerHTML = `
-            <div class="slideshow-container">
-                <button onclick="prevImage(${rental.id})">❮</button>
-                <img id="rental-image-${rental.id}" src="${rental.images[rental.currentImageIndex]}" alt="Rental Image">
-                <button onclick="nextImage(${rental.id})">❯</button>
-            </div>
-            <div class="details">
-                <div class="rent">R${rental.rent}</div>
-                <div class="description">${rental.description}</div>
-                <button class="toggle-agent-btn" onclick="toggleAgentDetails(${rental.id})"> Details</button>
-            </div>
-           <div class="agent-details" id="agent-details-${rental.id}" style="display: none;">
-                <img src="${rental.agent.image}" alt="${rental.agent.name}">
-                <div><strong>${rental.agent.name}</strong></div>
-                <div>Contact: ${rental.agent.contact}</div>
-                <div>Email: ${rental.agent.email}</div>
-                <iframe src="${rental.agent.location}" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
+        function getRentals() {
+            try {
+                const stored = localStorage.getItem('realhomes_rentlistings');
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                }
+            } catch (e) {}
+            return defaultRentals;
+        }
 
-        `;
+        function saveRentals(list) {
+            localStorage.setItem('realhomes_rentlistings', JSON.stringify(list));
+        }
 
-        listingsContainer.appendChild(rentalCard);
-    });
-}
+        let allRentals = getRentals();
 
-// Function to toggle agent details visibility
-function toggleAgentDetails(rentalId) {
-    const agentDetails = document.getElementById(`agent-details-${rentalId}`);
-    agentDetails.style.display = agentDetails.style.display === 'none' ? 'block' : 'none'; // Toggle only the clicked one
-}
+        function renderRentals(items) {
+            const container = document.getElementById('rentalContainer');
+            const countDisplay = document.getElementById('rentCount');
+            
+            container.innerHTML = '';
+            countDisplay.textContent = `Showing ${items.length} ${items.length === 1 ? 'Rental Property' : 'Rental Properties'}`;
 
-        function addNewRental() {
-            const description = document.getElementById('propertyDescription').value;
-            const price = document.getElementById('propertyPrice').value;
-            const imageFiles = document.getElementById('propertyImages').files;
-
-            if (!description){
-                alert('Please enter description for the property.');
-                return;
-            }
-            if (!price || price <= 0) {
-                alert('Please enter a valid price for the property.');
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background:#fff; border-radius:12px; border:1px solid #e2e8f0;">
+                        <h3 style="font-size: 22px; color: var(--primary-navy); margin-bottom: 8px;">No Rentals Found</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Try loosening your filters or budget range.</p>
+                        <button class="btn btn-gold" onclick="resetRentFilters()">Reset All Filters</button>
+                    </div>
+                `;
                 return;
             }
 
-            if (imageFiles.length < 3) {
-                alert('Please upload at least three images.');
-                return;
+            items.forEach(rental => {
+                const card = document.createElement('div');
+                card.className = 'property-card';
+                card.innerHTML = `
+                    <div class="card-slider">
+                        <div class="property-tags">
+                            <span class="badge badge-teal">To Rent</span>
+                            <span class="badge badge-navy" style="text-transform:capitalize;">${rental.type}</span>
+                        </div>
+                        <button class="property-fav-btn" data-id="r-${rental.id}" onclick="toggleFavorite('r-${rental.id}', this)">&#9825;</button>
+                        
+                        <button class="slider-ctrl-btn slider-prev" onclick="changeSlide(${rental.id}, -1)">&#10094;</button>
+                        <img id="rental-img-${rental.id}" src="${rental.images[rental.currentImageIndex || 0]}" alt="${rental.title}" class="card-slider-img" onerror="this.src='../IMAGES/SellPage/apartment1_1.jpeg'">
+                        <button class="slider-ctrl-btn slider-next" onclick="changeSlide(${rental.id}, 1)">&#10095;</button>
+                        
+                        <div class="slider-counter" id="slide-count-${rental.id}">
+                            ${(rental.currentImageIndex || 0) + 1} / ${rental.images.length}
+                        </div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price-row">
+                            <div class="property-price">${formatZAR(rental.rent)} <span class="period">/ month</span></div>
+                        </div>
+                        <h3 class="property-title">${rental.title}</h3>
+                        <div class="property-location">&#128205; Johannesburg Prime Area</div>
+                        <div class="property-specs">
+                            <div class="spec-item">&#128716; ${rental.bedrooms} Bed${rental.bedrooms > 1 ? 's' : ''}</div>
+                            <div class="spec-item">&#128705; ${rental.bathrooms} Bath</div>
+                            <div class="spec-item">&#128663; ${rental.parking} Parking</div>
+                            <div class="spec-item">&#128208; ${rental.area} m²</div>
+                        </div>
+                        <div class="property-footer">
+                            <div class="agent-mini">
+                                <img src="${rental.agent.image}" alt="${rental.agent.name}" class="agent-mini-avatar" onerror="this.src='../IMAGES/agents Portals/agent 1.jpeg'">
+                                <div class="agent-mini-info">
+                                    <span class="agent-mini-name">${rental.agent.name}</span>
+                                    <span class="agent-mini-role">Rental Manager</span>
+                                </div>
+                            </div>
+                            <div class="property-card-actions">
+                                <button class="btn-card-details" onclick="openRentalDetails(${rental.id})">Details & Map</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            initFavorites();
+        }
+
+        function changeSlide(rentalId, direction) {
+            const rental = allRentals.find(r => r.id === rentalId);
+            if (!rental) return;
+
+            rental.currentImageIndex = (rental.currentImageIndex || 0) + direction;
+            if (rental.currentImageIndex < 0) rental.currentImageIndex = rental.images.length - 1;
+            if (rental.currentImageIndex >= rental.images.length) rental.currentImageIndex = 0;
+
+            const imgEl = document.getElementById(`rental-img-${rentalId}`);
+            const counterEl = document.getElementById(`slide-count-${rentalId}`);
+            if (imgEl) imgEl.src = rental.images[rental.currentImageIndex];
+            if (counterEl) counterEl.textContent = `${rental.currentImageIndex + 1} / ${rental.images.length}`;
+        }
+
+        // Filtering
+        function applyRentFilters() {
+            const keyword = document.getElementById('filterRentKeyword').value.toLowerCase();
+            const price = document.getElementById('filterRentPrice').value;
+            const type = document.getElementById('filterRentType').value;
+            const beds = document.getElementById('filterRentBeds').value;
+            const sort = document.getElementById('filterRentSort').value;
+
+            let filtered = allRentals.filter(r => {
+                if (keyword) {
+                    const str = (r.title + ' ' + r.description + ' ' + r.type).toLowerCase();
+                    if (!str.includes(keyword)) return false;
+                }
+
+                if (price === 'low' && r.rent >= 4500) return false;
+                if (price === 'mid' && (r.rent < 4500 || r.rent > 6500)) return false;
+                if (price === 'high' && r.rent <= 6500) return false;
+
+                if (type !== 'all' && r.type.toLowerCase() !== type.toLowerCase()) return false;
+                if (beds !== 'all' && r.bedrooms < parseInt(beds)) return false;
+
+                return true;
+            });
+
+            if (sort === 'price-asc') {
+                filtered.sort((a, b) => a.rent - b.rent);
+            } else if (sort === 'price-desc') {
+                filtered.sort((a, b) => b.rent - a.rent);
+            }
+
+            renderRentals(filtered);
+        }
+
+        function resetRentFilters() {
+            document.getElementById('filterRentKeyword').value = '';
+            document.getElementById('filterRentPrice').value = 'all';
+            document.getElementById('filterRentType').value = 'all';
+            document.getElementById('filterRentBeds').value = 'all';
+            document.getElementById('filterRentSort').value = 'featured';
+            renderRentals(allRentals);
+        }
+
+        // Modal Controls
+        function openRentalDetails(id) {
+            const rental = allRentals.find(r => r.id === id);
+            if (!rental) return;
+
+            document.getElementById('rModalTitle').textContent = rental.title;
+            document.getElementById('rModalPrice').textContent = `${formatZAR(rental.rent)} / month`;
+            document.getElementById('rModalLocation').textContent = "Johannesburg Prime Area";
+            document.getElementById('rModalDesc').textContent = rental.description;
+            document.getElementById('rModalImg').src = rental.images[0];
+            document.getElementById('rModalMap').src = rental.agent.location;
+
+            document.getElementById('rModalSpecs').innerHTML = `
+                <div class="spec-item">&#128716; ${rental.bedrooms} Bedrooms</div>
+                <div class="spec-item">&#128705; ${rental.bathrooms} Bathrooms</div>
+                <div class="spec-item">&#128663; ${rental.parking} Covered Parking</div>
+                <div class="spec-item">&#128208; ${rental.area} m² Area</div>
+            `;
+
+            document.getElementById('rModalAgentName').textContent = rental.agent.name;
+            document.getElementById('rModalAgentImg').src = rental.agent.image;
+            document.getElementById('rModalAgentPhone').textContent = rental.agent.phone;
+            document.getElementById('rModalAgentEmail').textContent = rental.agent.email;
+
+            document.getElementById('rModalCallBtn').href = `tel:${rental.agent.phone.replace(/[^0-9]/g, '')}`;
+            document.getElementById('rModalWhatsAppBtn').href = `https://wa.me/27114567890?text=Hi%20${encodeURIComponent(rental.agent.name)},%20I'm%20inquiring%20about%20the%20rental%20${encodeURIComponent(rental.title)}%20(${formatZAR(rental.rent)}/pm)`;
+
+            document.getElementById('rentalModal').classList.add('active');
+        }
+
+        function closeRentalModal() {
+            document.getElementById('rentalModal').classList.remove('active');
+        }
+
+        function openAddRentalModal() {
+            document.getElementById('addRentalModal').classList.add('active');
+        }
+
+        function closeAddRentalModal() {
+            document.getElementById('addRentalModal').classList.remove('active');
+        }
+
+        function handleAddRental(e) {
+            e.preventDefault();
+            const title = document.getElementById('rentTitle').value;
+            const rent = parseInt(document.getElementById('rentAmount').value);
+            const type = document.getElementById('rentType').value;
+            const beds = parseInt(document.getElementById('rentBeds').value);
+            const baths = parseInt(document.getElementById('rentBaths').value);
+            const desc = document.getElementById('rentDesc').value;
+            const imgInput = document.getElementById('rentImages');
+
+            let images = ["../IMAGES/SellPage/apartment1_1.jpeg"];
+            if (imgInput.files && imgInput.files.length > 0) {
+                images = Array.from(imgInput.files).map(file => URL.createObjectURL(file));
             }
 
             const newRental = {
-                id: rentals.length + 1,
-                rent: price,
-                description,
-                images: Array.from(imageFiles).map(file => URL.createObjectURL(file)),
+                id: Date.now(),
+                title: title,
+                rent: rent,
+                type: type,
+                bedrooms: beds,
+                bathrooms: baths,
+                parking: 1,
+                area: beds * 45,
+                description: desc,
+                images: images,
+                currentImageIndex: 0,
                 agent: {
-                    name: "New Agent",
-                    contact: "(000) 000-0000",
-                    email: "newagent@example.com",
-                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345096465!2d144.953735315683!3d-37.81720997975111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11c341%3A0x5045675218ceed30!2sNew%20Agent%20Location!5e0!3m2!1sen!2sau!4v1634541129312!5m2!1sen!2sau",
-                    image: "agent_new.jpg"
-                },
-                currentImageIndex: 0
+                    name: "Jane Smith",
+                    phone: "(098) 765-4321",
+                    email: "janesmith@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 3.jpeg",
+                    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3584.0230357003106!2d27.82167747471655!3d-26.065503558338207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e959bfbf3f20049!2sSandton!5e0!3m2!1sen!2sza"
+                }
             };
 
-            rentals.push(newRental);
-            displayRentals(rentals);
+            allRentals.unshift(newRental);
+            saveRentals(allRentals);
+            renderRentals(allRentals);
+            closeAddRentalModal();
+            showToast("Rental property successfully published!");
         }
 
-        function nextImage(rentalId) {
-            const rental = rentals.find(r => r.id === rentalId);
-            rental.currentImageIndex = (rental.currentImageIndex + 1) % rental.images.length;
-            document.getElementById(`rental-image-${rentalId}`).src = rental.images[rental.currentImageIndex];
+        function handleRentalApplication(e) {
+            e.preventDefault();
+            closeRentalModal();
+            showToast("Rental application submitted! An agent will contact you within 24 hours.");
         }
 
-        function prevImage(rentalId) {
-            const rental = rentals.find(r => r.id === rentalId);
-            rental.currentImageIndex = (rental.currentImageIndex - 1 + rental.images.length) % rental.images.length;
-            document.getElementById(`rental-image-${rentalId}`).src = rental.images[rental.currentImageIndex];
-        }
+        window.onclick = function(e) {
+            if (e.target === document.getElementById('rentalModal')) closeRentalModal();
+            if (e.target === document.getElementById('addRentalModal')) closeAddRentalModal();
+        };
 
-        function filterRentals() {
-            const rentRange = document.getElementById('rentRange').value;
-            let filteredRentals = rentals;
-
-            if (rentRange === 'low') {
-                filteredRentals = rentals.filter(r => r.rent < 4000);
-            } else if (rentRange === 'mid') {
-                filteredRentals = rentals.filter(r => r.rent >= 4000 && r.rent <= 7000);
-            } else if (rentRange === 'high') {
-                filteredRentals = rentals.filter(r => r.rent >= 7000);
-            }
-
-            displayRentals(filteredRentals);
-        }
-
-        // Initial display of rentals
-        displayRentals(rentals);
+        renderRentals(allRentals);
     </script>
 </body>
 </html>

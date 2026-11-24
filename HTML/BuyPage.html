@@ -3,452 +3,882 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Listings</title>
+    <title>Properties For Sale in Johannesburg | Real Homes</title>
+    <meta name="description" content="Explore verified houses, luxury estates, and townhomes for sale across Johannesburg with Real Homes.">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        header {
-            background-color: white;
-            padding: 10px;
+        /* Buy Page Specific */
+        .page-banner {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), 
+                        url('../IMAGES/Headline.jpeg') center/cover no-repeat;
+            padding: 60px 24px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .page-banner h1 {
+            color: #ffffff;
+            font-size: clamp(32px, 4vw, 48px);
+            margin-bottom: 12px;
+        }
+
+        .page-banner p {
+            color: #cbd5e1;
+            font-size: 17px;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Filter Bar */
+        .filter-panel {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 24px 28px;
+            box-shadow: var(--shadow-md);
+            margin: -35px auto 40px;
+            max-width: 1380px;
+            position: relative;
+            z-index: 10;
+            border: 1px solid var(--border-light);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 1.8fr 1.2fr 1.2fr 1.2fr 1fr auto;
+            gap: 16px;
+            align-items: flex-end;
+        }
+
+        @media (max-width: 1100px) {
+            .filter-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 640px) {
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .results-meta-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1380px;
+            margin: 0 auto 24px;
+            padding: 0 24px;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .results-count {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-navy);
+        }
+
+        /* Modal Details Gallery */
+        .modal-gallery-img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
             margin-bottom: 20px;
         }
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #1eb7f3;
-            font-family: "my-font", serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1.8fr 1.2fr;
+            gap: 30px;
         }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
+        @media (max-width: 768px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
         }
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        .logo-container img {
-            margin-right: 15px;
-            width: 240px;
-        }
-        .WP {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        ul {
-            display: flex;
-            gap: 30px;
+
+        .amenities-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 18px 0;
             list-style: none;
         }
-        ul li a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
-        
-        ul li:hover a {
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            color: rgb(0, 114, 114);
-        }
-        .signlogin {
-            display: flex;
-            gap: 50px;
-            text-decoration: none;
-        }
-         a {
-            text-decoration: none;
-            color: black;
-            font-size: 21px;
-            padding: 10px 15px;
-        }
 
-        .sign, .login {
-            background-color: aqua;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .sign:hover {
-            background-color: rgb(0, 114, 114);
-            color: white;
-        }
-        .container {
-            width: 90%;
-            margin: auto;
-            max-width: 1200px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .house-listings {
+        .amenities-list li {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .house-card {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            width: 90%;
-            height: 200px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            background-color: #fff;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--navy-lighter);
         }
-        .house-card img {
-            max-width: 40%; /* Adjust image size */
-            max-height: 100%; /* Ensure image doesn't overflow */
-            object-fit: cover; /* Cover the available space, maintaining aspect ratio */
-            border-radius: 8px; /* Optional: Add rounded corners */
+
+        .amenities-list li span {
+            color: var(--teal-accent);
+            font-weight: 700;
         }
-        .house-card .details {
-            flex-grow: 1;
-            margin-left: 20px;
-        }
-        .house-card .remove-btn {
-            background-color: red;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        
-        .dropdown {
-            display: none;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            position: absolute; /* Ensure it appears below the button */
-            z-index: 1;
-        }
-        .dropdown img {
-            width: 50px; /* Set a size for the agent image */
-            border-radius: 50%; /* Circular image */
-        }
-        .dropdown iframe {
-            width: 100%; /* Full width for the iframe */
-            height: 200px; /* Set height for the iframe */
-            border: none; /* Remove border */
-        }
-        .dropdown-button {
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-        }
-        .add-property-btn, .remove-property-btn {
-            position: fixed;
-            bottom: 20px;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            border: none;
-        }
-        .add-property-btn {
-            right: 20px;
-        }
-        .remove-property-btn {
-            right: 160px;
-        }
-        .property-form-container {
-            display: none; /* Hidden by default */
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            width: 300px;
-            padding: 20px;
-            background-color: white;
-            border-top-left-radius: 10px;
-            border: 1px solid #ccc;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .property-form-container input, .property-form-container select {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 8px;
-        }
-        .property-form-container input[type="file"] {
-            padding: 3px;
-        }
-        .close-btn {
-            background-color: red;
-            color: white;
-            padding: 5px;
-            border: none;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-        footer {
-            background-color: #333;
-            color: white;
+
+        .agent-contact-card {
+            background: #f8fafc;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 24px;
             text-align: center;
-            padding: 20px;
-            font-family: 'Arial', sans-serif;
-            position: relative;
-            width: 100%;
-        }
-        .social_icons{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px 0;
-            flex-wrap: wrap;
-        }
-        footer p{
-            color: white;
-            margin-top: 15px;
-            margin-bottom: 10px;
-            font-size: 17.6px;
         }
 
+        .agent-lg-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gold-light);
+            margin: 0 auto 12px;
+        }
+
+        .fab-add-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #ffffff;
+            padding: 14px 24px;
+            border-radius: var(--radius-full);
+            box-shadow: 0 10px 25px rgba(184, 149, 98, 0.45);
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            z-index: 99;
+            transition: var(--transition);
+        }
+
+        .fab-add-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 14px 30px rgba(184, 149, 98, 0.55);
+        }
     </style>
 </head>
-<header>
-    <nav>
-        <div class="logo-container">
-            <img src="logo.png" alt="logo">
-            <div class="WP">Real Homes</div> 
-        </div>
-        <div class="navigator">
-            <ul>
-                <li><a href="HomePage.html">HOME</a></li>
-                <li><a href="RentPage.html">RENT</a></li>
-                <li><a href="calculator.html">Calculate</a></li>
-                <li><a href="./agent.html">Agent Portal</a></li>
-            </ul>
-        </div>
-        <div class="signlogin">
-            <div class="sign"><a href="./contactUs.html">ContactUs</a></div> 
-        </div>
-    </nav>
-</header>
 <body>
-<div class="container">
-    <div class="house-listings" id="houseListings"></div>
-</div>
 
-<footer>
-    <ul class="social_icons">
-        <li><a href="https://instagram.com"><img src="instagram.png" width="30px" height="30px"></a></li>
-        <li><a href="https://facebook.com"><img src="facebook.png" width="30px" height="30px"></a></li>
-        <li><a href="https://youtube.com"><img src="Youtube.png" width="30px" height="30px"></a></li>
-        <li><a href="https://twitter.com"><img src="x.png" width="30px" height="30px"></a></li>
-    </ul>
-    <div class="info">
-        <p>Contact Us:</p>
-        <p>Email: info@RealHomesproperties.com</p>
-        <p>Phone: (123) 456-7890</p>
-        <p>Address: 123 Property Lane, Johannesburg, SA</p>            
+    <!-- SITE HEADER -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="HomePage.html" class="brand-logo-wrap">
+                <img src="../IMAGES/logo.png" alt="Real Homes Logo" class="brand-logo-img" onerror="this.src='images/logo.png'">
+                <div class="brand-title-box">
+                    <span class="brand-name">Real Homes</span>
+                    <span class="brand-tagline">Luxury Real Estate</span>
+                </div>
+            </a>
+
+            <button class="mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+            <ul class="nav-menu">
+                <li><a href="HomePage.html" class="nav-link">Home</a></li>
+                <li><a href="BuyPage.html" class="nav-link active">Buy Homes</a></li>
+                <li><a href="RentPage.html" class="nav-link">Rentals</a></li>
+                <li><a href="sell.html" class="nav-link">Sell Property</a></li>
+                <li><a href="calculator.html" class="nav-link">Bond Calculator</a></li>
+                <li><a href="agent.html" class="nav-link">Our Agents</a></li>
+                <li><a href="contactUs.html" class="nav-link">Contact Us</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn-header-cta" onclick="openAddModal()">+ Add Listing</button>
+                <a href="index.html" class="btn-header-outline">Client Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="page-banner">
+        <span class="badge badge-gold" style="margin-bottom: 12px;">Premium Inventory</span>
+        <h1>Properties For Sale in Johannesburg</h1>
+        <p>Explore luxury freestanding residences, contemporary cluster homes, and suburban sanctuaries with verified title deeds.</p>
+    </section>
+
+    <!-- FILTER PANEL -->
+    <div style="padding: 0 24px;">
+        <div class="filter-panel">
+            <div class="filter-grid">
+                <div class="form-group" style="margin:0;">
+                    <label class="form-label">Search Keyword / Suburb</label>
+                    <input type="text" id="filterKeyword" class="form-control" placeholder="e.g. Morningside, pool, garden..." oninput="applyFilters()">
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label class="form-label">Location Area</label>
+                    <select id="filterLocation" class="form-control" onchange="applyFilters()">
+                        <option value="all">All Locations</option>
+                        <option value="Sandton">Sandton & Morningside</option>
+                        <option value="Ruimsig">Ruimsig Country Estate</option>
+                        <option value="Krugersdorp">Krugersdorp & West Rand</option>
+                        <option value="city">Johannesburg City</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label class="form-label">Price Range</label>
+                    <select id="filterPrice" class="form-control" onchange="applyFilters()">
+                        <option value="all">All Prices</option>
+                        <option value="under1m">Under R 1,000,000</option>
+                        <option value="1m-2m">R 1,000,000 - R 2,000,000</option>
+                        <option value="above2m">Above R 2,000,000</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label class="form-label">Bedrooms</label>
+                    <select id="filterBeds" class="form-control" onchange="applyFilters()">
+                        <option value="all">Any Bedrooms</option>
+                        <option value="2">2+ Bedrooms</option>
+                        <option value="3">3+ Bedrooms</option>
+                        <option value="4">4+ Bedrooms</option>
+                        <option value="5">5+ Bedrooms</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label class="form-label">Sort Order</label>
+                    <select id="filterSort" class="form-control" onchange="applyFilters()">
+                        <option value="featured">Featured First</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                    </select>
+                </div>
+                <div>
+                    <button class="btn btn-outline" style="width: 100%; padding: 12px 18px;" onclick="resetFilters()">Reset</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="symbols">&#169;</div>
-</footer>
-<button class="add-property-btn" onclick="toggleForm()">Add Property</button>
 
-<div class="property-form-container" id="propertyForm">
-    <!-- Updated form to use POST and multipart/form-data for file upload -->
-    <form id="propertySubmitForm" action="buy_add.php" method="POST" enctype="multipart/form-data">
-        <label for="propertyImage">Upload House Image:</label>
-        <input type="file" id="propertyImage" name="propertyImage" accept="image/*" required>
+    <!-- RESULTS BAR -->
+    <div class="results-meta-bar">
+        <div class="results-count" id="resultsCount">Loading available homes...</div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+            <button class="btn btn-primary" onclick="openAddModal()" style="padding: 9px 18px; font-size: 14px;">
+                + List A Property For Sale
+            </button>
+        </div>
+    </div>
 
-        <label for="propertyLocation">Location:</label>
-        <select id="propertyLocation" name="propertyLocation" required>
-            <option value="rural">Rural</option>
-            <option value="urban">Urban</option>
-            <option value="city">City</option>
-        </select>
+    <!-- PROPERTIES GRID -->
+    <main style="max-width: 1380px; margin: 0 auto; padding: 0 24px 80px; width: 100%;">
+        <div class="properties-grid" id="listingsContainer">
+            <!-- Dynamically populated via JS -->
+        </div>
+    </main>
 
-        <label for="propertyPrice">Price (min R400,000.00):</label>
-        <input type="number" id="propertyPrice" name="propertyPrice" min="400000" step="1000" required>
+    <!-- FLOATING ACTION BUTTON -->
+    <button class="fab-add-btn" onclick="openAddModal()">
+        <span>+</span> List Your Property
+    </button>
 
-        <button type="submit">Submit</button>
-        <button type="button" class="close-btn" onclick="toggleForm()">Close</button>
-    </form>
-</div>
+    <!-- PROPERTY DETAILS MODAL -->
+    <div class="modal-backdrop" id="detailsModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div>
+                    <span class="badge badge-gold" id="modalTag">Exclusive Mandate</span>
+                    <h3 class="modal-title" id="modalTitle" style="margin-top: 6px;">Property Title</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeDetailsModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImg" src="" alt="Property" class="modal-gallery-img">
+                
+                <div class="details-grid">
+                    <div>
+                        <div style="font-size: 30px; font-weight: 800; color: var(--primary-navy); margin-bottom: 6px;" id="modalPrice">
+                            R 0
+                        </div>
+                        <div style="color: var(--text-secondary); margin-bottom: 20px; font-size: 15px;" id="modalLocation">
+                            Location
+                        </div>
+                        
+                        <div class="property-specs" id="modalSpecs">
+                            <!-- Specs injected here -->
+                        </div>
 
-<script>
-    // Updated houses array with agent details and Google Maps URL
-    const houses = [
-        { 
-            id: 1, 
-            price: 450000, 
-            description: "Cozy 2-bedroom in a peaceful rural area with a beautiful garden.", 
-            location: "rural", 
-            image: "house4.jpeg",
-            agent: {
-                name: "John Doe",
-                phone: "(123) 456-7890",
-                email: "johndoe@gmail.com",
-                image: "agent 1.jpeg", 
-                mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.19658525562!2d27.789131174717742!3d-26.092500759432724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e95997114318fa3%3A0x1377691d677be3dd!2s1-5%20Katberg%20St%2C%20Noordheuwel%2C%20Krugersdorp%2C%201739!5e0!3m2!1sen!2sza!4v1729758809967!5m2!1sen!2sza" 
-            }
-        },
-        { 
-            id: 2, 
-            price: 950000, 
-            description: "Spacious 3-bedroom house close to the city.", 
-            location: "suburbs", 
-            image: "house5.jpeg",
-            agent: {
-                name: "Jane Smith",
-                phone: "(098) 765-4321",
-                email: "janesmith@gmail.com",
-                image: "agent 3.jpeg",
-                mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3584.0230357003106!2d27.82167747471655!3d-26.065503558338207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e959bfbf3f20049%3A0xf58b0f6db7825668!2sHeights%20St%2C%20Krugersdorp!5e0!3m2!1sen!2sza!4v1729759003347!5m2!1sen!2sza"
-            }
-        },
-        {
-            id: 3, 
-            price: 1800000,  
-            description: "Beautiful 3-bedroom house with a large backyard.",
-            location: "suburbs", 
-            image: "house2.jpeg",
-            agent: {
-                name: "Emily Johnson",
-                phone: "(456) 789-0123",
-                email: " emilyjohnson@gmail.com",
-                image: "agent 2.jpeg",
-                mapUrl:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.923029835512!2d27.84464053817812!3d-26.06877177756638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e959ea71f2eec15%3A0x57d16f289ecc9411!2s252%20Yvette%20St%2C%20Ruimsig%20Country%20Estate%2C%20Krugersdorp%2C%201724!5e0!3m2!1sen!2sza!4v1729759118637!5m2!1sen!2sza"
-            }
-        },
-        {
-            id: 4, 
-            price: 2000000,  
-            description:"Modern 4-bedroom home in a quiet neighborhood.",
-            location: "city", 
-            image: "house1.jpeg",
-            agent: {
-                name: "Kenen Williams",
-                phone: "(789) 223-0123",
-                email: " kenanwill@gmail.com",
-                image: "agent 4.jpg",
-                mapUrl:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.919015522223!2d28.070246674716675!3d-26.068902958476098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9572fbc1f4e30f%3A0x594c2c88c393c1b4!2s36-22%20Stuart%20Ave%2C%20Morningside%20Manor%2C%20Sandton%2C%202057!5e0!3m2!1sen!2sza!4v1729759226547!5m2!1sen!2sza"
-            }
-        },
-        {
-            id: 5, 
-            price: 2375000,  
-            description:"Luxurious 5-bedroom estate with a private pool.",
-            location: "city", 
-            image: "house3.jpeg",
-            agent: {
-                name: "Jane Smith",
-                phone: "(098) 765-4321",
-                email: "janesmith@gmail.com",
-                image: "agent 3.jpeg",
-                mapUrl:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.8612166625694!2d28.071115674716804!3d-26.070791658552544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9572fb05e1969d%3A0x8f70b726e088ac8c!2s1-3%20Aston%20Rd%2C%20Morningside%20Manor%2C%20Sandton%2C%202057!5e0!3m2!1sen!2sza!4v1729759283917!5m2!1sen!2sza"
-            }
-        },
-        
-    ];
+                        <h4 style="margin: 20px 0 10px; font-size: 18px;">Property Overview</h4>
+                        <p id="modalDesc" style="color: var(--text-secondary); line-height: 1.7; font-size: 15px;">
+                            Description
+                        </p>
 
-    // Function to display the houses
-    function displayHouses(housesToDisplay) {
-        const listingsContainer = document.getElementById('houseListings');
-        listingsContainer.innerHTML = '';
+                        <h4 style="margin: 24px 0 10px; font-size: 18px;">Highlights & Amenities</h4>
+                        <ul class="amenities-list">
+                            <li><span>&#10003;</span> Clear Title Deed Verified</li>
+                            <li><span>&#10003;</span> 24/7 Gated Security Guard</li>
+                            <li><span>&#10003;</span> High-Speed Fiber Ready</li>
+                            <li><span>&#10003;</span> Landscaped Private Garden</li>
+                            <li><span>&#10003;</span> Solar Geyser & Backup Ready</li>
+                            <li><span>&#10003;</span> Close to Premier Private Schools</li>
+                        </ul>
 
-        housesToDisplay.forEach(house => {
-            const houseCard = document.createElement('div');
-            houseCard.classList.add('house-card');
+                        <h4 style="margin: 24px 0 10px; font-size: 18px;">Neighborhood Map</h4>
+                        <iframe id="modalMap" src="" width="100%" height="220" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
 
-            houseCard.innerHTML = `
-                <img src="${house.image}" alt="House image">
-                <div class="details">
-                    <div class="price">R${house.price.toLocaleString()}</div>
-                    <div class="description">${house.description}</div>
-                    <button class="dropdown-button" onclick="toggleDropdown(event, ${house.id})">Show Details</button>
-                    <div class="dropdown" id="dropdown-${house.id}">
-                        <img src="${house.agent.image}" alt="Agent image">
-                        <p>${house.agent.name}</p>
-                        <p>Phone: ${house.agent.phone}</p>
-                        <p>Email: ${house.agent.email}</p>
-                        <iframe src="${house.agent.mapUrl}"></iframe>
+                    <!-- Right Column: Agent & Inquiry -->
+                    <div>
+                        <div class="agent-contact-card">
+                            <img id="modalAgentImg" src="" alt="Agent" class="agent-lg-avatar">
+                            <h4 id="modalAgentName" style="font-size: 18px; margin-bottom: 4px;">Agent Name</h4>
+                            <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">Certified Property Practitioner</p>
+                            
+                            <div style="text-align: left; font-size: 14px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;">
+                                <div><strong>Phone:</strong> <span id="modalAgentPhone"></span></div>
+                                <div><strong>Email:</strong> <span id="modalAgentEmail"></span></div>
+                            </div>
+
+                            <a id="modalWhatsAppBtn" href="#" target="_blank" class="btn btn-teal" style="width: 100%; margin-bottom: 10px; font-size: 14px;">
+                                &#128172; WhatsApp Agent
+                            </a>
+                            <a id="modalCallBtn" href="#" class="btn btn-primary" style="width: 100%; font-size: 14px;">
+                                &#128222; Call Agent Now
+                            </a>
+                        </div>
+
+                        <!-- Private Viewing Form -->
+                        <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 20px; margin-top: 20px;">
+                            <h5 style="font-size: 16px; margin-bottom: 12px;">Request Private Viewing</h5>
+                            <form onsubmit="handleViewingRequest(event)">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Your Full Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" class="form-control" placeholder="Contact Number" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-gold" style="width: 100%; font-size: 14px;">
+                                    Book Viewing Appointment
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <button class="remove-btn" onclick="removeProperty(${house.id})">Remove Property</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD PROPERTY MODAL -->
+    <div class="modal-backdrop" id="addModal">
+        <div class="modal-box" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 class="modal-title">List Your Property For Sale</h3>
+                <button class="modal-close-btn" onclick="closeAddModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addPropertyForm" onsubmit="handleAddProperty(event)" action="../PHP/buy_add.php" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="form-label">Property Title / Headline</label>
+                        <input type="text" id="propTitle" name="propertyTitle" class="form-control" placeholder="e.g. Modern 4-Bedroom Home in Sandton" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Asking Price (ZAR, Min R400,000)</label>
+                            <input type="number" id="propPrice" name="propertyPrice" min="400000" step="10000" class="form-control" placeholder="e.g. 2100000" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Suburb / Location</label>
+                            <select id="propLocation" name="propertyLocation" class="form-control" required>
+                                <option value="Sandton">Sandton & Morningside</option>
+                                <option value="Ruimsig">Ruimsig Country Estate</option>
+                                <option value="Krugersdorp">Krugersdorp & West Rand</option>
+                                <option value="city">Johannesburg City</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Bedrooms</label>
+                            <input type="number" id="propBeds" min="1" max="15" value="3" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Bathrooms</label>
+                            <input type="number" id="propBaths" min="1" max="15" value="2" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Garages</label>
+                            <input type="number" id="propGarages" min="0" max="10" value="2" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Property Description</label>
+                        <textarea id="propDesc" name="propertyDescription" class="form-control" rows="3" placeholder="Describe the layout, security, garden, finishes..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Property Photo</label>
+                        <input type="file" id="propImage" name="propertyImage" accept="image/*" class="form-control" required>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; margin-top: 24px;">
+                        <button type="button" class="btn btn-outline" style="flex:1;" onclick="closeAddModal()">Cancel</button>
+                        <button type="submit" class="btn btn-gold" style="flex:2;">Submit Property Listing</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-top-container">
+            <div class="footer-brand-col">
+                <div class="brand-logo-wrap" style="filter: brightness(0) invert(1);">
+                    <img src="../IMAGES/logo.png" alt="Real Homes" class="brand-logo-img" onerror="this.src='images/logo.png'">
+                    <span class="brand-name" style="color: #ffffff;">Real Homes</span>
+                </div>
+                <p>Johannesburg's premier residential real estate practice, specializing in the acquisition, valuation, and marketing of prime luxury estates and family homes.</p>
+                <div class="footer-compliance-tag">
+                    &#10003; Registered with the Property Practitioners Regulatory Authority (PPRA)
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-col-title">Navigation</h4>
+                <ul class="footer-links-list">
+                    <li><a href="HomePage.html">Home</a></li>
+                    <li><a href="BuyPage.html">Properties For Sale</a></li>
+                    <li><a href="RentPage.html">Rental Properties</a></li>
+                    <li><a href="sell.html">Sell Your Home</a></li>
+                    <li><a href="calculator.html">Bond Calculator</a></li>
+                    <li><a href="agent.html">Our Certified Agents</a></li>
+                    <li><a href="contactUs.html">Contact & Office</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-col-title">Prime Locations</h4>
+                <ul class="footer-links-list">
+                    <li><a href="BuyPage.html">Sandton & Morningside</a></li>
+                    <li><a href="BuyPage.html">Ruimsig Country Estate</a></li>
+                    <li><a href="BuyPage.html">Krugersdorp & West Rand</a></li>
+                    <li><a href="BuyPage.html">Rosebank & Hyde Park</a></li>
+                    <li><a href="RentPage.html">Johannesburg City Center</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-col-title">Johannesburg Office</h4>
+                <div class="footer-contact-info">
+                    <div class="contact-line">
+                        <span class="contact-icon">&#128205;</span>
+                        <span>123 Property Lane, Sandton, Johannesburg, 2196</span>
+                    </div>
+                    <div class="contact-line">
+                        <span class="contact-icon">&#128222;</span>
+                        <span>+27 (0)11 456 7890 / (123) 456-7890</span>
+                    </div>
+                    <div class="contact-line">
+                        <span class="contact-icon">&#9993;</span>
+                        <span>info@realhomesproperties.com</span>
+                    </div>
+                </div>
+
+                <div class="footer-social-wrap">
+                    <a href="https://instagram.com" class="social-circle-btn" aria-label="Instagram">
+                        <img src="../IMAGES/instagram.png" alt="Instagram" onerror="this.src='images/instagram.png'">
+                    </a>
+                    <a href="https://facebook.com" class="social-circle-btn" aria-label="Facebook">
+                        <img src="../IMAGES/facebook.png" alt="Facebook" onerror="this.src='images/facebook.png'">
+                    </a>
+                    <a href="https://youtube.com" class="social-circle-btn" aria-label="YouTube">
+                        <img src="../IMAGES/Youtube.png" alt="YouTube" onerror="this.src='images/Youtube.png'">
+                    </a>
+                    <a href="https://twitter.com" class="social-circle-btn" aria-label="X Twitter">
+                        <img src="../IMAGES/x.png" alt="X" onerror="this.src='images/x.png'">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+            <div>&copy; 2026 Real Homes Properties (Pty) Ltd. All Rights Reserved. Equal Housing Opportunity.</div>
+            <div style="display:flex; gap: 20px;">
+                <a href="#" style="color:#94a3b8;">Privacy Policy</a>
+                <a href="#" style="color:#94a3b8;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/main.js"></script>
+    <script>
+        // Primary Real Estate Inventory
+        const defaultHouses = [
+            { 
+                id: 5, 
+                title: "Luxurious 5-Bedroom Estate with Private Pool",
+                price: 2375000, 
+                description: "This architectural masterpiece features five lavish en-suite bedrooms, an open-concept entertainer's terrace overlooking a heated pool, landscaped designer gardens, chef's kitchen with scullery, and quadruple garaging. Situated inside an ultra-secure 24/7 patrolled enclave.", 
+                location: "Sandton",
+                address: "Aston Rd, Morningside Manor, Sandton",
+                bedrooms: 5,
+                bathrooms: 4,
+                garages: 3,
+                area: 520,
+                tag: "Exclusive Mandate",
+                image: "../IMAGES/buyPage/house3.jpeg",
+                agent: {
+                    name: "Jane Smith",
+                    role: "Senior Luxury Specialist",
+                    phone: "(098) 765-4321",
+                    email: "janesmith@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 3.jpeg",
+                    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.8612166625694!2d28.071115674716804!3d-26.070791658552544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9572fb05e1969d%3A0x8f70b726e088ac8c!2s1-3%20Aston%20Rd%2C%20Morningside%20Manor%2C%20Sandton%2C%202057!5e0!3m2!1sen!2sza!4v1729759283917!5m2!1sen!2sza"
+                }
+            },
+            { 
+                id: 4, 
+                title: "Modern 4-Bedroom Architectural Home",
+                price: 2000000, 
+                description: "Contemporary elegance meets absolute privacy. Boasting soaring double-volume ceilings, expansive glass sliding doors seamlessly connecting indoor and outdoor living, a custom designer kitchen, pyjama lounge, and full solar inverter backup.", 
+                location: "Sandton",
+                address: "Stuart Ave, Morningside Manor, Sandton",
+                bedrooms: 4,
+                bathrooms: 3.5,
+                garages: 2,
+                area: 380,
+                tag: "New Listing",
+                image: "../IMAGES/buyPage/house1.jpeg",
+                agent: {
+                    name: "Kenen Williams",
+                    role: "Principal Property Broker",
+                    phone: "(789) 223-0123",
+                    email: "kenanwill@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 4.jpg",
+                    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.919015522223!2d28.070246674716675!3d-26.068902958476098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9572fbc1f4e30f%3A0x594c2c88c393c1b4!2s36-22%20Stuart%20Ave%2C%20Morningside%20Manor%2C%20Sandton%2C%202057!5e0!3m2!1sen!2sza!4v1729759226547!5m2!1sen!2sza"
+                }
+            },
+            { 
+                id: 3, 
+                title: "Contemporary 3-Bedroom Villa with Garden",
+                price: 1800000, 
+                description: "Nestled within prestigious Ruimsig Country Estate. This family sanctuary provides a tranquil lifestyle with lush gardens, state-of-the-art security, open-plan dining and living rooms, covered braai patio, and double automated garage.", 
+                location: "Ruimsig",
+                address: "Yvette St, Ruimsig Country Estate, Krugersdorp",
+                bedrooms: 3,
+                bathrooms: 2,
+                garages: 2,
+                area: 310,
+                tag: "Prime Estate",
+                image: "../IMAGES/buyPage/house2.jpeg",
+                agent: {
+                    name: "Emily Johnson",
+                    role: "Residential Specialist",
+                    phone: "(456) 789-0123",
+                    email: "emilyjohnson@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 2.jpeg",
+                    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.923029835512!2d27.84464053817812!3d-26.06877177756638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e959ea71f2eec15%3A0x57d16f289ecc9411!2s252%20Yvette%20St%2C%20Ruimsig%20Country%20Estate%2C%20Krugersdorp%2C%201724!5e0!3m2!1sen!2sza!4v1729759118637!5m2!1sen!2sza"
+                }
+            },
+            { 
+                id: 2, 
+                title: "Spacious 3-Bedroom Family House",
+                price: 950000, 
+                description: "Generous freestanding property boasting a large private yard perfect for pets and kids. Featuring 3 spacious bedrooms, built-in cupboards, sunlit kitchen, and double carport. Minutes away from schools and shopping amenities.", 
+                location: "Krugersdorp",
+                address: "Heights St, Krugersdorp Suburbs",
+                bedrooms: 3,
+                bathrooms: 2,
+                garages: 2,
+                area: 240,
+                tag: "Family Value",
+                image: "../IMAGES/buyPage/house5.jpeg",
+                agent: {
+                    name: "Jane Smith",
+                    role: "Senior Luxury Specialist",
+                    phone: "(098) 765-4321",
+                    email: "janesmith@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 3.jpeg",
+                    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3584.0230357003106!2d27.82167747471655!3d-26.065503558338207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e959bfbf3f20049%3A0xf58b0f6db7825668!2sHeights%20St%2C%20Krugersdorp!5e0!3m2!1sen!2sza!4v1729759003347!5m2!1sen!2sza"
+                }
+            },
+            { 
+                id: 1, 
+                title: "Charming 2-Bedroom Suburban Retreat",
+                price: 450000, 
+                description: "Ideal starter home or quiet retreat with picturesque garden views. Includes 2 cozy bedrooms, fitted kitchen, open lounge, and secure perimeter fencing. Exceptional entry-level property opportunity.", 
+                location: "Krugersdorp",
+                address: "Katberg St, Noordheuwel, Krugersdorp",
+                bedrooms: 2,
+                bathrooms: 1,
+                garages: 1,
+                area: 160,
+                tag: "Great Starter",
+                image: "../IMAGES/buyPage/house4.jpeg",
+                agent: {
+                    name: "John Doe",
+                    role: "Property Consultant",
+                    phone: "(123) 456-7890",
+                    email: "johndoe@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 1.jpeg",
+                    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.19658525562!2d27.789131174717742!3d-26.092500759432724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e95997114318fa3%3A0x1377691d677be3dd!2s1-5%20Katberg%20St%2C%20Noordheuwel%2C%20Krugersdorp%2C%201739!5e0!3m2!1sen!2sza!4v1729758809967!5m2!1sen!2sza"
+                }
+            }
+        ];
+
+        // Retrieve properties with local storage support
+        function getHouses() {
+            try {
+                const stored = localStorage.getItem('realhomes_buylistings');
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                }
+            } catch (e) {}
+            return defaultHouses;
+        }
+
+        function saveHouses(list) {
+            localStorage.setItem('realhomes_buylistings', JSON.stringify(list));
+        }
+
+        let allHouses = getHouses();
+
+        // Render Property Cards
+        function renderHouses(items) {
+            const container = document.getElementById('listingsContainer');
+            const countDisplay = document.getElementById('resultsCount');
+            
+            container.innerHTML = '';
+            countDisplay.textContent = `Showing ${items.length} ${items.length === 1 ? 'Property' : 'Properties'} For Sale`;
+
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background:#fff; border-radius:12px; border:1px solid #e2e8f0;">
+                        <h3 style="font-size: 22px; color: var(--primary-navy); margin-bottom: 8px;">No Properties Match Your Search</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Try adjusting your filters or price range to explore more homes.</p>
+                        <button class="btn btn-gold" onclick="resetFilters()">Reset All Filters</button>
+                    </div>
+                `;
+                return;
+            }
+
+            items.forEach(house => {
+                const card = document.createElement('div');
+                card.className = 'property-card';
+                card.innerHTML = `
+                    <div class="property-thumb-wrap">
+                        <div class="property-tags">
+                            <span class="badge badge-gold">${house.tag || 'For Sale'}</span>
+                            <span class="badge badge-navy">${house.location}</span>
+                        </div>
+                        <button class="property-fav-btn" data-id="${house.id}" onclick="toggleFavorite(${house.id}, this)">&#9825;</button>
+                        <img src="${house.image}" alt="${house.title}" class="property-thumb" onerror="this.src='../IMAGES/buyPage/house1.jpeg'">
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price-row">
+                            <div class="property-price">${formatZAR(house.price)}</div>
+                        </div>
+                        <h3 class="property-title">${house.title}</h3>
+                        <div class="property-location">&#128205; ${house.address || house.location}</div>
+                        <div class="property-specs">
+                            <div class="spec-item">&#128716; ${house.bedrooms} Beds</div>
+                            <div class="spec-item">&#128705; ${house.bathrooms} Baths</div>
+                            <div class="spec-item">&#128663; ${house.garages} Garages</div>
+                            <div class="spec-item">&#128208; ${house.area} m²</div>
+                        </div>
+                        <div class="property-footer">
+                            <div class="agent-mini">
+                                <img src="${house.agent.image}" alt="${house.agent.name}" class="agent-mini-avatar" onerror="this.src='../IMAGES/agents Portals/agent 1.jpeg'">
+                                <div class="agent-mini-info">
+                                    <span class="agent-mini-name">${house.agent.name}</span>
+                                    <span class="agent-mini-role">${house.agent.role || 'Agent'}</span>
+                                </div>
+                            </div>
+                            <div class="property-card-actions">
+                                <button class="btn-card-details" onclick="openDetailsModal(${house.id})">Details & Map</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            initFavorites();
+        }
+
+        // Filter and Search Logic
+        function applyFilters() {
+            const keyword = document.getElementById('filterKeyword').value.toLowerCase();
+            const location = document.getElementById('filterLocation').value;
+            const price = document.getElementById('filterPrice').value;
+            const beds = document.getElementById('filterBeds').value;
+            const sort = document.getElementById('filterSort').value;
+
+            let filtered = allHouses.filter(house => {
+                // Keyword
+                if (keyword) {
+                    const matchText = (house.title + ' ' + house.description + ' ' + house.location + ' ' + (house.address || '')).toLowerCase();
+                    if (!matchText.includes(keyword)) return false;
+                }
+
+                // Location
+                if (location !== 'all') {
+                    if (house.location.toLowerCase() !== location.toLowerCase()) return false;
+                }
+
+                // Price
+                if (price === 'under1m' && house.price >= 1000000) return false;
+                if (price === '1m-2m' && (house.price < 1000000 || house.price > 2000000)) return false;
+                if (price === 'above2m' && house.price <= 2000000) return false;
+
+                // Bedrooms
+                if (beds !== 'all' && house.bedrooms < parseInt(beds)) return false;
+
+                return true;
+            });
+
+            // Sorting
+            if (sort === 'price-asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sort === 'price-desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            }
+
+            renderHouses(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('filterKeyword').value = '';
+            document.getElementById('filterLocation').value = 'all';
+            document.getElementById('filterPrice').value = 'all';
+            document.getElementById('filterBeds').value = 'all';
+            document.getElementById('filterSort').value = 'featured';
+            renderHouses(allHouses);
+        }
+
+        // Details Modal
+        function openDetailsModal(id) {
+            const house = allHouses.find(h => h.id === id);
+            if (!house) return;
+
+            document.getElementById('modalTitle').textContent = house.title;
+            document.getElementById('modalPrice').textContent = formatZAR(house.price);
+            document.getElementById('modalLocation').textContent = house.address || house.location;
+            document.getElementById('modalDesc').textContent = house.description;
+            document.getElementById('modalTag').textContent = house.tag || 'Exclusive Mandate';
+            document.getElementById('modalImg').src = house.image;
+            document.getElementById('modalMap').src = house.agent.mapUrl;
+
+            document.getElementById('modalSpecs').innerHTML = `
+                <div class="spec-item">&#128716; ${house.bedrooms} Bedrooms</div>
+                <div class="spec-item">&#128705; ${house.bathrooms} Bathrooms</div>
+                <div class="spec-item">&#128663; ${house.garages} Garages</div>
+                <div class="spec-item">&#128208; ${house.area} m² Floor Size</div>
             `;
 
-            listingsContainer.appendChild(houseCard);
-        });
-    }
+            document.getElementById('modalAgentName').textContent = house.agent.name;
+            document.getElementById('modalAgentImg').src = house.agent.image;
+            document.getElementById('modalAgentPhone').textContent = house.agent.phone;
+            document.getElementById('modalAgentEmail').textContent = house.agent.email;
+            
+            document.getElementById('modalCallBtn').href = `tel:${house.agent.phone.replace(/[^0-9]/g, '')}`;
+            document.getElementById('modalWhatsAppBtn').href = `https://wa.me/27114567890?text=Hi%20${encodeURIComponent(house.agent.name)},%20I'm%20inquiring%20about%20${encodeURIComponent(house.title)}%20(${formatZAR(house.price)})`;
 
-    // Initial display of existing houses
-    displayHouses(houses);
+            document.getElementById('detailsModal').classList.add('active');
+        }
 
-    // Toggle visibility of the form
-    function toggleForm() {
-        const form = document.getElementById('propertyForm');
-        form.style.display = (form.style.display === 'block') ? 'none' : 'block';
-    }
+        function closeDetailsModal() {
+            document.getElementById('detailsModal').classList.remove('active');
+        }
 
-    // Toggle dropdown visibility
-    function toggleDropdown(event, houseId) {
-        event.stopPropagation(); // Prevent click from bubbling up
-        const dropdown = document.getElementById(`dropdown-${houseId}`);
-        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
-    }
+        // Add Property Modal
+        function openAddModal() {
+            document.getElementById('addModal').classList.add('active');
+        }
 
-    // Function to handle form submission and add a new property
-    function addProperty(event) {
-        event.preventDefault();
+        function closeAddModal() {
+            document.getElementById('addModal').classList.remove('active');
+        }
 
-        const imageInput = document.getElementById('propertyImage');
-        const locationInput = document.getElementById('propertyLocation').value;
-        const priceInput = document.getElementById('propertyPrice').value;
+        function handleAddProperty(e) {
+            // Check if submitted as regular form or client dynamic
+            e.preventDefault();
+            const title = document.getElementById('propTitle').value;
+            const price = parseInt(document.getElementById('propPrice').value);
+            const location = document.getElementById('propLocation').value;
+            const beds = parseInt(document.getElementById('propBeds').value);
+            const baths = parseInt(document.getElementById('propBaths').value);
+            const garages = parseInt(document.getElementById('propGarages').value);
+            const desc = document.getElementById('propDesc').value;
+            const imageInput = document.getElementById('propImage');
 
-        const newHouse = {
-            id: houses.length + 1,
-            price: parseInt(priceInput),
-            description: `Beautiful house located in ${locationInput}.`,
-            location: locationInput,
-            image: URL.createObjectURL(imageInput.files[0]),
-            agent: {
-                name: "Default Agent",
-                phone: "(000) 000-0000",
-                email: "default@example.com",
-                image: "default-agent.jpeg",
-                mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d...example"
+            if (price < 400000) {
+                alert("Minimum listing price must be at least R400,000.");
+                return;
             }
+
+            let imageSrc = "../IMAGES/buyPage/house1.jpeg";
+            if (imageInput.files && imageInput.files[0]) {
+                imageSrc = URL.createObjectURL(imageInput.files[0]);
+            }
+
+            const newHouse = {
+                id: Date.now(),
+                title: title,
+                price: price,
+                description: desc,
+                location: location,
+                address: `${location}, Johannesburg`,
+                bedrooms: beds,
+                bathrooms: baths,
+                garages: garages,
+                area: beds * 75,
+                tag: "Newly Listed",
+                image: imageSrc,
+                agent: {
+                    name: "Jane Smith",
+                    role: "Senior Luxury Specialist",
+                    phone: "(098) 765-4321",
+                    email: "janesmith@realhomesproperties.com",
+                    image: "../IMAGES/agents Portals/agent 3.jpeg",
+                    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.8612166625694!2d28.071115674716804!3d-26.070791658552544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9572fb05e1969d%3A0x8f70b726e088ac8c!2s1-3%20Aston%20Rd%2C%20Morningside%20Manor%2C%20Sandton%2C%202057!5e0!3m2!1sen!2sza!4v1729759283917!5m2!1sen!2sza"
+                }
+            };
+
+            allHouses.unshift(newHouse);
+            saveHouses(allHouses);
+            renderHouses(allHouses);
+            closeAddModal();
+            showToast("Property listing successfully submitted and published!");
+        }
+
+        function handleViewingRequest(e) {
+            e.preventDefault();
+            closeDetailsModal();
+            showToast("Your private viewing request has been confirmed with the agent!");
+        }
+
+        // Close modal when clicking on backdrop
+        window.onclick = function(event) {
+            const detailsModal = document.getElementById('detailsModal');
+            const addModal = document.getElementById('addModal');
+            if (event.target === detailsModal) closeDetailsModal();
+            if (event.target === addModal) closeAddModal();
         };
 
-        houses.push(newHouse);
-        displayHouses(houses);
-        toggleForm();
-    }
-
-    // Function to remove a property
-    function removeProperty(id) {
-        const houseIndex = houses.findIndex(house => house.id === id);
-        if (houseIndex > -1) {
-            houses.splice(houseIndex, 1);
-        }
-        displayHouses(houses);
-    }
-
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', () => {
-        const dropdowns = document.querySelectorAll('.dropdown');
-        dropdowns.forEach(dropdown => {
-            dropdown.style.display = 'none';
+        // URL Query param handling (from homepage search)
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            const locParam = params.get('location');
+            if (locParam && locParam !== 'all') {
+                const locSelect = document.getElementById('filterLocation');
+                if (locSelect) {
+                    locSelect.value = locParam;
+                }
+            }
+            applyFilters();
         });
-    });
-</script>
+    </script>
 </body>
 </html>
